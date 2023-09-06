@@ -1,6 +1,6 @@
 testSaisie = True
 while testSaisie == True:
-    typeLettre = input("Saisir le type de lettre verte, prioritaire ou éco-plie (V, P, E) : ").capitalize()
+    typeLettre = input("Saisir le type de lettre (verte (V), prioritaire (P) ou éco-plie (E)) : ").capitalize()
     if typeLettre != "V" and typeLettre != "P" and typeLettre != "E":
         print("Désolé le type de lettre saisie n'est pas correct.")
     else:
@@ -8,10 +8,10 @@ while testSaisie == True:
 
 testValeur = True
 while testValeur == True:
-    poidLettre = input("Saisir le poid de la lettre en gramme : ")
+    poidsLettre = input("Saisir le poids de la lettre en gramme : ")
     try:
-        poidLettre = int(poidLettre)
-        int(poidLettre) == int()
+        poidsLettre = int(poidsLettre)
+        int(poidsLettre) == int()
         testValeur = False
     except ValueError:
         print("Désolé la valeur saisie n'est pas correct.")
@@ -46,7 +46,7 @@ if typeLettre == "V":
     TARIF_UN_KILOS = 7.50
     TARIF_TROIS_KILOS = 10.50
 
-    prix_gramme(poidLettre)
+    prix_gramme(poidsLettre)
 
 elif typeLettre == "P":
     TARIF_VINGT_GRAMME = 1.43
@@ -56,7 +56,7 @@ elif typeLettre == "P":
     TARIF_UN_KILOS = 7.89
     TARIF_TROIS_KILOS = 11.44
 
-    prix_gramme(poidLettre)
+    prix_gramme(poidsLettre)
 
 elif typeLettre == "E":
     TARIF_VINGT_GRAMME = 1.14
@@ -66,4 +66,4 @@ elif typeLettre == "E":
     TARIF_UN_KILOS = "erreur"
     TARIF_TROIS_KILOS = "erreur"
 
-    prix_gramme(poidLettre)
+    prix_gramme(poidsLettre)
