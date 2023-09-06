@@ -85,7 +85,3 @@ while jeu == True:
         
 if jeu == False :
     print("Merci d'avoir joué ! A bientôt")
-
-    # gagnant 1 if -> tout gagnant score +1 jouer1 else joeur deux gagne
-    # debut oui non if o joueur 2= machine sinon input
-    # print gagnant qu'une fois variable winner recup tout 
