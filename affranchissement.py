@@ -20,7 +20,7 @@ def prix_gramme(poid):
     prixAffranchissement = 0
     
     if poid <= 20:
-        prixAffranchissement = 1
+        prixAffranchissement = TARIF_VINGT_GRAMME
     elif (20 < poid <= 100):
         prixAffranchissement = TARIF_CENT_GRAMME
     elif (100 < poid <= 250):
