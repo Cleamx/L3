@@ -1,7 +1,8 @@
 import random
 
-"""fonction test qui  permet de tester 10 années choisit aléatoirement entre 1000 et 3000"""
 def testAnnee():
+    """fonction test qui  permet de tester 10 années choisit aléatoirement entre 1000 et 3000"""
+
     i = 0
 
     while i != 10:
@@ -10,8 +11,14 @@ def testAnnee():
         print(anneeTest,anneeBool)
         i+=1
 
-"""fonction qui renvoie False si l'année n'est pas bissextile et True si bissextile"""
 def est_bessextile(annee:int):
+    """
+        fonction qui renvoie False si l'année n'est pas bissextile et True si bissextile
+        :param annee: recupère l'année saisie
+        :type annee: int
+        :return: True si l'année est bissextile ou False si pas bissextile
+        :rtype: bool
+    """
     global anneeBool
 
     if annee % 4 == 0 and annee % 100 != 0 or annee % 400 == 0:
