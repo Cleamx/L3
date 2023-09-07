@@ -1,5 +1,26 @@
-def prix_gramme(poid):
-    prixAffranchissement = 0
+prixAffranchissement = 0
+tariftest = [""] 
+
+
+
+def prix_gramme(poids,tarifLettre):
+    """ 
+        envoie le prix en fonction du poids et du type de lettre
+
+        :param poids: poids de la lettre
+        :param tarifLettre: tarif en fonction du type de lettre
+        :type poids: int
+        :type tarifLettre: list
+        :return: tarif en fonction du poids et du type de lettre
+        :rtype: float ou str si erreur
+    """
+    TARIF_VINGT_GRAMME = tarifLettre[0]
+    TARIF_CENT_GRAMME = tarifLettre[1]
+    TARIF_DEUX_CENT_CINQUANTE_GRAMME = tarifLettre[2]
+    TARIF_CINQUE_CENTS_GRAMME = tarifLettre[3]
+    TARIF_UN_KILOS = tarifLettre[4]
+    TARIF_TROIS_KILOS = tarifLettre[5]
+
     POIDS_VINGT_GRAMME = 20
     POIDS_CENT_GRAMME = 100
     POIDS_DEUX_CENT_CINQUANTE_GRAMME = 250
@@ -9,31 +30,50 @@ def prix_gramme(poid):
 
     """Renvoie le tarif en fonction du poids"""
 
-    if poid <= POIDS_VINGT_GRAMME:
-        prixAffranchissement = TARIF_VINGT_GRAMME
-    elif (POIDS_VINGT_GRAMME < poid <= POIDS_CENT_GRAMME):
-        prixAffranchissement = TARIF_CENT_GRAMME
-    elif (POIDS_CENT_GRAMME < poid <= POIDS_DEUX_CENT_CINQUANTE_GRAMME):
-        prixAffranchissement = TARIF_DEUX_CENT_CINQUANTE_GRAMME
-    elif (POIDS_DEUX_CENT_CINQUANTE_GRAMME < poid < POIDS_CINQUE_CENTS_GRAMME):
-        prixAffranchissement = TARIF_CINQUE_CENTS_GRAMME
-    elif (POIDS_CINQUE_CENTS_GRAMME < poid <= POIDS_UN_KILO):
-        prixAffranchissement = TARIF_UN_KILOS
-    elif (POIDS_UN_KILO < poid <= POIDS_TROIS_KILOS):
-        prixAffranchissement = TARIF_TROIS_KILOS
+    if poids <= POIDS_VINGT_GRAMME:
+        tarif = TARIF_VINGT_GRAMME
+    elif (POIDS_VINGT_GRAMME < poids <= POIDS_CENT_GRAMME):
+        tarif = TARIF_CENT_GRAMME
+    elif (POIDS_CENT_GRAMME < poids <= POIDS_DEUX_CENT_CINQUANTE_GRAMME):
+        tarif = TARIF_DEUX_CENT_CINQUANTE_GRAMME
+    elif (POIDS_DEUX_CENT_CINQUANTE_GRAMME < poids < POIDS_CINQUE_CENTS_GRAMME):
+        tarif = TARIF_CINQUE_CENTS_GRAMME
+    elif (POIDS_CINQUE_CENTS_GRAMME < poids <= POIDS_UN_KILO):
+        tarif = TARIF_UN_KILOS
+    elif (POIDS_UN_KILO < poids <= POIDS_TROIS_KILOS):
+        tarif = TARIF_TROIS_KILOS
     else:
         print("Le poid inscrit est trop élevé")
-        prixAffranchissement = "Erreur le prix n'est pas disponible"
+        tarif = "Erreur le prix n'est pas disponible"
 
-    print("Le prix de l'affranchissement est de ",prixAffranchissement," €")
+    return tarif
+
+def calculPrixType(typeDeLettre):
+
+    """
+        envoie la liste des tarifs en fonction du type de lettre
+
+        :param typeDeLettre: type de lettre V/ P/ E
+        :type typeDeLettre: str
+        :return: liste des tarifs du type de la lettre V/ P/ E
+        :rtype: list
+    """
+
+    if typeDeLettre == "V":
+        TARIF_LETTRE_VERTE = [1.16,2.32,4.00,6.00,7.50,10.50]
+        tariftest = TARIF_LETTRE_VERTE 
+
+    elif typeDeLettre == "P":
+        TARIF_LETTRE_PRIORITAIRE = [1.43,2.86,5.26,7.89,7.89,11.44]
+        tariftest = TARIF_LETTRE_PRIORITAIRE
+
+    elif typeDeLettre == "E":
+        TARIFECOPLI = [1.14,2.28,3.92,"poids trop élevé","poids trop élevé","poids trop élevé"]
+        tariftest = TARIFECOPLI
+    
+    return tariftest
 
 def main():
-    global TARIF_VINGT_GRAMME
-    global TARIF_CENT_GRAMME
-    global TARIF_DEUX_CENT_CINQUANTE_GRAMME
-    global TARIF_CINQUE_CENTS_GRAMME
-    global TARIF_UN_KILOS
-    global TARIF_TROIS_KILOS
     testSaisie = True
     testValeur = True
  
@@ -55,36 +95,10 @@ def main():
         except ValueError:
             print("Désolé la valeur saisie n'est pas correct.")
 
-    """en fonction du type de lettre les tarifs varient et la fonction prix_gramme renvoie le tarif en fonction du poids saisie"""
-    if typeLettre == "V":
-            
-        TARIF_VINGT_GRAMME = 1.16
-        TARIF_CENT_GRAMME = 2.32
-        TARIF_DEUX_CENT_CINQUANTE_GRAMME = 4.00
-        TARIF_CINQUE_CENTS_GRAMME = 6.00
-        TARIF_UN_KILOS = 7.50
-        TARIF_TROIS_KILOS = 10.50
+    
+    test = calculPrixType(typeLettre)
+    prixFinal =  prix_gramme(poidsLettre,test)
 
-        prix_gramme(poidsLettre)
-
-    elif typeLettre == "P":
-        TARIF_VINGT_GRAMME = 1.43
-        TARIF_CENT_GRAMME = 2.86
-        TARIF_DEUX_CENT_CINQUANTE_GRAMME = 5.26
-        TARIF_CINQUE_CENTS_GRAMME = 7.89
-        TARIF_UN_KILOS = 7.89
-        TARIF_TROIS_KILOS = 11.44
-
-        prix_gramme(poidsLettre)
-
-    elif typeLettre == "E":
-        TARIF_VINGT_GRAMME = 1.14
-        TARIF_CENT_GRAMME = 2.28
-        TARIF_DEUX_CENT_CINQUANTE_GRAMME = 3.92
-        TARIF_CINQUE_CENTS_GRAMME = "erreur"
-        TARIF_UN_KILOS = "erreur"
-        TARIF_TROIS_KILOS = "erreur"
-
-        prix_gramme(poidsLettre)
+    print("Le prix de l'affranchissement est de ", prixFinal, "euro")    
 
 main()
