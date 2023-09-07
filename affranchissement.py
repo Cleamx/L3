@@ -7,6 +7,8 @@ def prix_gramme(poid):
     POIDS_UN_KILO = 1000
     POIDS_TROIS_KILOS = 3000
 
+    """Renvoie le tarif en fonction du poids"""
+
     if poid <= POIDS_VINGT_GRAMME:
         prixAffranchissement = TARIF_VINGT_GRAMME
     elif (POIDS_VINGT_GRAMME < poid <= POIDS_CENT_GRAMME):
@@ -34,7 +36,8 @@ def main():
     global TARIF_TROIS_KILOS
     testSaisie = True
     testValeur = True
-
+ 
+    """Test si typeLettre est bien V P ou E sinon renvoie un message d'erreur et redemande la saisie"""
     while testSaisie == True:
         typeLettre = input("Saisir le type de lettre (verte (V), prioritaire (P) ou éco-plie (E)) : ").capitalize()
         if typeLettre != "V" and typeLettre != "P" and typeLettre != "E":
@@ -42,6 +45,7 @@ def main():
         else:
             testSaisie = False
 
+    """Test si le poids entrer est bien un entier sinon renvoie un message d'erreur et redemande la saisie"""
     while testValeur == True:
         poidsLettre = input("Saisir le poids de la lettre en gramme : ")
         try:
@@ -51,6 +55,7 @@ def main():
         except ValueError:
             print("Désolé la valeur saisie n'est pas correct.")
 
+    """en fonction du type de lettre les tarifs varient et la fonction prix_gramme renvoie le tarif en fonction du poids saisie"""
     if typeLettre == "V":
             
         TARIF_VINGT_GRAMME = 1.16
