@@ -10,8 +10,16 @@ def test():
         print(test_imc)
         message_imc(test_imc)
 
-#Renvoie en sortie l'interprétation d'imc selon la valeur de l'imc
+
 def message_imc(imc : float):
+
+    """
+        Renvoie en sortie l'interprétation d'imc selon la valeur de l'imc
+        :param imc: recupère l'imc saisie dans main
+        :type imc: float
+        :return: interpretation de l'imc
+        :rtype: str
+    """
     resultat_imc = ""
     IMC_FAMINE = 16.5
     IMC_MAIGREUR = 18.5
@@ -35,7 +43,7 @@ def message_imc(imc : float):
     elif imc > IMC_OB_SEVERE:
         resultat_imc = "obésité morbide"
 
-    print("L'interprétation de votre imc est : ", resultat_imc)
+    return resultat_imc
 
 #test si la entrerImc est bien en float sinon envoie un message d'erreur et demande une nouvelle saisie puis envoie en paramètre 
 #entrerImc
@@ -50,7 +58,7 @@ def main():
         except ValueError:
             print("Désolé la valeur saisie n'est pas correct.")
         
-    message_imc(entrerImc)
-
+    imcInterpretation = message_imc(entrerImc)
+    print("L'interprétation de votre imc est : ", imcInterpretation)
 test()
 main()
