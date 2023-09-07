@@ -1,4 +1,16 @@
-def message_imc(imc : int):
+import random
+
+def test():
+    testtest = (16.5, 18.5, 25, 30, 35, 40)
+
+    for i in testtest :
+
+        test_imc = i
+        print(test_imc)
+        message_imc(test_imc)
+
+
+def message_imc(imc : float):
     resultat_imc = ""
     IMC_FAMINE = 16.5
     IMC_MAIGREUR = 18.5
@@ -11,7 +23,7 @@ def message_imc(imc : int):
         resultat_imc = "dénutrition ou famine"
     elif IMC_FAMINE < imc <= IMC_MAIGREUR:
         resultat_imc = "maigreur"
-    elif IMC_MAIGREUR < imc < IMC_NORMALE:
+    elif IMC_MAIGREUR < imc <= IMC_NORMALE:
         resultat_imc = "corpulence normale"
     elif IMC_NORMALE < imc <= IMC_SURPOIDS:
         resultat_imc = "surpoids"
@@ -24,7 +36,9 @@ def message_imc(imc : int):
 
     print("L'interprétation de votre imc est : ", resultat_imc)
 
-def main():
+test()
+
+"""def main():
     testValeur = True
     while testValeur == True:
         entrerImc = input("Saisir votre imc : ")
@@ -37,4 +51,4 @@ def main():
         
     message_imc(entrerImc)
 
-main()
+main()"""
