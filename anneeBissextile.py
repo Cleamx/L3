@@ -26,7 +26,7 @@ def main():
         entrerAnnee = input("Entrer une année : ")
         try:
             entrerAnnee = int(entrerAnnee)
-            int(entrerAnnee) == int()
+            entrerAnnee == int()
             testValeur = False
         except ValueError:
             print("Désolé la valeur saisie n'est pas correct.")

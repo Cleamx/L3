@@ -41,7 +41,7 @@ def main():
         entrerImc = input("Saisir votre imc : ")
         try:
             entrerImc = float(entrerImc)
-            float(entrerImc) == float()
+            entrerImc == float()
             testValeur = False
         except ValueError:
             print("Désolé la valeur saisie n'est pas correct.")
