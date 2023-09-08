@@ -113,6 +113,19 @@ def moyenne_sup(L:list, e:int) ->float:
         res = moyenne(listeNbSup)
     return res
 
+def val_max(L : list) -> float:
+    valeurMax = 0
+    for i in range(len(L)):
+        if valeurMax < L[i]:
+            valeurMax = L[i]
+    return valeurMax
+
+def ind_max(L:list) -> int:
+    ind_max = 0
+    for i in range(len(L)):
+        if ind_max < i:
+            ind_max = i
+    return ind_max
 
 
 def test_exercice_un():
@@ -123,12 +136,16 @@ def test_exercice_un():
     print("Test moyenne : ", moyenne(liste_test))
     print("Test nombre sup : ", nb_sup(liste_test, 45), nb_sup_deux(liste_test, 45))
     print("Test moyenne nombre Sup : ", moyenne_sup(liste_test, 34))
+    print("Test valeur max : ", val_max(liste_test))
+    print("Test index max : ", ind_max(liste_test))
     
     liste_test_deux = [1,10,100, 1000,10000]
     print("Test somme 11111 : ", somme_un(liste_test_deux), somme_deux(liste_test_deux), somme_trois(liste_test_deux))
     print("Test moyenne : ", moyenne(liste_test_deux))
     print("Test nombre sup : ", nb_sup(liste_test_deux, 45), nb_sup_deux(liste_test_deux, 45))
     print("Test moyenne nombre Sup : ", moyenne_sup(liste_test_deux, 34))
+    print("Test valeur max : ", val_max(liste_test_deux))
+    print("Test index max : ", ind_max(liste_test_deux))
 
     
 
