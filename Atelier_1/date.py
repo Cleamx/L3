@@ -7,7 +7,7 @@ def date_est_valide(jour:int, mois: int, annee:int)->bool:
 
     joursMois = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     if est_bessextile(annee):
-        joursMois[1] = 28
+        joursMois[1] = 29
     
     if mois < 1 or mois > 12:
         valide = False
