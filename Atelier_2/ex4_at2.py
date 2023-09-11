@@ -65,18 +65,28 @@ def est_bijective(F:list) -> bool:
 def AffichageHisto(F:list)->str:
     H = histo(F)
     MAXOCC = max(H)
+    lignes = ""
 
     for i in range(MAXOCC, 0, -1):
-        line = ''
+        line =""
         for j in range(len(H)):
             valeur = H[j]
             if valeur >= i:
-                line += " #|"
+                line += "   #|"
             elif valeur <= i:
-                line += "  |"
+                line += "   -|"
         print(line)
 
-    lignes = '  '.join([str(num) for num in range(len(H))])
+    for num in range(len(H)):
+        if num < 10:
+            lignes += "  "
+            lignes += str(num)
+            lignes += "  "
+        else:
+            lignes += " "
+            lignes += str(num)
+            lignes += "  "
+
     print(lignes)
 
 print(AffichageHisto([1,1,2,4,5,6,6,4,6,7,8,9,9,10,11,11,12,13,14,15]))
