@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 def histo(F: list) -> list:
     """liste d'entiers H représentant l'histogramme de F
 
@@ -63,6 +65,14 @@ def est_bijective(F:list) -> bool:
     return bijective
 
 def AffichageHisto(F:list)->str:
+    """Affichage de l'histogramme sur terminal et matplotlib
+
+    Args:
+        F (list): liste d'entier
+
+    Returns:
+        str: affichage terminal
+    """
     H = histo(F)
     MAXOCC = max(H)
     lignes = ""
@@ -88,5 +98,10 @@ def AffichageHisto(F:list)->str:
             lignes += "  "
 
     print(lignes)
+    plt.hist(F, range = (min(F), max(F)), bins = max(F), color = 'blue',
+            edgecolor = 'black')
+    plt.xlabel('nombres')
+    plt.ylabel('occurence dans la liste')
+    plt.show()
 
 print(AffichageHisto([1,1,2,4,5,6,6,4,6,7,8,9,9,10,11,11,12,13,14,15]))
