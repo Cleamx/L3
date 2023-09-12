@@ -1,7 +1,6 @@
 def vitrines(nbEmplacements:int, lObjet:list)->list:
     vitrineUn = []
     vitrineDeux = []
-    i = 0
 
     for i in range(len(lObjet)):
         if len(vitrineUn) <= len(vitrineDeux) and len(vitrineUn) < nbEmplacements and lObjet[i] not in vitrineUn :
