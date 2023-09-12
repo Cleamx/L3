@@ -1,6 +1,14 @@
 import collections
 
-def test_valeurs(L:list):
+def test_valeurs(L:list)->bool:
+    """compte le nombre d'occurences dans une liste True si le nombre est inférieur ou égale à deux
+
+    Args:
+        L (list): list d'entier
+
+    Returns:
+        bool: retourne True si la condition est validé sinon False
+    """
     c = collections.Counter(L)
     listC = list(c.values())
 
@@ -12,6 +20,15 @@ def test_valeurs(L:list):
     return repetition
 
 def vitrines(nbEmplacements:int, lObjet:list)->list:
+    """affiche les nombres en vitrines 
+
+    Args:
+        nbEmplacements (int): nombre d'emplacements
+        lObjet (list): liste d'entier
+
+    Returns:
+        list: affiche tous les objets en vitrines et les vitrines n'ont pas deux objets identiques
+    """
     
     vitrineUn = []
     vitrineDeux = []
