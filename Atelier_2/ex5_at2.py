@@ -5,10 +5,10 @@ def test_valeurs(L:list):
     listC = list(c.values())
 
     if all(j <= 2 for j in listC):
-        repetition = True
+        return True
     else:
-        repetition = False
-    return repetition
+        return False
+    
 
 def vitrines(nbEmplacements:int, lObjet:list)->list:
     
