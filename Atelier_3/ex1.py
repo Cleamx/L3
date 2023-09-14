@@ -44,5 +44,14 @@ def is_mail(str_arg:str)->(int,int):
 
     return (a,b)
 
-print(full_name("mirande clementine"))
-print(is_mail("@univ-corse.fr"))
+def test():
+    str_variable2test = "bisgambiglia_paul@univ-corse.fr"
+    print(is_mail(str_variable2test))
+    str_variable2test = "bisgambiglia_paulOuniv-corse.fr" 
+    print(is_mail(str_variable2test)) 
+    str_variable2test = "bisgambiglia_paul@univ-corsePOINTfr"
+    print(is_mail(str_variable2test))
+    str_variable2test = "@univ-corse.fr" 
+    print(is_mail(str_variable2test))
+
+test()
