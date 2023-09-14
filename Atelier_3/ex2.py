@@ -35,7 +35,7 @@ def commencent_par(lst_mot: list, prefixe:str)->list:
     liste_prefixe = []
 
     for i in range(len(lst_mot)):
-        if commence_par(lst_mot[i], prefixe) == True:
+        if commence_par(lst_mot[i], prefixe):
             liste_prefixe.append(lst_mot[i])
     return liste_prefixe
 
@@ -83,8 +83,9 @@ def liste_mots (lst_mot:list, prefixe:str, suffixe:str, n:int) ->list:
     Returns:
         list: liste de mot de n lettre avec prefixe ou suffixe chercher 
     """
-    resultat = mots_Nlettres(lst_mot, n)
-    return commencent_par(resultat,prefixe) + finissent_par(resultat,suffixe)
+    liste_Nlettre = mots_Nlettres(lst_mot, n)
+
+    return  finissent_par(commencent_par(liste_Nlettre,prefixe),suffixe)
 
 def dictionnaire(fichier)->list:
     """fonction qui retourne les mots d'un fichier dans une liste
@@ -107,9 +108,9 @@ def dictionnaire(fichier)->list:
 lst_test = dictionnaire("/Users/clementinemirande/Desktop/L3 SPI/L3/littre.txt")
 
 
-print(mots_Nlettres(lst_test,3))
-print(commence_par("jouer", "jou"))
-print(commencent_par(lst_test, "jouer"))
-print(finit_par("bonjour", "our"))
-print(finissent_par(lst_test, "tter"))
-print(liste_mots(lst_test, "a", "t", 4 ))
+print("Test mot de n lettre :\n",mots_Nlettres(lst_test,3))
+print("Test mot commence par :\n", commence_par("jouer", "jou"))
+print("Test mots commencent par :\n",commencent_par(lst_test, "jouer"))
+print("Test mot finit par :\n",finit_par("bonjour", "our"))
+print("Test mots finnissent par :\n",finissent_par(lst_test, "tter"))
+print("Test mots de n lettre commencent et finissent par :\n",liste_mots(lst_test, "j", "r", 5 ))
