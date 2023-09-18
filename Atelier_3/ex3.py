@@ -43,10 +43,10 @@ def outputStr(mot:str, lpos:list)-> str:
 
 def runGame():
     #Affichage
-    C5 = "|---] "
-    C4 = "| O "
-    C3 = "| T "
-    C2 = "|/ \ "
+    C5 = "|----] "
+    C4 = "|  O "
+    C3 = "|  T "
+    C2 = "| / \ "
     C1 = "|______"
     
     i = 5
@@ -55,7 +55,6 @@ def runGame():
     lst_len = len(lst)
     iRand = random.randint(1, lst_len)
     motRand = lst[iRand-1]
-    print(motRand)
     indices = places_lettre('', motRand)
     print(outputStr(motRand, indices))
 
@@ -69,7 +68,8 @@ def runGame():
         else:
             i -= 1 
 
-        print(outputStr(motRand, lst_indices))
+        res = outputStr(motRand, lst_indices)
+        print(res)
 
         if i == 4:
             print("\n",C1)
@@ -83,6 +83,8 @@ def runGame():
             print("\nPerdu")
             print("\n",C5,"\n",C4,"\n",C3,"\n",C2,"\n",C1)
         
+        if "_" not in res:
+            return 1
 
        
 
