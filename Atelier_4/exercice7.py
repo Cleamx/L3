@@ -68,3 +68,24 @@ def selection_sort(list_to_sort: list)->list:
     return list_to_sort
 
 print(selection_sort(my_lst_to_sort))
+
+def buble_sort(list_to_sort: list)->list:
+    """fonction qui parcourt la liste et compare les éléments consécutifs. 
+    Lorsque deux éléments consécutifs ne sont pas dans l'ordre convenu 
+    (croissant), ils sont échangés.
+
+    Args:
+        list_to_sort (list): liste à trier
+
+    Returns:
+        list: liste triée
+    """
+    
+    for i in range(len(my_lst_to_sort)):
+        for j in range (i-1):
+            if my_lst_to_sort[j+1] < my_lst_to_sort[j]:
+                list_to_sort[j+1], list_to_sort[j] = list_to_sort[j], list_to_sort[j+1]
+    
+    return list_to_sort
+
+print(buble_sort(my_lst_to_sort))
