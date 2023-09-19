@@ -3,7 +3,6 @@ from random import shuffle, sample
 import time
 from partie1 import mix_list, gen_list_random_int, extract_elements_list
 
-listNbr = [i for i in range(100)]
 
 def perf_list(mix_list, shuffle, listInt, n)->callable:
     time_shuffle = []
@@ -35,12 +34,11 @@ result = perf_list(mix_list, shuffle, [5,10,20], 10)
 def perf_extract(sample, extract_elements_list, listInt, n, int_nbr_of_element_to_extract):
     time_extract = []
     time_sample = []
-    liste = [i for i in range(100)]
 
     for i in listInt:
         times_extract = []
         times_sample = []
-
+        liste = gen_list_random_int(i)
         for _ in range(n):
             start_pc = time.perf_counter()
             extract_elements_list(liste,int_nbr_of_element_to_extract)
@@ -57,6 +55,7 @@ def perf_extract(sample, extract_elements_list, listInt, n, int_nbr_of_element_t
 
     return (time_extract, time_sample)
 
+listNbr = [10, 500, 5000, 50000, 100000]
 resultDeux = perf_extract(sample, extract_elements_list,listNbr, 100, 5 )
 
 
