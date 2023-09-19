@@ -1,21 +1,19 @@
 import matplotlib.pyplot as plt
-import numpy as np
-from random import *
+from random import shuffle, sample
 import time
 from partie1 import mix_list, gen_list_random_int, extract_elements_list
 
-listNbr = [10, 500, 5000, 50000, 100000]
+listNbr = [i for i in range(100)]
 
 def perf_list(mix_list, shuffle, listInt, n)->callable:
     time_shuffle = []
     time_mix = []
-
+    liste = [i for i in range(100)]
     for i in listInt:
         times_shuffle = []
         times_mix = []
 
         for _ in range(n):
-            liste = gen_list_random_int(i)
 
             start_pc = time.perf_counter()
             shuffle(liste)
@@ -37,14 +35,13 @@ result = perf_list(mix_list, shuffle, [5,10,20], 10)
 def perf_extract(sample, extract_elements_list, listInt, n, int_nbr_of_element_to_extract):
     time_extract = []
     time_sample = []
+    liste = [i for i in range(100)]
 
     for i in listInt:
         times_extract = []
         times_sample = []
 
         for _ in range(n):
-            liste = gen_list_random_int(i)
-
             start_pc = time.perf_counter()
             extract_elements_list(liste,int_nbr_of_element_to_extract)
             end_pc = time.perf_counter()
