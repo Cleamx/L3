@@ -21,7 +21,7 @@ def gen_list_random_int(nbmax = 10, int_binf=0, int_bsup=10)->list:
     
     return int_nbr
 
-print(gen_list_random_int())
+# print(gen_list_random_int())
 
 
 def mix_list(int_nbr_of_element_to_extract:list)->list:
@@ -51,7 +51,7 @@ def mix_list(int_nbr_of_element_to_extract:list)->list:
 
 lst_sorted=[i for i in range(10)]
 res = mix_list(lst_sorted)
-print(res)
+# print(res)
 
 def choose_element_list(list_in_which_to_choose:list)-> int:
     """renvoie un élément de la liste aléatoirement
@@ -65,7 +65,7 @@ def choose_element_list(list_in_which_to_choose:list)-> int:
     nbAleatoire = randint(0, len(list_in_which_to_choose)-1)
     return list_in_which_to_choose[nbAleatoire]
 
-print(choose_element_list(res))
+# print(choose_element_list(res))
 
 def extract_elements_list(list_in_which_to_choose:list, int_nbr_of_element_to_extract:int)->list:
     """ fonction qui retourne un nombre int_nbr_of_element_to_extract d'éléments aléatoirement 
@@ -94,4 +94,4 @@ def extract_elements_list(list_in_which_to_choose:list, int_nbr_of_element_to_ex
             list_nbAleatoire.append(nbAleatoire)
     return extrated_list
 
-print(extract_elements_list(lst_sorted,5))
+# print(extract_elements_list(lst_sorted,5))

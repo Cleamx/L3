@@ -32,7 +32,7 @@ def perf_list(mix_list, shuffle, listInt, n)->callable:
 
     return (time_shuffle, time_mix)
 
-result = perf_list(mix_list, shuffle, listNbr, 100 )
+result = perf_list(mix_list, shuffle, [5,10,20], 10)
 
 def perf_extract(sample, extract_elements_list, listInt, n, int_nbr_of_element_to_extract):
     time_extract = []
@@ -66,7 +66,7 @@ resultDeux = perf_extract(sample, extract_elements_list,listNbr, 100, 5 )
 
 
 # -------------- Affichage ---------------
-x_axis_list = [2,3,4]
+x_axis_list = [5,10,20]
 fig, ax = plt.subplots()
 
 ax.plot(x_axis_list,result[0],'bo-',label='Shuffle') 
@@ -76,7 +76,7 @@ ax.legend(loc='upper center', shadow=True, fontsize='x-large')
 #fig.savefig("test.png")
 plt.show()
 
-x_axis_list = [2,3,4]
+x_axis_list = listNbr
 fig, ax = plt.subplots()
 
 ax.plot(x_axis_list,resultDeux[0],'bo-',label='extract') 
