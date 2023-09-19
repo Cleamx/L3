@@ -4,7 +4,15 @@ import matplotlib.pyplot as plt
 
 lst = [5,10,20]
 
-def sort_list(liste):
+def sort_list(liste:lst) -> list:
+    """fonction qui permet de trier la liste en ordre croissant
+
+    Args:
+        liste (list): liste à trier
+
+    Returns:
+        list: liste trier dans l'ordre croissant
+    """
     lst_sorted = list(liste)
 
     for i in range(len(lst_sorted)):
@@ -16,7 +24,18 @@ def sort_list(liste):
 
     return lst_sorted
 
-def perf_list(sort_list, sorted, listInt, n)->callable:
+def perf_list(sort_list, sorted, listInt, n)->tuple:
+    """calcule le temps que mettent sort_list et sorted à s'exécuter
+
+    Args:
+        sort_list (callable): ma fonction 
+        sorted (callable): fonciton python
+        listInt (list): tailles de liste pour lesquelles on effectue la comparaison
+        n (_type_): nombre d’exécution moyen nécessaire au calcul de la moyenne des temps
+
+    Returns:
+        tuple: liste des temps d’exécution moyens pour chacune de ces tailles de liste
+    """
     time_sorted = []
     time_sort_lst = []
     for i in listInt:
@@ -44,6 +63,8 @@ def perf_list(sort_list, sorted, listInt, n)->callable:
 result = perf_list(sort_list, sorted, lst, 10)
 print(sort_list(lst))
 print(result)
+
+# ------------- Affichage --------------
 
 x_axis_list = lst
 fig, ax = plt.subplots()

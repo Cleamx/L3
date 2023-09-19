@@ -4,7 +4,18 @@ import time
 from partie1 import mix_list, gen_list_random_int, extract_elements_list
 
 
-def perf_list(mix_list, shuffle, listInt, n)->callable:
+def perf_list(mix_list, shuffle, listInt, n)->tuple:
+    """calcule le temps que mettent mix_list et shuffle à s'exécuter
+
+    Args:
+        mix_list (callable): ma fonction
+        shuffle (callable): fonction python
+        listInt (list): tailles de liste pour lesquelles on effectue la comparaison
+        n (int): nombre d’exécution moyen nécessaire au calcul de la moyenne des temps
+
+    Returns:
+        tuple: liste des temps d’exécution moyens pour chacune de ces tailles de liste
+    """
     time_shuffle = []
     time_mix = []
     for i in listInt:
@@ -32,6 +43,18 @@ def perf_list(mix_list, shuffle, listInt, n)->callable:
 result = perf_list(mix_list, shuffle, [5,10,20], 10)
 
 def perf_extract(sample, extract_elements_list, listInt, n, int_nbr_of_element_to_extract):
+    """calcule le temps que mettent sample et extract_elements_list à s'exécuter
+
+    Args:
+        sample (callable): fonction python
+        extract_elements_list (callable): ma fonction
+        listInt (list): tailles de liste pour lesquelles on effectue la comparaison
+        n (n): nombre d’exécution moyen nécessaire au calcul de la moyenne des temps
+        int_nbr_of_element_to_extract (int): nombre d'éléments à extraire
+
+    Returns:
+       tuple: liste des temps d’exécution moyens pour chacune de ces tailles de liste
+    """
     time_extract = []
     time_sample = []
 
