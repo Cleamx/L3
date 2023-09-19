@@ -61,8 +61,8 @@ def perf_list(sort_list, sorted, listInt, n)->tuple:
     return (time_sorted, time_sort_lst)
 
 result = perf_list(sort_list, sorted, lst, 10)
-print(sort_list(lst))
-print(result)
+# print(sort_list(lst))
+# print(result)
 
 # ------------- Affichage --------------
 
@@ -74,4 +74,4 @@ ax.plot(x_axis_list,result[1], 'r*-', label='sort_list')
 ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps fonction") 
 ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
 #fig.savefig("test.png")
-plt.show()
+# plt.show()
