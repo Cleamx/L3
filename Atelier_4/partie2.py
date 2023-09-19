@@ -8,10 +8,10 @@ listNbr = [i for i in range(100)]
 def perf_list(mix_list, shuffle, listInt, n)->callable:
     time_shuffle = []
     time_mix = []
-    liste = [i for i in range(100)]
     for i in listInt:
         times_shuffle = []
         times_mix = []
+        liste = gen_list_random_int(i)
 
         for _ in range(n):
 
@@ -72,7 +72,7 @@ ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps
 ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
 #fig.savefig("test.png")
 plt.show()
-
+x_axis_list = []
 x_axis_list = listNbr
 fig, ax = plt.subplots()
 
@@ -80,5 +80,4 @@ ax.plot(x_axis_list,resultDeux[0],'bo-',label='extract')
 ax.plot(x_axis_list,resultDeux[1], 'r*-', label='sample') 
 ax.set(xlabel='Taille de la liste', ylabel='Temps (s)', title="Comparaison temps fonction") 
 ax.legend(loc='upper center', shadow=True, fontsize='x-large') 
-#fig.savefig("test.png")
 plt.show()
