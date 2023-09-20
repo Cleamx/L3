@@ -44,6 +44,7 @@ def mix_list(int_nbr_of_element_to_extract:list)->list:
         else:
             while nbAleatoire in list_nbAleatoire:
                 nbAleatoire = randint(0, len(int_nbr_of_element_to_extract)-1)
+                
             extrated_list.append(int_nbr_of_element_to_extract[nbAleatoire])
             list_nbAleatoire.append(nbAleatoire)
     return extrated_list

@@ -89,3 +89,47 @@ def buble_sort(list_to_sort: list)->list:
     return list_to_sort
 
 print(buble_sort(my_lst_to_sort))
+
+def tri_fusion(list_to_sort: list)->list:
+    """Trie une liste d'éléments en utilisant l'algorithme de tri fusion
+
+    Args:
+        list_to_sort (list): Liste à trier
+
+    Returns:
+        list: liste trier
+    """
+    if len(list_to_sort) <= 1:
+        return list_to_sort
+
+
+    milieu_liste = len(list_to_sort) // 2
+    liste_droite = list_to_sort[:milieu_liste]
+    liste_gauche = list_to_sort[milieu_liste:]
+    liste_droite = tri_fusion(liste_droite)
+    liste_gauche = tri_fusion(liste_gauche)
+
+    liste_triee = []
+    i = j = 0
+    taille_liste_droite = len(liste_droite)
+    taille_liste_gauche = len(liste_gauche)
+
+    while i < taille_liste_droite and j < taille_liste_gauche :
+        if liste_droite[i] < liste_gauche[j]:
+            liste_triee.append(liste_droite[i])
+            i+=1
+        else:
+            liste_triee.append(liste_gauche[j])
+            j+=1
+        
+    while i < len(liste_droite):
+        liste_triee.append(liste_droite[i])
+        i += 1
+    
+    while j < len(liste_gauche):
+        liste_triee.append(liste_gauche[j])
+        j += 1
+
+    return liste_triee
+
+print(tri_fusion(my_lst_to_sort))
