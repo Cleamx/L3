@@ -53,6 +53,14 @@ def longueur(lst:list)->int:
 print(longueur(lst_test))
 
 def findMin(lst:list)->int:
+    """fonction qui retourne le minimum d'une liste en utilisant la recursivité
+
+    Args:
+        lst (list): liste
+
+    Returns:
+        int: minimum
+    """
     minNumber = 0
     if len(lst) == 1:
         minNumber =  lst[0]
@@ -69,6 +77,15 @@ def findMin(lst:list)->int:
 print(findMin(lst_test))
 
 def ListPairs(lst : list)->list:
+    """fonction qui retourne les éléments paires dans une liste en utilisant la recursivité
+    
+
+    Args:
+        lst (list): liste
+
+    Returns:
+        list: liste d'éléments paires
+    """
     if len(lst) == 0:
         return []
     elif len(lst) == 1:
@@ -84,3 +101,19 @@ def ListPairs(lst : list)->list:
             return lst1
 
 print(ListPairs(lst_test))
+
+def concat_lst(lst : list)->list:
+    """fonction qui permet de concaténer plusieurs listes
+
+    Args:
+        lst (list): liste de listes
+
+    Returns:
+        list: listes
+    """
+    if lst == []:
+        return []
+    else:
+        return lst[0] + concat_lst(lst[1:])
+    
+print(concat_lst([[0,1],[2,3],[4],[5,6]]))
