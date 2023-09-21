@@ -94,11 +94,11 @@ def ListPairs(lst : list)->list:
         else:
             return []
     else:
-        lst1 = ListPairs(lst[1:])
+        paires = ListPairs(lst[1:])
         if lst[0] % 2 == 0:
-            return [lst[0]] + lst1
+            return [lst[0]] + paires
         else:
-            return lst1
+            return paires
 
 print(ListPairs(lst_test))
 
@@ -117,3 +117,24 @@ def concat_lst(lst : list)->list:
         return lst[0] + concat_lst(lst[1:])
     
 print(concat_lst([[0,1],[2,3],[4],[5,6]]))
+
+def separe(lst)->tuple:
+    """fonction qui sépare une liste en deux et qui renvoie un tuple de liste avec une liste paire et une impaire
+
+    Args:
+        lst (_type_): liste
+
+    Returns:
+        tuple: tuple de liste avec une liste paire et une impaire
+    """
+    if len(lst) == 0:
+        return [], []
+    
+    pairs, impairs = separe(lst[1:])
+    
+    if lst[0] % 2 == 0:
+        return [lst[0]] + pairs, impairs
+    else:
+        return pairs, [lst[0]] + impairs
+
+print(separe(lst_test))
