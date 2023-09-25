@@ -108,6 +108,18 @@ def matriceIncidence(mat:object)->object:
                 matrice[lignes][colonne] = matrice[colonne][lignes] = 1
     return matrice
 
+def matriceIncidencev2(mat:object)->object:
+    lst_arc = listeArcs(mat)
+    taille_mat = (len(mat),len(lst_arc))
+    matrice = np.zeros(taille_mat)
+    taille_matrice_incidence = len(matrice)
+
+    for i in range(taille_matrice_incidence):
+            a,b = lst_arc[i]
+            matrice[a][b] = matrice[b][a] = 1
+    
+    return matrice
+
 def test():
     lst_sommet = [0, 1, 2, 3, 4]
     lst_arc = [(0, 1), (0, 2), (1, 2), (1, 4), (2, 3), (3, 4), (4, 2)]
@@ -146,6 +158,10 @@ def test():
 
     resIncidence = matriceIncidence(res)
     print("\nLa matrice d'incidence est : \n ", resIncidence)
+    print("---------------------------")
+    
+    resIncidencev2 = matriceIncidencev2(res)
+    print("\nLa matrice d'incidence est : \n ", resIncidencev2)
     print("---------------------------")
 
 test()
