@@ -170,7 +170,7 @@ def est_voisinV2(mat:object, S: int, V:int)->bool:
     taille_lst_arc = len(lst_arc)
     res = False
     i = 0
-    while i < taille_lst_arc and res != True:
+    while i < taille_lst_arc and res == False:
         if lst_arc[i] == (S,V) or lst_arc[i] == (V,S):
             res = True
         i+=1
@@ -215,7 +215,7 @@ def test():
     print("\nLa matrice d'incidence est : \n ", resIncidencev2)
     print("---------------------------")
 
-    voisin = est_voisin(res, 1, 2)
+    voisin = est_voisin(res,  2,4)
     if voisin:
         print("Les deux sommets sont voisins\n")
     else:
@@ -223,7 +223,7 @@ def test():
     
     print("---------------------------")
     
-    voisin = est_voisinV2(res, 1, 2)
+    voisin = est_voisinV2(res, 2,4)
     if voisin:
         print("Les deux sommets sont voisins\n")
     else:
