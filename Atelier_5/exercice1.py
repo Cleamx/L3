@@ -1,9 +1,5 @@
 import numpy as np
 
-
-arr = np.array([1, 2, 3, 4, 5, 4, 4])
-print(arr)
-
 def my_searchsorted (table : object, element : int)-> int:
     """fonction qui cherche l'indice d'un élément d'une matrice
 
@@ -17,8 +13,6 @@ def my_searchsorted (table : object, element : int)-> int:
     for i in table:
         if element == table[i]:
             return i
-
-print(my_searchsorted(arr,4))
 
 def my_where(table : object, element : int )-> list:
     """fonction qui cherche l'indice d'un élément d'une matrice et retourne une liste d'un ou plusieurs indices
@@ -36,11 +30,6 @@ def my_where(table : object, element : int )-> list:
             res.append(i)
     return res 
 
-# print(my_where(arr, 4))
-
-A = np.array(([3,1],[6,4])) 
-B = np.array(([1,8],[4,2]))
-
 def my_add(tableA : object, tableB : object)-> object:
     """fonction qui permet d'additionner deux matrice
 
@@ -57,4 +46,40 @@ def my_add(tableA : object, tableB : object)-> object:
                 tableA[L, col] += tableB[L, col]
     return tableA
 
-print(my_add(A,B))
+
+def test():
+
+    arr = np.array([1, 2, 3, 4, 5, 4, 4])
+    print("Matrice:", arr)
+    print("---------------------------")
+
+    # Test de my_searchsorted
+    search_element = 4
+    index = my_searchsorted(arr, search_element)
+    if index != -1:
+        print("L'indice de ", search_element, " est ", index)
+    else:
+        print("L'élément chercher n'est pas dans la matrice")
+    print("---------------------------")
+
+    # Test de my_where (décommentez la ligne ci-dessous si vous souhaitez l'exécuter)
+    indices = my_where(arr, search_element)
+    print("Le ou les indices de ", search_element, " est/sont ", indices)
+    print("---------------------------")
+
+    A = np.array([[3, 1], [6, 4]])
+    B = np.array([[1, 8], [4, 2]])
+
+    print("Matrix A:")
+    print(A)
+    print("Matrix B:")
+    print(B)
+
+    # Test de my_add
+    result = my_add(A, B)
+    print("Result of matrix addition:")
+    print(result)
+    print("---------------------------")
+
+# Appeler la fonction de test
+test()
