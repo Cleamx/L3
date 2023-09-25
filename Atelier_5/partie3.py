@@ -96,6 +96,17 @@ def listeArcs(mat:object)->list:
                 resArcs.append((lignes,colonne))
     return resArcs
 
+def matriceIncidence(mat:object)->object:
+    lst_arc = listeArcs(mat)
+    taille_mat = (len(mat),len(lst_arc))
+    matrice = np.zeros(taille_mat)
+    taille_matrice_incidence = len(matrice)
+
+    for lignes in range(taille_matrice_incidence):
+        for colonne in range(taille_matrice_incidence):
+            if mat[lignes][colonne] == (1.0):
+                matrice[lignes][colonne] = matrice[colonne][lignes] = 1
+    return matrice
 
 def test():
     lst_sommet = [0, 1, 2, 3, 4]
@@ -131,6 +142,10 @@ def test():
     # Test de listeArcs
     resArcs = listeArcs(res)
     print("\nLes arcs de la matrice sont : ", resArcs)
+    print("---------------------------")
+
+    resIncidence = matriceIncidence(res)
+    print("\nLa matrice d'incidence est : \n ", resIncidence)
     print("---------------------------")
 
 test()
