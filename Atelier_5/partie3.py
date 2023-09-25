@@ -96,18 +96,41 @@ def listeArcs(mat:object)->list:
                 resArcs.append((lignes,colonne))
     return resArcs
 
-lst_sommet = [0,1,2,3,4]
-lst_arc = [(0,1),(0,2),(1,2), (1,4), (2,3), (3,4), (4,2)]
-res = matriceAdjacence(lst_sommet, lst_arc)
-print(res)
-lst_arc_pond = [(0,1,3),(0,2,5),(1,2,4), (1,4,1), (2,3,9), (3,4,8), (4,2,7)]
-# resPond = matriceAdjacencePond(lst_sommet, lst_arc_pond)
-# print(resPond)
-nomFick = "./Atelier_5/graphe/graph0.txt"
-# resFichier = lireMatriceFichier(nomFick)
-# print("\nLa matrice inscrite dans le fichier est \n", resFichier)
-resSommet = tousLesSommets(res)
-print("\nLes sommets de la matrice sont : ", resSommet)
 
-resArcs = listeArcs(res)
-print("\nLes arcs de la matrice sont : ", resArcs)
+def test():
+    lst_sommet = [0, 1, 2, 3, 4]
+    lst_arc = [(0, 1), (0, 2), (1, 2), (1, 4), (2, 3), (3, 4), (4, 2)]
+
+    # Test de matriceAdjacence
+    res = matriceAdjacence(lst_sommet, lst_arc)
+    print("Matrice d'adjacence :")
+    print(res)
+    print("---------------------------")
+
+    lst_arc_pond = [(0, 1, 3), (0, 2, 5), (1, 2, 4), (1, 4, 1), (2, 3, 9), (3, 4, 8), (4, 2, 7)]
+
+    # Test de matriceAdjacencePond (décommentez la ligne suivante)
+    resPond = matriceAdjacencePond(lst_sommet, lst_arc_pond)
+    print("\nMatrice d'adjacence pondérée :\n")
+    print(resPond)
+    print("---------------------------")
+
+    nomFichier = "./Atelier_5/graphe/graph0.txt"
+
+    # Test de lireMatriceFichier (décommentez la ligne suivante)
+    resFichier = lireMatriceFichier(nomFichier)
+    print("\nLa matrice inscrite dans le fichier est :\n")
+    print(resFichier)
+    print("---------------------------")
+
+    # Test de tousLesSommets
+    resSommet = tousLesSommets(res)
+    print("\nLes sommets de la matrice sont : ", resSommet)
+    print("---------------------------")
+
+    # Test de listeArcs
+    resArcs = listeArcs(res)
+    print("\nLes arcs de la matrice sont : ", resArcs)
+    print("---------------------------")
+
+test()
