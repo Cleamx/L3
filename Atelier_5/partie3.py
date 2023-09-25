@@ -170,7 +170,7 @@ def est_voisinV2(mat:object, S: int, V:int)->bool:
     taille_lst_arc = len(lst_arc)
     res = False
     i = 0
-    while i<taille_lst_arc and res == False:
+    while i < taille_lst_arc and res != True:
         if lst_arc[i] == (S,V) or lst_arc[i] == (V,S):
             res = True
         i+=1
