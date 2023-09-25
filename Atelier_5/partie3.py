@@ -112,9 +112,9 @@ def matriceIncidencev2(mat:object)->object:
     lst_arc = listeArcs(mat)
     taille_mat = (len(mat),len(lst_arc))
     matrice = np.zeros(taille_mat)
-    taille_matrice_incidence = len(matrice)
+    taille_lst_arc = len(lst_arc)
 
-    for i in range(taille_matrice_incidence):
+    for i in range(taille_lst_arc):
             a,b = lst_arc[i]
             matrice[a][b] = matrice[b][a] = 1
     
