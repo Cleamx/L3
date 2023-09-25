@@ -19,12 +19,6 @@ def matriceAdjacence(S: list, A: list)->object:
         matrice[a][b] = 1
     return matrice
 
-
-lst_sommet = [0,1,2,3,4]
-lst_arc = [(0,1),(0,2),(1,2), (1,4), (2,3), (3,4), (4,2)]
-res = matriceAdjacence(lst_sommet, lst_arc)
-# print(res)
-
 def matriceAdjacencePond(S: list, A: list)->object:
     """fonction qui retourne la matrice d’adjacence 
 
@@ -43,10 +37,6 @@ def matriceAdjacencePond(S: list, A: list)->object:
         a,b,c = A[i]
         matrice[a][b] = c
     return matrice
-
-lst_arc_pond = [(0,1,3),(0,2,5),(1,2,4), (1,4,1), (2,3,9), (3,4,8), (4,2,7)]
-# resPond = matriceAdjacencePond(lst_sommet, lst_arc_pond)
-# print(resPond)
 
 def lireMatriceFichier(nomfichier)->object:
     """fonction qui lit dans un fichier une matrice et qui crée une matrice avec numpy à partir du fichier
@@ -72,10 +62,6 @@ def lireMatriceFichier(nomfichier)->object:
     except FileNotFoundError:
         raise FileNotFoundError("Le fichier n'existe pas.")
 
-nomFick = "./Atelier_5/graphe/graph3.txt"
-# resFichier = lireMatriceFichier(nomFick)
-# print("\nLa matrice inscrite dans le fichier est \n", resFichier)
-
 def tousLesSommets(mat: object)->list:
     """fonction qui retourne la liste des sommets d'une matrice
 
@@ -92,9 +78,6 @@ def tousLesSommets(mat: object)->list:
         i+=1
     return resSommet
 
-resSommet = tousLesSommets(res)
-print("Les sommets de la matrice sont : ", resSommet)
-
 def listeArcs(mat:object)->list:
     """fonction qui retourne la liste de tuples des arcs de la matrice
 
@@ -108,12 +91,24 @@ def listeArcs(mat:object)->list:
     resArcs = []
     tailleMat = len(mat)
     
-    for i in range(tailleMat):
-        for j in range(tailleMat):
-            if mat[i][j] == (0.1) or mat[i][j] == (1.0):
-                resArcs.append((i,j))
-                
+    for lignes in range(tailleMat):
+        for colonne in range(tailleMat):
+            if mat[lignes][colonne] == (0.1) or mat[lignes][colonne] == (1.0):
+                resArcs.append((lignes,colonne))
     return resArcs
+
+lst_sommet = [0,1,2,3,4]
+lst_arc = [(0,1),(0,2),(1,2), (1,4), (2,3), (3,4), (4,2)]
+res = matriceAdjacence(lst_sommet, lst_arc)
+# print(res)
+lst_arc_pond = [(0,1,3),(0,2,5),(1,2,4), (1,4,1), (2,3,9), (3,4,8), (4,2,7)]
+# resPond = matriceAdjacencePond(lst_sommet, lst_arc_pond)
+# print(resPond)
+nomFick = "./Atelier_5/graphe/graph3.txt"
+# resFichier = lireMatriceFichier(nomFick)
+# print("\nLa matrice inscrite dans le fichier est \n", resFichier)
+resSommet = tousLesSommets(res)
+print("Les sommets de la matrice sont : ", resSommet)
 
 resArcs = listeArcs(res)
 print("\nLes arcs de la matrice sont : ", resArcs)

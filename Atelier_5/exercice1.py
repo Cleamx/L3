@@ -38,7 +38,7 @@ def my_where(table : object, element : int )-> list:
 
 # print(my_where(arr, 4))
 
-A = np.array(([3,1,],[6,4])) 
+A = np.array(([3,1],[6,4])) 
 B = np.array(([1,8],[4,2]))
 
 def my_add(tableA : object, tableB : object)-> object:
@@ -51,8 +51,10 @@ def my_add(tableA : object, tableB : object)-> object:
     Returns:
         object: matrice a+b
     """
-    if tableA.shape == tableB.shape:
-        res = A + B
-    return res
+    if tableA.shape == tableB.shape :
+        for L in range(len(tableA)):
+             for col in range(len(tableA)):
+                tableA[L, col] += tableB[L, col]
+    return tableA
 
-# print(my_add(A,B))
+print(my_add(A,B))
