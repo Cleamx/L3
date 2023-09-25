@@ -97,6 +97,14 @@ def listeArcs(mat:object)->list:
     return resArcs
 
 def matriceIncidence(mat:object)->object:
+    """fonction qui retourne la matrice d'incidence de mat
+
+    Args:
+        mat (object): matrice
+
+    Returns:
+        object: matrice d'incidence
+    """
     lst_arc = listeArcs(mat)
     taille_mat = (len(mat),len(lst_arc))
     matrice = np.zeros(taille_mat)
@@ -109,6 +117,14 @@ def matriceIncidence(mat:object)->object:
     return matrice
 
 def matriceIncidencev2(mat:object)->object:
+    """fonction qui retourne la matrice d'incidence de mat
+
+    Args:
+        mat (object): matrice
+
+    Returns:
+        object: matrice d'incidence
+    """
     lst_arc = listeArcs(mat)
     taille_mat = (len(mat),len(lst_arc))
     matrice = np.zeros(taille_mat)
