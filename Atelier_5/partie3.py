@@ -10,7 +10,6 @@ def matriceAdjacence(S: list, A: list)->object:
     Returns:
         object: matrice d’adjacence associée
     """
-    a = b = 0
     taille_S = (len(S),len(S))
     matrice = np.zeros(taille_S)
     
@@ -93,22 +92,22 @@ def listeArcs(mat:object)->list:
     
     for lignes in range(tailleMat):
         for colonne in range(tailleMat):
-            if mat[lignes][colonne] == (0.1) or mat[lignes][colonne] == (1.0):
+            if mat[lignes][colonne] == (1.0):
                 resArcs.append((lignes,colonne))
     return resArcs
 
 lst_sommet = [0,1,2,3,4]
 lst_arc = [(0,1),(0,2),(1,2), (1,4), (2,3), (3,4), (4,2)]
 res = matriceAdjacence(lst_sommet, lst_arc)
-# print(res)
+print(res)
 lst_arc_pond = [(0,1,3),(0,2,5),(1,2,4), (1,4,1), (2,3,9), (3,4,8), (4,2,7)]
 # resPond = matriceAdjacencePond(lst_sommet, lst_arc_pond)
 # print(resPond)
-nomFick = "./Atelier_5/graphe/graph3.txt"
+nomFick = "./Atelier_5/graphe/graph0.txt"
 # resFichier = lireMatriceFichier(nomFick)
 # print("\nLa matrice inscrite dans le fichier est \n", resFichier)
 resSommet = tousLesSommets(res)
-print("Les sommets de la matrice sont : ", resSommet)
+print("\nLes sommets de la matrice sont : ", resSommet)
 
 resArcs = listeArcs(res)
 print("\nLes arcs de la matrice sont : ", resArcs)
