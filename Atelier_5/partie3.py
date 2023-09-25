@@ -136,6 +136,46 @@ def matriceIncidencev2(mat:object)->object:
     
     return matrice
 
+def est_voisin(mat:object, S: int, V:int)->bool:
+    """fonction qui retourne true si les deux sommets sont voisins sinon false avec boucle for
+
+    Args:
+        mat (object): matrice
+        S (int): premier sommet
+        V (int): deuxieme sommet
+
+    Returns:
+        bool: true si les deux sommets sont voisins sinon false
+    """
+    lst_arc = listeArcs(mat)
+    taille_lst_arc = len(lst_arc)
+    res = False
+    for i in range(taille_lst_arc):
+        if lst_arc[i] == (S,V) or lst_arc[i] == (V,S):
+            res = True
+    return res
+
+def est_voisinV2(mat:object, S: int, V:int)->bool:
+    """fonction qui retourne true si les deux sommets sont voisins sinon false avec boucle while
+
+    Args:
+        mat (object): matrice
+        S (int): premier sommet
+        V (int): deuxieme sommet
+
+    Returns:
+        bool: true si les deux sommets sont voisins sinon false
+    """
+    lst_arc = listeArcs(mat)
+    taille_lst_arc = len(lst_arc)
+    res = False
+    i = 0
+    while i<taille_lst_arc and res == False:
+        if lst_arc[i] == (S,V) or lst_arc[i] == (V,S):
+            res = True
+        i+=1
+    return res
+
 def test():
     lst_sommet = [0, 1, 2, 3, 4]
     lst_arc = [(0, 1), (0, 2), (1, 2), (1, 4), (2, 3), (3, 4), (4, 2)]
@@ -174,5 +214,19 @@ def test():
     resIncidencev2 = matriceIncidencev2(res)
     print("\nLa matrice d'incidence est : \n ", resIncidencev2)
     print("---------------------------")
+
+    voisin = est_voisin(res, 1, 2)
+    if voisin:
+        print("Les deux sommets sont voisins\n")
+    else:
+        print("Les sommets ne sont pas voisins\n")
+    
+    print("---------------------------")
+    
+    voisin = est_voisinV2(res, 1, 2)
+    if voisin:
+        print("Les deux sommets sont voisins\n")
+    else:
+        print("Les sommets ne sont pas voisins\n")
 
 test()
