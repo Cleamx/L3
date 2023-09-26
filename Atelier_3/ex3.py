@@ -32,13 +32,15 @@ def outputStr(mot:str, lpos:list)-> str:
 
     liste_res = []
     str_res = ""
+    taille_mot = len(mot)
 
-    for i in range(len(mot)):
+    for i in range(taille_mot):
         liste_res.append(" _")
         if i in lpos:
             liste_res[i] = mot[i]
 
-    for i in range(len(liste_res)):
+    taille_lst_res = len(liste_res)
+    for i in range(taille_lst_res):
         str_res += liste_res[i] + " "
     return str_res
 
@@ -96,16 +98,20 @@ def runGame():
     - Voitre choix : """)) #choix de la difficulté
 
     #selon la difficulté choisit une keys du dictionnaire
-    if difficulte == 1:
-        cles = random.randint(1, 6)
-    elif difficulte == 2:
-        cles = random.randint(7,8)
-    elif difficulte == 3:
-        cles = random.randint(9, max(dictio.keys()))
-    else:
-        print("Choix non valide, niveau aléaoirement choisit")
-        cles = random.randint(1, max(dictio.keys())-1)
-    print(cles)
+    cles = 0
+    min_dico = 4
+    if cles == 0:
+        if difficulte == 1:
+            cles = random.randint(min_dico, 6 )
+        elif difficulte == 2:
+            cles = random.randint(7,8)
+        elif difficulte == 3:
+            cles = random.randint(9, max(dictio.keys()))
+        else:
+            print("Choix non valide, niveau aléaoirement choisit")
+            cles = random.randint(min_dico, max(dictio.keys()))
+        
+
     mot = select_word(dictio,cles) #mot aléatoire selon difficulté
     print(mot)
     if mot != "erreur" or mot != " ":
