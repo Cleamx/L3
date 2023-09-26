@@ -97,18 +97,18 @@ def runGame():
 
     #selon la difficulté choisit une keys du dictionnaire
     if difficulte == 1:
-        cles = random.randint(min(dictio.keys()), 6)
+        cles = random.randint(1, 6)
     elif difficulte == 2:
         cles = random.randint(7,8)
     elif difficulte == 3:
         cles = random.randint(9, max(dictio.keys()))
     else:
         print("Choix non valide, niveau aléaoirement choisit")
-        cles = random.randint(min(dictio.keys(), max(dictio.keys())))
-    
+        cles = random.randint(1, max(dictio.keys())-1)
+    print(cles)
     mot = select_word(dictio,cles) #mot aléatoire selon difficulté
     print(mot)
-    if mot != "erreur":
+    if mot != "erreur" or mot != " ":
         indices = places_lettre('', mot) 
         print(outputStr(mot, indices)) #affichage premier tour tous les tirets
     else:
