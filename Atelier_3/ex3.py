@@ -1,4 +1,5 @@
 import random
+from ex2 import dictionnaire
 
 def places_lettre(ch : str, mot : str) -> list:
     """Fonction qui cherche si ch est dans le mot et retourne son indice
@@ -41,6 +42,42 @@ def outputStr(mot:str, lpos:list)-> str:
         str_res += liste_res[i] + " "
     return str_res
 
+def build_dict(lst: list) -> dict :
+    """fonction qui fait un dictionnaire à partir d'une liste
+
+    Args:
+        lst (list): liste à transformé
+
+    Returns:
+        dict: dictionnaire
+    """
+
+    dictio = {}
+    for mot in lst:
+        taille_mot = len(mot)
+        if taille_mot not in dictio:
+            dictio[taille_mot] = []
+        dictio[taille_mot].append(mot.lower())
+    return dictio
+
+def select_word(sorted_words:dict, word_len:int)->str:
+    """selectionne un mot aléatoire à partir de word_len (niveau de difficulté, taille du mot à deviner)
+
+    Args:
+        sorted_words (dict): dictionnaire
+        word_len (int): difficulté (taille du mot à deviner)
+
+    Returns:
+        str: mot à deviner
+    """
+
+    if word_len in sorted_words:
+        res = random.choices(sorted_words[word_len])
+    else:
+        res = " "
+    return res[0]
+
+
 def runGame():
     #Affichage
     C5 = "|----] "
@@ -49,18 +86,40 @@ def runGame():
     C2 = "| / \ "
     C1 = "|______"
     
-    i = 5
     lst_indices = []
-    lst =["paris","londres","madrid","berlin","new-york"]
-    lst_len = len(lst)
-    iRand = random.randint(1, lst_len)
-    motRand = lst[iRand-1]
-    indices = places_lettre('', motRand)
-    print(outputStr(motRand, indices))
+    lst = dictionnaire("./Atelier_3/capitales.txt") #création de la liste à partire d'un fichier
+    dictio = build_dict(lst) #recupère le transforme la liste en dictionnaire
+    difficulte = int(input("""Sélectionnez le niveau de difficulté:\n
+    - niveau 1 (taille du mot < 7) 
+    - niveau 2 (6 < taille du mot < 9)
+    - niveau 3 (taille du mot > 8)
+    - Voitre choix : """)) #choix de la difficulté
 
+    #selon la difficulté choisit une keys du dictionnaire
+    if difficulte == 1:
+        cles = random.randint(min(dictio.keys()), 6)
+    elif difficulte == 2:
+        cles = random.randint(7,8)
+    elif difficulte == 3:
+        cles = random.randint(9, max(dictio.keys()))
+    else:
+        print("Choix non valide, niveau aléaoirement choisit")
+        cles = random.randint(min(dictio.keys(), max(dictio.keys())))
+    
+    mot = select_word(dictio,cles) #mot aléatoire selon difficulté
+    print(mot)
+    if mot != "erreur":
+        indices = places_lettre('', mot) 
+        print(outputStr(mot, indices)) #affichage premier tour tous les tirets
+    else:
+        print(mot)
+
+
+    i = 5
     while i != 0:
+        
         lettre = str(input("Entrez une lettre : ")).lower()
-        indices = places_lettre(lettre, motRand)
+        indices = places_lettre(lettre, mot)
 
         if indices:
             for j in indices:
@@ -68,7 +127,7 @@ def runGame():
         else:
             i -= 1 
 
-        res = outputStr(motRand, lst_indices)
+        res = outputStr(mot, lst_indices)
         print(res)
 
         if i == 4:
@@ -86,9 +145,6 @@ def runGame():
         if "_" not in res:
             return 1
 
-       
-
-        
 
 def test_places_lettre():
     lettre = input("Entrez une lettre : ")
@@ -98,5 +154,5 @@ def test_places_lettre():
     
     print(outputStr(mot,indices))
 
-# test_places_lettre()
+# # test_places_lettre()
 runGame()
