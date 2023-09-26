@@ -89,36 +89,39 @@ def runGame():
     C1 = "|______"
     
     lst_indices = []
-    lst = dictionnaire("./Atelier_3/capitales.txt") #création de la liste à partire d'un fichier
+    lst = sorted(dictionnaire("./Atelier_3/capitales.txt")) #création de la liste à partire d'un fichier
+    if '' in lst:
+        lst.remove('')
+    elif ' ' in lst:
+        lst.remove(' ')
+    
     dictio = build_dict(lst) #recupère le transforme la liste en dictionnaire
     difficulte = int(input("""Sélectionnez le niveau de difficulté:\n
     - niveau 1 (taille du mot < 7) 
     - niveau 2 (6 < taille du mot < 9)
     - niveau 3 (taille du mot > 8)
-    - Voitre choix : """)) #choix de la difficulté
+    \nVoitre choix : """)) #choix de la difficulté
 
     #selon la difficulté choisit une keys du dictionnaire
-    cles = 0
-    min_dico = 4
-    if cles == 0:
-        if difficulte == 1:
-            cles = random.randint(min_dico, 6 )
-        elif difficulte == 2:
-            cles = random.randint(7,8)
-        elif difficulte == 3:
-            cles = random.randint(9, max(dictio.keys()))
-        else:
-            print("Choix non valide, niveau aléaoirement choisit")
-            cles = random.randint(min_dico, max(dictio.keys()))
+ 
+    if difficulte == 1:
+        cles = random.randint(min(dictio.keys()), 6 )
+    elif difficulte == 2:
+        cles = random.randint(7,8)
+    elif difficulte == 3:
+        cles = random.randint(9, max(dictio.keys()))
+    else:
+        print("Choix non valide, niveau aléaoirement choisit")
+        cles = random.randint(min(dictio.keys()), max(dictio.keys()))
         
 
     mot = select_word(dictio,cles) #mot aléatoire selon difficulté
     print(mot)
-    if mot != "erreur" or mot != " ":
+    if mot != " ":
         indices = places_lettre('', mot) 
         print(outputStr(mot, indices)) #affichage premier tour tous les tirets
     else:
-        print(mot)
+        print("Erreur")
 
 
     i = 5
@@ -160,5 +163,5 @@ def test_places_lettre():
     
     print(outputStr(mot,indices))
 
-# # test_places_lettre()
+# test_places_lettre()
 runGame()
