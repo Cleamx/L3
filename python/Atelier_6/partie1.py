@@ -1,3 +1,5 @@
+from Atelier_1.anneeBissextile import est_bessextile
+
 def  listeMultiples(binf : int, bsup : int, nb:int )->list:
     """liste des multiple de nb entre binf et bsup
 
@@ -38,6 +40,9 @@ def ajouterSiSup(lst:list, val:int, nb:int)->list:
     """
     return [nb+x for x in lst if x >= val]
 
+def  bissextiles(adeb:int, afin:int)->list:
+    return [x for x in range(adeb,afin+1) if est_bessextile(x) ]
+
 def test():
     
     res_lst_multiple = listeMultiples(1,10,2)
@@ -48,5 +53,9 @@ def test():
 
     res_lst_si_sup = ajouterSiSup([11,2,13,4,15],10,10)
     print(res_lst_si_sup)
+
+    res_Bissextile = bissextiles(2000,2024)
+    print(res_Bissextile)
+
 
 test()
