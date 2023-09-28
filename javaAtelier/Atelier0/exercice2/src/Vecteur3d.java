@@ -45,4 +45,12 @@ public class Vecteur3d {
     public float getSomme(){
         return resSomme;
     }
+
+    public float produitScalaireV2(Vecteur3d a){
+        return(this.x * a.x) + (this.y * a.y) + (this.z * a.z);
+    }
+
+    public float sommeVecteurV2(Vecteur3d a){
+        return(this.x + a.x) + (this.y + a.y) + (this.z + a.z);
+    }
 }

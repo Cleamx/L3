@@ -7,13 +7,16 @@ public class TestVecteur {
         System.out.println("Norme de v1 : "+ v1.normeVecteur());
         v2.affichageVecteur();
         System.out.println("Norme de v2 : "+ v2.normeVecteur());
-        v1.setProduitScalaire(v1, v2);
+        v1.setProduitScalaire(v1, v2); 
         v1.setSommeVecteur(v1, v2);
 
         float resultatSomme = v1.getSomme();
         System.out.println("v1 + v2 = " + resultatSomme);
+        System.out.println("version 2 : v1 + v2 = " + v1.sommeVecteurV2(v2));
+        
         float resultatProduitScalaire = v1.getProduitSclaire();
         System.out.println("v1.v2 = " + resultatProduitScalaire);
+         System.out.println("version 2 : v1.v2 = " + v1.produitScalaireV2(v2));
     }
 }
 
