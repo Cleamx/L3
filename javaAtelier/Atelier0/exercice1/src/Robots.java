@@ -55,9 +55,15 @@ public class Robots {
     public void afficheToi(){
         System.out.println("Le nom du robot est : " + nomRobot);
         System.out.println("La référence est : " + refRobot);
-        System.out.println("Les coordonées sont : x = "+ x +" y = " + y );
+        System.out.println("Les coordonées sont : (" + x + ", " + y+")");
         System.out.println("La direction est : " + orientation);
     }
 
+    public String toString(){
+        return "Référence : " + refRobot + "\n" +
+                "Nom : " + nomRobot + "\n" +
+                "Coordonnées : (" + x + ", " + y + ")\n" +
+                "Orientation : " + orientation;
+    }
 }
 
