@@ -1,5 +1,6 @@
 public class Vecteur3d {
     float x,y,z;
+    private static float resProduit, resSomme;
 
     public Vecteur3d(int x, int y, int z){
         this.x = x;
@@ -21,17 +22,27 @@ public class Vecteur3d {
         norme = Math.sqrt(norme);
         return norme;
     }
-
-    public float produitScalaire(Vecteur3d a, Vecteur3d b ){
-        float res;
-        res = (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
-        return res;
-        
+    public void setProduitScalaire(Vecteur3d v1, Vecteur3d v2){
+        produitScalaire(v1, v2);
     }
 
-    public float sommeVecteur(Vecteur3d a, Vecteur3d b){
-        float resSomme;
+    public static void produitScalaire(Vecteur3d a, Vecteur3d b ){
+        resProduit = (a.x * b.x) + (a.y * b.y) + (a.z * b.z);
+    }
+
+    public float getProduitSclaire(){
+        return resProduit;
+    }
+
+    public void setSommeVecteur(Vecteur3d v1, Vecteur3d v2){
+        sommeVecteur(v1, v2);
+    }
+
+    public static void sommeVecteur(Vecteur3d a, Vecteur3d b){
         resSomme = (a.x + b.x) + (a.y + b.y) + (a.z + b.z);
+    }
+
+    public float getSomme(){
         return resSomme;
     }
 }
