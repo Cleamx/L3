@@ -1,0 +1,30 @@
+Question 3.1
+
+1. la classe math ne possède aucun attribut
+
+2. les méthodes de cette classe son appeller directement nous n'avons pas besoin de créer 
+une instance
+
+3. la méthode Math.random() public static double random() est une méthode de classe
+
+4. il y en a deux : public static int max(int a, int b) et 
+public static long max(long a, long b) une permet de comparer des entiers l'autre des long
+
+5. a) n'est pas correcte car il n'y a qu'un seul argument et il en faut deux
+b) la deuxième est correcte et renvoie 6
+
+Question 3.2
+
+1. public int compareTo(String anotherString) c'est une méthode d'instance.
+
+2. car cette méthode doit être appler sur une instance de la classe String et ici elle est appeller
+directement sur la classe et la méthode renvoie un int donc elle ne peut être stockée dans res qui est de 
+type String.
+
+3. public int length() c'est une méthode d'instance
+
+4. Car cette méthode doit être appler sur une instance de la classe String et ici elle est appeller
+directement sur la classe. 
+Correction :
+String st = "bonjour";
+int lg = st.length();
