@@ -19,8 +19,8 @@ public class Robots {
 
     public Robots(String nomRobot){
         this.nomRobot = nomRobot;
-        x = 0;
-        y = 0;
+        this.x = 0;
+        this.y = 0;
         nombreRobot += 1;
         refRobot += nombreRobot;
         this.orientation = NORD;
