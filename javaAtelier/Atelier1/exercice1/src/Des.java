@@ -71,4 +71,10 @@ public class Des {
     public static int getNbDes(){
         return counter;
     }
+
+    public String toString(){
+        return  "Nom : " + nom + "\n" +
+                "Nombre de faces :" + nbFaces + " \n" +
+                "Nombre de dés : "+ counter;
+    }
 }

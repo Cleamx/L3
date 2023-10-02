@@ -4,13 +4,14 @@ public class TestDes {
         Des d1 = new Des("Dédé");
         Des d2 = new Des();
 
-        System.out.println(d.getNbFace());
-        System.out.println(d.getNom());
-        System.out.println(d1.getNom());
-        System.out.println(d2.getNom());
+        System.out.println(d);
+        System.out.println(d1);
+        System.out.println(d2);
+        
         System.out.println(d2.lancer());
 
         System.out.println(d.lancer(5));
+        
     }
    
 }
