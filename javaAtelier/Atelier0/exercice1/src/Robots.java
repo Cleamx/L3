@@ -33,22 +33,18 @@ public class Robots {
 
     public void deplacer(){
         
-        if (orientation > 0){
-            if (orientation == NORD){
-                y += 1;
-            }
-            else if (orientation == SUD){
-                y -= 1;
-            }
-            else if (orientation == EST){
-                x += 1;
-            }
-            else if (orientation == OUEST){
-                x -= 1;
-            }
+       
+        if (orientation == NORD){
+            y += 1;
         }
-        else{
-            System.out.println("Erreur, il faut changer d'orientation");
+        else if (orientation == SUD && y > 0){
+            y -= 1;
+        }
+        else if (orientation == EST){
+            x += 1;
+        }
+        else if (orientation == OUEST && x > 0){
+            x -= 1;
         }
     }
 
