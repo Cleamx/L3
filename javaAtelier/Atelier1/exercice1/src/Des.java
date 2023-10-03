@@ -7,6 +7,7 @@ public class Des {
     private final static int MAXFACE = 120;
     private final static int MINFACE = 3;
     static int counter;
+    private static Random r = new Random(); 
 
 
     public Des(){
@@ -49,7 +50,6 @@ public class Des {
     }
 
     public int lancer(){
-        Random r = new Random();
         int nbAleatoire = r.nextInt(this.nbFaces)+1;
         return nbAleatoire;
     }
@@ -75,6 +75,8 @@ public class Des {
     public String toString(){
         return  "Nom : " + nom + "\n" +
                 "Nombre de faces :" + nbFaces + " \n" +
-                "Nombre de dés : "+ counter;
+                "Nombre de dés : "+ counter+ " \n";
     }
+
+    
 }
