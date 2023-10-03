@@ -1,5 +1,7 @@
 import java.util.*;
 
+import Atelier1.exercice2.entier;
+
 public class Des {
 
     private String nom = "Dé";
@@ -124,6 +126,25 @@ public class Des {
         return  "Nom : " + nom + "\n" +
                 "Nombre de faces :" + nbFaces + " \n" +
                 "Nombre de dés : "+ counter+ " \n";
+    }
+
+    /**
+     * The function checks if two objects are equal based on their number of faces.
+     * 
+     * @param obj The "obj" parameter is an object of type Object, which is the superclass of all other
+     * classes in Java. It represents the object that is being compared for equality with the current
+     * object.
+     * @return The method is returning a boolean value.
+     */
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Des other = (Des) obj;
+        return nbFaces == other.nbFaces ;
     }
 
 

@@ -21,6 +21,21 @@ public class entier {
             this.valeur = valeur;
         }
     }
+    public String toString() {
+        return Integer.toString(valeur);
+    }
+
+   
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        entier other = (entier) obj;
+        return valeur == other.valeur && borneMin == other.borneMin && borneMax == other.borneMax;
+    }
     
 
     
