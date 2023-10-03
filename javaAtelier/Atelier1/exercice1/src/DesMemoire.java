@@ -1,18 +1,19 @@
 public class DesMemoire extends Des {
     private int derniereValeur = -1;
 
-    // The code `public DesMemoire(int nbFaces, String nom) { super(nbFaces); }` is a constructor for
-    // the `DesMemoire` class.
+    
+    // Le code `public DesMemoire(int nbFaces, String nom) { super(nbFaces); }` est un constructeur
+    // pour la classe `DesMemoire`.
     public DesMemoire(int nbFaces, String nom) {
         super(nbFaces);
     }
 
-
- /**
-  * La fonction "lancer" retourne un nombre aléatoire, en regardant que le resultat ne soit pas le même que 
-  * le dernier lancer.
-  * @return La méthode renvoie un entier, c'est le resultat du lancer de dés.
-  */
+    /**
+     * La fonction "lancer" renvoie un nombre aléatoire, garantissant qu'il n'est pas le même que la
+     * valeur précédente.
+     * 
+     * @return La méthode renvoie une valeur entière.
+     */
     public int lancer() {
         int resultat;
         do {

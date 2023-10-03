@@ -2,8 +2,8 @@ public class DesPipes extends Des {
 
     private int borneMin;
 
-   // The code is defining a constructor for the `DesPipes` class. It takes three parameters:
-   // `nbFaces`, `nom`, and `borneMin`.
+   
+    // un constructeur pour la classe `DesPipes`.
     public DesPipes(int nbFaces, String nom, int borneMin){
         
         super(nbFaces);
@@ -11,21 +11,22 @@ public class DesPipes extends Des {
 
     }
 
-   /**
-    * The function "getBorneMin" returns the value of the variable "borneMin".
-    * 
-    * @return The method is returning the value of the variable "borneMin".
-    */
+   
+    /**
+     * La fonction "getBorneMin" renvoie la valeur de la variable "borneMin".
+     * 
+     * @return La méthode renvoie la valeur de la variable "borneMin".
+     */
     public int getBorneMin(){
         return borneMin;
     }
 
     /**
-     * The function sets the minimum value for a range, but only if it is within the valid range of 1
-     * to the number of faces.
+     * La fonction définit la valeur minimale d'une plage, mais uniquement si elle se situe dans la
+     * plage valide de 1 au nombre de faces.
      * 
-     * @param borneMin The parameter "borneMin" is an integer value representing the minimum value that
-     * can be rolled on a dice.
+     * @param borneMin Le paramètre « borneMin » est une valeur entière représentant la valeur minimale
+     * pouvant être lancée sur un dé.
      */
     private void setBorneMin(int borneMin){
         if(borneMin >= 1 && borneMin <= super.getNbFace()){
@@ -36,11 +37,12 @@ public class DesPipes extends Des {
         }
     }
 
+   
     /**
-     * The function "lancer" generates a random number until it is greater than a specified minimum
-     * value.
+     * La fonction "lancer" génère un nombre aléatoire jusqu'à ce qu'il soit supérieur à une valeur
+     * minimale spécifiée.
      * 
-     * @return The method is returning the value of the variable "resultat".
+     * @return La méthode renvoie la valeur de la variable "resultat".
      */
     public int lancer(){
         int resultat;
