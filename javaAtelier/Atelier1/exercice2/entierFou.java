@@ -1,20 +1,20 @@
 package Atelier1.exercice2;
 import java.util.Random;
 
-public class entierFou extends entier {
+public class EntierFou extends Entier {
 
     private int niveauFolie;
     private Random random = new Random();
 
     // Le code définit un constructeur pour la classe `entierFou`.
-    public entierFou(int borneMin, int borneMax, int niveauFolie){
+    public EntierFou(int borneMin, int borneMax, int niveauFolie){
         super(borneMin,borneMax);
         this.niveauFolie = niveauFolie;
     }
 
     // Le code définit un constructeur pour la classe `entierFou`. Ce constructeur prend quatre
     // paramètres : `borneMin`, `borneMax`, `valeur` et `niveauFolie`.
-    public entierFou(int borneMin, int borneMax, int valeur, int niveauFolie){
+    public EntierFou(int borneMin, int borneMax, int valeur, int niveauFolie){
         super(borneMin, borneMax, valeur);
         this.niveauFolie = niveauFolie;
     }

@@ -1,6 +1,6 @@
 package Atelier1.exercice2;
 
-public class entier {
+public class Entier {
     private int valeur;
     private final int borneMin;
     private final int borneMax;
@@ -10,7 +10,7 @@ public class entier {
     // la classe `entier`. Il prend deux paramètres : `borneMin` et `borneMax`. À l'intérieur du
     // constructeur, les valeurs « borneMax » et « borneMin » sont affectées aux variables d'instance
     // correspondantes à l'aide du mot-clé « this ». De plus, la variable « valeur » est définie sur 0.
-    public entier(int borneMin, int borneMax){
+    public Entier(int borneMin, int borneMax){
         this.borneMax = borneMax;
         this.borneMin = borneMin;
         this.valeur = 0;
@@ -19,7 +19,7 @@ public class entier {
    
     // Le constructeur `public entier(int borneMin, int borneMax, int valeur)` crée une nouvelle
     // instance de la classe `entier` avec trois paramètres : `borneMin`, `borneMax` et `valeur`.
-    public entier(int borneMin, int borneMax, int valeur){
+    public Entier(int borneMin, int borneMax, int valeur){
         this(borneMin, borneMax);
         setValeur(valeur);
     }
@@ -86,7 +86,7 @@ public class entier {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        entier other = (entier) obj;
+        Entier other = (Entier) obj;
         return valeur == other.valeur && borneMin == other.borneMin && borneMax == other.borneMax;
     }
     
