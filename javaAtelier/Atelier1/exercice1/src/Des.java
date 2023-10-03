@@ -1,7 +1,5 @@
 import java.util.*;
 
-import Atelier1.exercice2.entier;
-
 public class Des {
 
     private String nom = "Dé";
