@@ -18,7 +18,6 @@ public class testEntier {
         entier1.setValeur(5);
         System.out.println("Entier1 après setValeur(5): " + entier1); 
 
-       
         System.out.println("Entier2: " + entier2); 
 
         entier2.incremente(5);

@@ -6,7 +6,7 @@ public class DesPipes extends Des {
     // un constructeur pour la classe `DesPipes`.
     public DesPipes(int nbFaces, String nom, int borneMin){
         
-        super(nbFaces);
+        super(nom, nbFaces);
         setBorneMin(borneMin);
 
     }
@@ -28,7 +28,7 @@ public class DesPipes extends Des {
      * @param borneMin Le paramètre « borneMin » est une valeur entière représentant la valeur minimale
      * pouvant être lancée sur un dé.
      */
-    private void setBorneMin(int borneMin){
+    public void setBorneMin(int borneMin){
         if(borneMin >= 1 && borneMin <= super.getNbFace()){
             this.borneMin = borneMin;
         }

@@ -42,6 +42,17 @@ public class Des {
         this.nbFaces = MINFACE;
         counter ++;
     }
+
+    public Des(String nom, int nbFaces){
+        if(nom != null && nom != ""){
+            this.nom = nom;
+        }
+        else{
+            this.nom += counter;
+        }
+        setNbFace(nbFaces);
+        counter ++;
+    }
     
    
     /**

@@ -5,7 +5,7 @@ public class DesMemoire extends Des {
     // Le code `public DesMemoire(int nbFaces, String nom) { super(nbFaces); }` est un constructeur
     // pour la classe `DesMemoire`.
     public DesMemoire(int nbFaces, String nom) {
-        super(nbFaces);
+        super(nom,nbFaces);
     }
 
     /**
