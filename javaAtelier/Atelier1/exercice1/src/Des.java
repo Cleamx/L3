@@ -140,13 +140,14 @@ public class Des {
     }
 
     
-    /**
-     * La fonction vérifie si deux objets sont égaux en fonction de leur nombre de faces.
-     * 
-     * @param obj Le paramètre "obj" est un objet de type Object, qui est la superclasse de toutes les
-     * autres classes Java. Il représente l'objet dont l'égalité est comparée à l'objet actuel.
-     * @return La méthode renvoie une valeur booléenne.
-     */
+    
+   /**
+    * La fonction vérifie si deux objets sont égaux en fonction de leur nombre de faces et de leur nom.
+    * 
+    * @param obj Le paramètre "obj" est un objet de type Object, qui est la superclasse de toutes les
+    * classes en Java. Il représente l'objet dont nous voulons comparer l'égalité avec l'objet actuel.
+    * @return La méthode renvoie une valeur booléenne.
+    */
     public boolean equals(Object obj) {
         boolean result = false;
         if ((obj == null) && (obj instanceof Des)) {

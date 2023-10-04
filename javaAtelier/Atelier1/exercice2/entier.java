@@ -71,14 +71,16 @@ public class Entier {
     }
    
     
-    /**
-     * La fonction vérifie si deux objets sont égaux en fonction de leurs valeurs et limites.
-     * 
-     * @param obj Le paramètre "obj" est un objet de type Object, qui est la superclasse de toutes les
-     * autres classes Java. Dans cette méthode equals(), elle est utilisée pour comparer l'objet actuel
-     * (this) avec un autre objet pour vérifier s'ils sont égaux.
-     * @return La méthode renvoie une valeur booléenne.
-     */
+    
+   /**
+    * La fonction vérifie si l'objet actuel est égal à un autre objet de la même classe en comparant
+    * leurs valeurs et leurs limites.
+    * 
+    * @param obj Le paramètre "obj" est un objet de type Objet, ce qui signifie qu'il peut s'agir de
+    * n'importe quel type d'objet. Dans cette méthode, on vérifie si le paramètre "obj" est nul et s'il
+    * s'agit d'une instance de la classe "Entier". Si les deux conditions sont vraies, la méthode
+    * @return La méthode renvoie une valeur booléenne.
+    */
     public boolean equals(Object obj) {
         boolean result = false;
         if ((obj == null) && (obj instanceof Entier)) {
