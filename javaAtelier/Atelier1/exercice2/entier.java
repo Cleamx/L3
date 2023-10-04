@@ -41,7 +41,8 @@ public class Entier {
      * La fonction "incremente" incrémente la valeur de 1 si elle est inférieure à la limite maximale.
      */
     public void incremente() {
-        if (valeur < borneMax) {
+        int n = 1;
+        if (valeur + n <= borneMax) {
             valeur++;
         }
     }
