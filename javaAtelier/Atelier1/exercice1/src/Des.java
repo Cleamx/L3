@@ -148,14 +148,12 @@ public class Des {
      * @return La méthode renvoie une valeur booléenne.
      */
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+        boolean result = false;
+        if ((obj == null) && (obj instanceof Des)) {
+            Des other = (Des) obj;
+            result = (this.nbFaces == other.nbFaces) && (this.nom.equals(other.nom)) ;
         }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Des other = (Des) obj;
-        return nbFaces == other.nbFaces ;
+        return result;
     }
 
 

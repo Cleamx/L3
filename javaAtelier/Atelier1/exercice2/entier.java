@@ -80,16 +80,11 @@ public class Entier {
      * @return La méthode renvoie une valeur booléenne.
      */
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Entier other = (Entier) obj;
-        return valeur == other.valeur && borneMin == other.borneMin && borneMax == other.borneMax;
-    }
-    
-
-    
+        boolean result = false;
+        if ((obj == null) && (obj instanceof Entier)) {
+            Entier other = (Entier) obj;
+            result = (valeur == other.valeur) && (borneMin == other.borneMin) && (borneMax == other.borneMax);
+        }   
+        return result;
+    }    
 }
