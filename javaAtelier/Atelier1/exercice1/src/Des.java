@@ -161,7 +161,7 @@ public class Des {
     */
     public boolean equals(Object obj) {
         boolean result = false;
-        if ((obj == null) && (obj instanceof Des)) {
+        if ((obj != null) && (obj instanceof Des)) {
             Des other = (Des) obj;
             result = (this.nbFaces == other.nbFaces) && (this.nom.equals(other.nom)) ; //ici this.nom.equals() equals de la class String
         }

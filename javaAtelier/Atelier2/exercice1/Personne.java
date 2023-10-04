@@ -10,6 +10,7 @@ public class Personne{
     private final GregorianCalendar dateNaissance;
     private Adresse adresse=ADRESSE_INCONNUE;
 	private static int nombrePersonne = 0;
+	private boolean resfinal = false;
 	
 	/**
 	 * Constructeur de Personne
@@ -105,22 +106,37 @@ public class Personne{
 		int res = this.dateNaissance.compareTo(pPersonne.dateNaissance);
 		
 		if (res == 0){
-			System.out.println("Les deux personnes ont le même age");
+			resfinal = false;
+		}
+		else if(res == 1){
+			resfinal = true;
 		}
 
-		if(res == 1){
-			System.out.println(pPersonne.prenom + " est plus agée que "+ this.prenom);
-			return true;
-		}
-
-		if(res == -1)
+		else if(res == -1)
 		{
-			System.out.println(this.prenom + " est plus agée que "+ pPersonne.prenom);
-			return false;
+			resfinal = false;;
 		}
-		return false;
-		
+		return resfinal;
 	}
+
+	public String affichagePlusAgee(){
+		String affichageRes = this.prenom + " est moins agée.";
+		if (resfinal == false){
+			affichageRes = this.prenom + " est plus agée.";
+		}
+		return affichageRes;
+	}
+
+	public boolean equals(Object obj) {
+        boolean result = false;
+        if ((obj != null) && (obj instanceof Personne)) {
+            Personne other = (Personne) obj;
+            result = (this.nom.equals(other.nom)) && (this.prenom.equals(other.prenom)) && (this.dateNaissance.equals(other.dateNaissance));
+        }   
+        return result;
+    }
+
+	
 }
 
     

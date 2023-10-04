@@ -84,7 +84,7 @@ public class Entier {
     */
     public boolean equals(Object obj) {
         boolean result = false;
-        if ((obj == null) && (obj instanceof Entier)) {
+        if ((obj != null) && (obj instanceof Entier)) {
             Entier other = (Entier) obj;
             result = (valeur == other.valeur) && (borneMin == other.borneMin) && (borneMax == other.borneMax);
         }   
