@@ -152,7 +152,7 @@ public class Des {
         boolean result = false;
         if ((obj == null) && (obj instanceof Des)) {
             Des other = (Des) obj;
-            result = (this.nbFaces == other.nbFaces) && (this.nom.equals(other.nom)) ;
+            result = (this.nbFaces == other.nbFaces) && (this.nom.equals(other.nom)) ; //ici this.nom.equals() equals de la class String
         }
         return result;
     }
