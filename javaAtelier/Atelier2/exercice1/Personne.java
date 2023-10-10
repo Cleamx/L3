@@ -10,7 +10,6 @@ public class Personne{
     private final GregorianCalendar dateNaissance;
     private Adresse adresse=ADRESSE_INCONNUE;
 	private static int nombrePersonne = 0;
-	private boolean resfinal = false;
 	
 	/**
 	 * Constructeur de Personne
@@ -102,31 +101,51 @@ public class Personne{
 		return nombrePersonne;
 	}
 
+	/**
+	 * La fonction compare les dates de naissance de deux objets Personne et renvoie vrai si la première
+	 * personne est plus âgée que la deuxième personne, et faux dans le cas contraire.
+	 * 
+	 * @param pPersonne Le paramètre pPersonne est de type Personne, qui est une classe représentant une
+	 * personne.
+	 * @return La méthode renvoie une valeur booléenne.
+	 */
 	public boolean plusAgee(Personne pPersonne){
+		boolean resfinal = false;
 		int res = this.dateNaissance.compareTo(pPersonne.dateNaissance);
 		
 		if (res == 0){
-			resfinal = false;
+			resfinal = true;
 		}
 		else if(res == 1){
-			resfinal = true;
+			resfinal = false;
 		}
 
 		else if(res == -1)
 		{
-			resfinal = false;;
+			resfinal = true;;
 		}
+		System.out.println(affichagePlusAgee(pPersonne, resfinal));
 		return resfinal;
 	}
 
-	public String affichagePlusAgee(){
-		String affichageRes = this.prenom + " est moins agée.";
-		if (resfinal == false){
-			affichageRes = this.prenom + " est plus agée.";
+	
+	public String affichagePlusAgee(Personne personne, boolean resPlusAgee){
+		String affichageRes = this.prenom + " est moins agée que " + personne.prenom;
+		if (resPlusAgee == true){
+			affichageRes = this.prenom + " est plus agée que "+ personne.prenom;
 		}
 		return affichageRes;
 	}
 
+	/**
+	 * La fonction vérifie si deux objets Personne sont égaux en comparant leurs attributs nom, prenom et
+	 * dateNaissance.
+	 * 
+	 * @param obj Le paramètre "obj" est un objet de type Object, qui est la superclasse de toutes les
+	 * classes en Java. Il est utilisé pour comparer l'objet actuel avec un autre objet pour vérifier
+	 * s'ils sont égaux.
+	 * @return La méthode renvoie une valeur booléenne.
+	 */
 	public boolean equals(Object obj) {
         boolean result = false;
         if ((obj != null) && (obj instanceof Personne)) {
