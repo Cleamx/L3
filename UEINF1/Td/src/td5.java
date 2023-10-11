@@ -7,6 +7,7 @@ public class td5 {
         char resChar;
         String resChaine = "";
 
+        // Le code inverse une chaîne donnée « maChaine ».
         for(int i = 0; i < maChaine.length(); i++){
             resChar = maChaine.charAt(i);
             resChaine = resChar +resChaine ;

@@ -3,15 +3,13 @@ public class td2 {
         multiplication(5);
     }
 
+    
     /**
-     * The function takes an integer as input and prints the multiplication table
-     * for that number up to
-     * 10, returning the input number.
+     * La fonction "multiplication" prend un entier en entrée et imprime la table de multiplication de
+     * ce nombre de 0 à 10.
      * 
-     * @param a The parameter "a" is an integer value that represents the number you
-     *          want to multiply.
-     * @return The method is returning the value of the parameter 'a', which is an
-     *         integer.
+     * @param a Le paramètre "a" représente le nombre que vous souhaitez multiplier.
+     * @return La méthode renvoie la valeur du paramètre « a », qui est un entier.
      */
     public static int multiplication(int a) {
         int resMultipication = 0;

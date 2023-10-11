@@ -10,25 +10,27 @@ public class td1 {
         System.out.println(resMain);
     }
 
+    
     /**
-     * The function "addition" takes two integers as input and returns their sum.
+     * La fonction « addition » prend deux entiers en entrée et renvoie leur somme.
      * 
-     * @param a The parameter "a" is an integer value that represents the first number to be added.
-     * @param b The parameter "b" is an integer value that is passed into the "addition" method.
-     * @return The sum of the two input integers, a and b, is being returned.
+     * @param a Le paramètre « a » est une valeur entière qui représente le premier nombre à ajouter.
+     * @param b Le paramètre "b" est une valeur entière transmise à la méthode "addition".
+     * @return La somme des deux entiers d’entrée, a et b, est renvoyée.
      */
     public static int addition(int a, int b) {
         int res = a + b;
         return res;
     }
 
+    
     /**
-     * The function "addition2" takes an array of integers as input and returns the sum of all the
-     * elements in the array.
+     * La fonction "addition2" prend un tableau d'entiers en entrée et renvoie la somme de tous les
+     * éléments du tableau.
      * 
-     * @param array The parameter "array" is an integer array that contains the numbers to be added
-     * together.
-     * @return The method is returning the sum of all the elements in the input array.
+     * @param array Le paramètre "array" est un tableau d'entiers qui contient les nombres à
+     * additionner.
+     * @return La méthode renvoie la somme de tous les éléments du tableau d’entrée.
      */
     public static int addition2(int [] array){
         int res2 = 0;
