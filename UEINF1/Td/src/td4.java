@@ -1,5 +1,3 @@
-package Td1.Td.src;
-
 public class td4 {
     public static void main(String[] args) {
         int tab[] = {1,2,3,4};

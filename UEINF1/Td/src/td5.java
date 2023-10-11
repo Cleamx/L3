@@ -1,5 +1,3 @@
-package Td1.Td.src;
-
 public class td5 {
     public static void main(String[] args) {
         System.out.println(chaineInv("12345"));

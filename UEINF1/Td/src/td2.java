@@ -1,5 +1,3 @@
-package Td1.Td.src;
-
 public class td2 {
     public static void main(String[] args) {
         multiplication(5);

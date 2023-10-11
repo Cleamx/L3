@@ -1,5 +1,3 @@
-package Td1.Td.src;
-
 public class td3 {
     public static void main(String[] args) {
         System.out.println("Le perimètre est de :" + perimetre(2));

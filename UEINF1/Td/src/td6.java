@@ -1,5 +1,3 @@
-package Td1.Td.src;
-
 public class td6 {
     public static void main(String[] args) {
         char ch = '5';
