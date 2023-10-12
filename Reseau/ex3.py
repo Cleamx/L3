@@ -2,6 +2,7 @@ def create_encoded_data(num1, num2, num3, bool1, bool2):
     """
     La fonction crée des données codées en combinant trois nombres et deux booléens à l'aide
     d'opérations au niveau du bit.
+    -> faire un exemple ici (par rapport au td ecrit qu'on a fait)
     
     :param num1: Le premier nombre à encoder. Il doit s'agir d'un entier compris entre 0 et 500
     :param num2: Le paramètre « num2 » représente un nombre qui doit être codé dans la plage de 0 à 500
