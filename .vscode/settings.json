@@ -1,5 +1,8 @@
 {
     "python.analysis.extraPaths": [
         "./Atelier_1"
-    ]
+    ],
+    "docwriter.style": "Javadoc",
+    "docwriter.language": "French",
+    "docwriter.progress.trackClasses": true
 }

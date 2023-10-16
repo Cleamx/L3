@@ -1,3 +1,5 @@
+package Atelier0.exercice1.src;
+
 public class ManipRob {
     public static void main (String [] args){
         Robots r1 = new Robots("Titi", 10, 20, Robots.SUD);
