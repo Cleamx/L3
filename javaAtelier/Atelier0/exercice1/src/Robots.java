@@ -1,3 +1,5 @@
+package Atelier0.exercice1.src;
+
 public class Robots {
     String refRobot= "ROB", nomRobot;
     int x, y, orientation;
