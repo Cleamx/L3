@@ -1,4 +1,4 @@
-package Reseau.ex_manette;
+package TD1;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
