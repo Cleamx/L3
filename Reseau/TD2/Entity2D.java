@@ -228,7 +228,7 @@ public class Entity2D implements Externalizable {
         data.writeFloat(y);
         data.writeShort(items.size()); 
         for (int item : items) {
-            data.writeInt(item);
+            data.writeShort(item);
         }
     }
 
@@ -250,7 +250,7 @@ public class Entity2D implements Externalizable {
         int itemCount = data.readShort(); 
         entity.items = new ArrayList<>(itemCount);
         for (int i = 0; i < itemCount; i++) {
-            entity.items.add(data.readInt());
+            entity.items.add((int) data.readShort());
         }
         return entity;
     }

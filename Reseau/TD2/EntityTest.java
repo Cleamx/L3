@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+
 public class EntityTest {
     public static void main(String [] args) {
         Entity2D ent_1 = new Entity2D("test1", 0.0f, 0.0f);
