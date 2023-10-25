@@ -18,7 +18,7 @@ public class MainSpotizer {
         Artiste artiste = new Artiste("Artiste Nom", titres, "Image de l'artiste");
 
         // Création d'un nouvel utilisateur
-        Utilisateur user = new Utilisateur("Nom d'Utilisateur");
+        Utilisateur user = new Utilisateur("Nom d'Utilisateur", "test@gmail.com");
 
         // L'utilisateur ajoute de l'argent à son solde
         user.ajouterAuSolde(50.0);
@@ -49,14 +49,15 @@ public class MainSpotizer {
         System.out.println(playlist);
         System.out.println(ecoute);
         
-        
 
        // TEST de la durée d'écoute et calcul du prix par minute
         ecoute.CalculerDureeTotale();
-        System.out.println(ecoute.getDureeTotale());
-        System.out.println( Facturation.calculerCoutEcoute(user, ecoute.getDureeTotale(), user.isaUnAccesHD()));
+        System.out.println();
+        System.out.println("Le prix pour " + ecoute.getDureeTotale()+" minute d'écoute est de " + 
+        Facturation.calculerCoutEcoute(user, ecoute.getDureeTotale(), user.isaUnAccesHD()) + "€");
         
         //REMUNERATION DE L'ARTISTE
-        System.out.println(Facturation.calculerRemunerationArtistes(Facturation.calculerCoutEcoute(user, ecoute.getDureeTotale(), user.isaUnAccesHD())));
+        System.out.println("La rémunération de l'artiste sera donc de "+
+        Facturation.calculerRemunerationArtistes(Facturation.calculerCoutEcoute(user, ecoute.getDureeTotale(), user.isaUnAccesHD())) + "€");
     }
 }

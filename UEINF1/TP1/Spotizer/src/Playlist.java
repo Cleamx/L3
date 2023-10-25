@@ -55,7 +55,7 @@ public class Playlist {
 
     @Override
     public String toString() {
-        return "Playlist [nom=" + nom + ", createur=" + createur + ", morceaux=" + morceaux + "]";
+        return "\nPlaylist [nom=" + nom + ", createur=" + createur + ", morceaux=" + morceaux + "]";
     }
 
     

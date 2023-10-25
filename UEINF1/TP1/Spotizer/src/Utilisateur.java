@@ -1,18 +1,23 @@
 /**
- * La classe `Utilisateur` représente un utilisateur avec des propriétés telles que le nom
+ * La classe `Utilisateur` représente un utilisateur avec des propriétés telles
+ * que le nom
  * d'utilisateur, le solde, le statut de l'abonnement et l'accès HD.
  */
 public class Utilisateur {
     private String nomUtilisateur;
+    private String email;
     private double solde;
     private boolean estAbonne;
     private boolean aUnAccesHD;
 
-    // Le `public Utilisateur(String nomUtilisateur)` est une méthode constructeur pour la classe
-    // `Utilisateur`. Il permet de créer une nouvelle instance de la classe `Utilisateur` et
+    // Le `public Utilisateur(String nomUtilisateur)` est une méthode constructeur
+    // pour la classe
+    // `Utilisateur`. Il permet de créer une nouvelle instance de la classe
+    // `Utilisateur` et
     // d'initialiser ses propriétés.
-    public Utilisateur(String nomUtilisateur) {
+    public Utilisateur(String nomUtilisateur, String email) {
         this.nomUtilisateur = nomUtilisateur;
+        this.email = email;
         this.solde = 0.0;
         this.estAbonne = false;
         this.aUnAccesHD = false;
@@ -21,8 +26,9 @@ public class Utilisateur {
     /**
      * La fonction "ajouterAuSolde" ajoute un montant donné au solde actuel.
      * 
-     * @param montant Le paramètre "montant" est une variable de type double qui représente le montant
-     * à ajouter au solde courant.
+     * @param montant Le paramètre "montant" est une variable de type double qui
+     *                représente le montant
+     *                à ajouter au solde courant.
      */
     public void ajouterAuSolde(double montant) {
         solde += montant;
@@ -84,13 +90,17 @@ public class Utilisateur {
         this.aUnAccesHD = aUnAccesHD;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "\nUtilisateur [nomUtilisateur=" + nomUtilisateur + ", solde=" + solde + ", estAbonne=" + estAbonne
                 + ", aUnAccesHD=" + aUnAccesHD + "]";
     }
-
-   
 }
-
-

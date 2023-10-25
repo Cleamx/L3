@@ -78,7 +78,7 @@ public class Ecoute {
 
     @Override
     public String toString() {
-        return "Ecoute [nom=" + nom + ", user=" + user + ", morceaux=" + morceaux + ", dureeTotale="
+        return "\nEcoute [nom=" + nom + ", user=" + user + ", morceaux=" + morceaux + ", dureeTotale="
                 + dureeTotale + "]";
     }
 
