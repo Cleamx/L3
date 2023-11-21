@@ -1,5 +1,15 @@
 import re
 
+
+nom_fichier = 'monProgramme.txt'
+# Ouvrir le fichier en mode lecture
+with open(nom_fichier, 'r') as fichier:
+    # Lire le contenu du fichier
+    code = fichier.read()
+
+code = code.replace('(', ' ( ').replace(')', ' ) ').replace(',', ' , ').replace(';', ' ; ').replace('.', ' . ')
+liste_mots = code.split()
+
 # La ligne `TOKENS=["program","begin","end","read","write","if","while","(",")"]` crée une liste
 # appelée `TOKENS ` qui contient les mots-clés et les symboles utilisés dans le langage de
 # programmation. 
@@ -8,32 +18,32 @@ i=0 #indice du token actuel
 ID='[a-zA-Z][a-zA-Z_0-9]*'
 NUM='[0-9]+'
 
-PROGRAM=["program",'abc',';','const','C','=','10',';','var','A',',','B',';',
-         'begin',
-         'A',':=','0',';',
-         'B',':=','0',';',
-         'while','A','<>','0','do',
-         'begin',
-         'read','(','A',')',';',
-         'B',':=','A','+','B',';',
-         'end',';',
-         "write",'(','B',')',';', 
-         'end','.']
+# liste_mots=["program",'abc',';','const','C','=','10',';','var','A',',','B',';',
+#          'begin',
+#          'A',':=','0',';',
+#          'B',':=','0',';',
+#          'while','A','<>','0','do',
+#          'begin',
+#          'read','(','A',')',';',
+#          'B',':=','A','+','B',';',
+#          'end',';',
+#          "write",'(','B',')',';', 
+#          'end','.']
 
-token=PROGRAM[0]
+token=liste_mots[0]
 
-length=len(PROGRAM)
+length=len(liste_mots)
 
 
 def next_token():
     """
     La fonction `next_token()` met à jour les variables globales `i` et `token` à la valeur suivante
-    dans la liste `PROGRAM` si `i` est inférieur à la longueur de `PROGRAM` moins 1.
+    dans la liste `liste_mots` si `i` est inférieur à la longueur de `liste_mots` moins 1.
     """
     global i,token
-    if i<(len(PROGRAM)-1):
+    if i<(len(liste_mots)-1):
         i+=1
-        token=PROGRAM[i]
+        token=liste_mots[i]
 
 def erreur(exp_token,given_token):
     """

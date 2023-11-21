@@ -7,16 +7,11 @@ with open(nom_fichier, 'r') as fichier:
     # Lire le contenu du fichier
     code = fichier.read()
 
-code = code.replace('(', ' ( ').replace(')', ' ) ')
+code = code.replace('(', ' ( ').replace(')', ' ) ').replace(',', ' , ').replace(';', ' ; ').replace('.', ' . ')
+
 liste_mots = code.split()
 
-print(liste_mots)
-
-TOKENS=["program","begin","end","read","write","if","while","(",")","var"]
-i=0 #indice du token actuel
-ID='[a-zA-Z][a-zA-Z_0-9]*'
-NUM='[0-9]+'
-
+# La liste de mot pour l'exemple est :
 # liste_mots=["program",'abc',';','const','C','=','10',';','D','=','8',';',
 #          'var','A',',','B',';',
 #          'begin',
@@ -29,6 +24,11 @@ NUM='[0-9]+'
 #          'end',';',
 #          "write",'(','B',')',';', 
 #          'end','.']
+
+TOKENS=["program","begin","end","read","write","if","while","(",")","var"]
+i=0 #indice du token actuel
+ID='[a-zA-Z][a-zA-Z_0-9]*'
+NUM='[0-9]+'
 
 token=liste_mots[0]
 
