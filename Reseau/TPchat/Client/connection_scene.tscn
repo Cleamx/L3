@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://4wra76kifsik"]
+
+[ext_resource type="Script" path="res://connection_scene.gd" id="1_6rce6"]
+[ext_resource type="PackedScene" uid="uid://sv66eh7btrec" path="res://panel.tscn" id="1_e7q1o"]
+
+[node name="ConnectionScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6rce6")
+
+[node name="Panel" parent="." instance=ExtResource("1_e7q1o")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 322.0
+offset_bottom = 280.0

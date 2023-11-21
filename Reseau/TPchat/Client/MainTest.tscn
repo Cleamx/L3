@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://oomililepm5i"]
+[gd_scene load_steps=3 format=3 uid="uid://5wr07q8lykvn"]
 
 [ext_resource type="Script" path="res://MainTest.gd" id="1_2wn1s"]
-[ext_resource type="PackedScene" uid="uid://baxlhrcmpu8yd" path="res://Chat_Window.tscn" id="2_lq5k2"]
+[ext_resource type="PackedScene" uid="uid://dbtrdkufj6t3g" path="res://Chat_Window.tscn" id="2_lq5k2"]
 
 [node name="MainTest" type="Control"]
 layout_mode = 3
