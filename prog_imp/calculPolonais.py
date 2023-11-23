@@ -29,7 +29,7 @@ def evaluation():
 
 print(evaluation())
 
-V = [False, False, False, False, False]
+V = [True, False, False, False, False]
 I = ['and 0 not 4', 'or 1 and 2 3', 'or not 0 not 1', 
      'or and 1 3 and 2 not 4', 'or 2 and 1 4']
 op = []
@@ -54,10 +54,27 @@ def expressionBool(num):
         return op1 or op2
     else:
         return not op1
+    
+def ouverture():
+    global V, op, pos
+    for num in range(len(V)):
+        pos = 0
+        if expressionBool(num)==False:
+            return False
+    return True
 
-for num in range(len(V)):
-    pos = 0
-    print(expressionBool(num))
+resultat = ouverture()
+
+
+
+
+
+
+
+
+
+
+
 
 
         
