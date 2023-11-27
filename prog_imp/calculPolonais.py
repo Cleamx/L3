@@ -29,13 +29,14 @@ def evaluation():
 
 print(evaluation())
 
-V = [True, False, False, False, False]
+V = [False, False, False, False, False]
 I = ['and 0 not 4', 'or 1 and 2 3', 'or not 0 not 1', 
      'or and 1 3 and 2 not 4', 'or 2 and 1 4']
 op = []
 for ligne in I:
     op.append(ligne.split())
 pos = 0
+trouve = False
 
 def expressionBool(num):
     global V, pos, op
@@ -57,13 +58,24 @@ def expressionBool(num):
     
 def ouverture():
     global V, op, pos
-    for num in range(len(V)):
+    for num in range(len(op)):
         pos = 0
         if expressionBool(num)==False:
             return False
     return True
 
-resultat = ouverture()
+def interrupteur(num):
+    global V, op, trouve
+    if num == len(V): return
+    if ouverture() == True:
+        trouve = True; return
+    for val in [True, False]:
+        V[num] = False
+        interrupteur(num + 1)
+        if trouve : return
+        V[num] = False
+
+resultat = interrupteur(0)
 
 
 
