@@ -1,18 +1,36 @@
 package TD5.ex4;
 
+
+import java.io.PrintWriter;
+import java.net.ServerSocket;
 import java.net.Socket;
 
-public class AcceptClient implements Runnable {
+public class AcceptClient extends Thread {
     private Socket socket;
+    private ServerSocket server;
+    private PrintWriter out;
 
-    public AcceptClient(Socket socket) {
-        this.socket = socket;
+    public AcceptClient( ServerSocket server) {
+        this.server = server;
     }
 
-    @Override
     public void run() {
-        // Gérer la communication avec le client ici
+        System.out.println("Le client est a l'ecoute sur le port 2000");
+        int nbclient = 0;
+        try{
+            while(true){
+                socket = server.accept();
+                nbclient++;
+                System.out.println("Le client numero " + nbclient + " est connecte");
+                out = new PrintWriter(socket.getOutputStream());
+                out.println("Bienvenue client numero " + nbclient);
+                out.flush();
+                socket.close();
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
-
-    // Autres méthodes de la classe AcceptClient
+   
 }

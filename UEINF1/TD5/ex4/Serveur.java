@@ -1,25 +1,20 @@
 package TD5.ex4;
 
+import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.io.PrintWriter;
 
 public class Serveur {
 
     public static void main(String[] args) {
-        try {
-            ServerSocket server = new ServerSocket(2000);
-            Socket socket = server.accept();
-            System.out.println("Nouvel utilisateur connecté");
+        ServerSocket server;
 
-            PrintWriter out = new PrintWriter(socket.getOutputStream());
-            out.println("Message");
-            out.flush();
+        try{
+            server = new ServerSocket(2000);
+            AcceptClient client = new AcceptClient(server);
+            client.start();
 
-            socket.close();
-            server.close();
-
-        } catch (Exception e) {
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
     }
