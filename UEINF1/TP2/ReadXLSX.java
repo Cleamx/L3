@@ -4,10 +4,12 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 
 public class ReadXLSX {
+    // Méthode pour lire un fichier Excel (xlsx)
     public List<List<String>> readXLSX() throws Exception {
+        // Ouvre le fichier Excel comme un fichier Zip
         ZipFile zipFile = new ZipFile("Liste_Pokemon.xlsx");
 
-        // Lire les chaînes partagées
+        // Lit les chaînes partagées (sharedStrings.xml)
         ZipEntry sharedStringXML = zipFile.getEntry("xl/sharedStrings.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -18,11 +20,12 @@ public class ReadXLSX {
             sharedStrings.add(list.item(i).getTextContent());
         }
 
-        // Lire les données de la feuille
+        // Lit les données de la feuille (sheet1.xml)
         ZipEntry sheetXML = zipFile.getEntry("xl/worksheets/sheet1.xml");
         doc = dBuilder.parse(zipFile.getInputStream(sheetXML));
         NodeList rowNodes = doc.getElementsByTagName("row");
 
+        // Stocke les données de chaque cellule dans une liste de listes
         List<List<String>> data = new ArrayList<>();
         for (int i = 0; i < rowNodes.getLength(); i++) {
             NodeList cellNodes = ((Element) rowNodes.item(i)).getElementsByTagName("c");
@@ -35,23 +38,20 @@ public class ReadXLSX {
             data.add(row);
         }
 
-        // Liste des types de Pokémon pour la vérification
-        List<String> types = Arrays.asList("Normal", "Feu", "Eau", "Plante", "Électrik", "Glace", "Combat", "Poison",
-                "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée");
-
+        // Si un Pokémon a moins de trois évolutions, insère un espace avant le premier type
         for (List<String> colonne : data) {
-            // Si l'avant-dernier élément n'est pas un type, insérez un espace avant le
-            // dernier élément
-            if (!types.contains(colonne.get(colonne.size() - 2))) {
+            if (colonne.size() < 4) {
                 colonne.add(colonne.size() - 1, " ");
             }
         }
 
+        // Ferme le fichier Zip et supprime la première ligne (en-têtes)
         zipFile.close();
         data.remove(0);
         return data;
     }
 
+    // Méthode pour obtenir la valeur d'une cellule
     private static String getCellValue(Element cellElement, List<String> sharedStrings) {
         String cellValue = "";
         NodeList vNodes = cellElement.getElementsByTagName("v");
