@@ -79,6 +79,10 @@ public class MainPokemon {
                 // Affiche l'objet à la console
                 System.out.println(instance);
             }
+            // ajouter les deuxième types pour les pokemons aillant deux types
+
+            // utiliser un random sur instances en ne selectionnant que les objets de type Pokemon
+            // pour futur fonction lootbox
 
         } catch (
 
