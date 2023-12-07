@@ -19,40 +19,38 @@ public class Creation_Pokemon {
                 "Poison",
                 "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée");
 
-        System.out.println(Pokemon_liste);
         // La liste est parcourut de la fin vers le début pour éviter les erreurs (en
         // supprimant les éléments de la liste
         // on change la taille de la liste et donc l'indice des éléments)
+
         for (int i = Pokemon_liste.size() - 1; i >= 0; i--) {
             List<String> sous_liste = Pokemon_liste.get(i);
 
-            // Si la liste ne contient pas d'espace ou si le troisième élément est un espace
             if (!sous_liste.contains(" ") || sous_liste.get(2).equals(" ")) {
-                // Crée un nouvel objet Pokemon avec le premier nom et le quatrième élément
-                // comme type, et ajoute cet objet à la liste des instances
-                Pokemon p1Pokemon = new Pokemon(sous_liste.get(0), sous_liste.get(3), 0, 0);
-                instances.add(p1Pokemon);
-                // Supprime le premier élément de la liste
-                sous_liste.remove(0);
-                // Crée un nouvel objet Pokemon_evolution1 avec le premier nom (maintenant le
-                // deuxième nom original) et le troisième élément comme type, et ajoute cet
-                // objet à la liste des instances
-                Pokemon_evolution1 p1Evolution1 = new Pokemon_evolution1(sous_liste.get(0), sous_liste.get(2), 0,
-                        0);
-                instances.add(p1Evolution1);
-                // Supprime le premier élément de la liste (maintenant le deuxième nom original)
-                sous_liste.remove(0);
 
-            }
-            // Si le quatrième élément de la liste est un espace
-            else if (sous_liste.get(3).equals(" ")) {
-                Pokemon p2Pokemon = new Pokemon(sous_liste.get(0), sous_liste.get(4), 0, 0);
-                instances.add(p2Pokemon);
-                sous_liste.remove(0);
-                Pokemon_evolution1 p2Evolution1 = new Pokemon_evolution1(sous_liste.get(0), sous_liste.get(3), 0,
-                        0);
-                instances.add(p2Evolution1);
-                sous_liste.remove(0);
+                if (sous_liste.size() == 5) {
+                    Pokemon p1Pokemon = new Pokemon(sous_liste.get(0), sous_liste.get(3), sous_liste.get(4), 0, 0);
+                    instances.add(p1Pokemon);
+                    sous_liste.remove(0);
+                } else {
+                    Pokemon p1Pokemon = new Pokemon(sous_liste.get(0), sous_liste.get(3), 0, 0);
+                    instances.add(p1Pokemon);
+                    sous_liste.remove(0);
+                }
+
+
+                if (sous_liste.size() == 4) {
+                    Pokemon_evolution1 p1Evolution1 = new Pokemon_evolution1(sous_liste.get(0), sous_liste.get(2),
+                            sous_liste.get(3), 0, 0);
+                    instances.add(p1Evolution1);
+                    sous_liste.remove(0);
+                } else {
+                    Pokemon_evolution1 p1Evolution1 = new Pokemon_evolution1(sous_liste.get(0), sous_liste.get(2), 0,
+                            0);
+                    instances.add(p1Evolution1);
+                    sous_liste.remove(0);
+                }
+               
             }
             // Si la sous liste est vide ou si le premier élément est un type alors on passe
             // à la suite
@@ -66,8 +64,13 @@ public class Creation_Pokemon {
             if (sous_liste.get(0).equals(" ")) {
                 // Efface tous les éléments de la liste
                 sous_liste.clear();
-            } else {
+            } else if (sous_liste.size() == 3) {
                 // Sinon, crée un nouvel objet Pokemon_evolution2
+                Pokemon_evolution2 p1Evolution2 = new Pokemon_evolution2(sous_liste.get(0), sous_liste.get(1), sous_liste.get(2),0,
+                        0);
+                instances.add(p1Evolution2);
+                sous_liste.remove(0);
+            }else{
                 Pokemon_evolution2 p1Evolution2 = new Pokemon_evolution2(sous_liste.get(0), sous_liste.get(1), 0,
                         0);
                 instances.add(p1Evolution2);
@@ -77,10 +80,10 @@ public class Creation_Pokemon {
 
         // Pour chaque objet dans la liste 'instances'
 
-        // for (Object instance : instances) {
-        // // Affiche l'objet à la console
-        // System.out.println(instance);
-        // }
+        for (Object instance : instances) {
+            // Affiche l'objet à la console
+            System.out.println(instance);
+        }
         return instances;
     }
 
