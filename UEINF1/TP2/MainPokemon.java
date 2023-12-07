@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class MainPokemon {
     public static void main(String[] args) {
@@ -8,19 +9,37 @@ public class MainPokemon {
             List<List<String>> Pokemon_liste = reader.readXLSX();
             Creation_Pokemon.Initialisation_pokemon(Pokemon_liste);
 
-            // affiche tous les pokemons non évoluer
-            System.out.println(Creation_Pokemon.getNonEvo());
-            // affiche tous les pokemons évoluer 1 fois
-            System.out.println(Creation_Pokemon.getEvo1());
-            // affiche tous les pokemons évoluer 2 fois
-            System.out.println(Creation_Pokemon.getEvo2());
+            Scanner scanner = new Scanner(System.in);
+            String choix;
+            do {
+                System.out.println("Veuillez choisir une option :");
+                System.out.println("1. Afficher tous les pokemons non évolués");
+                System.out.println("2. Afficher tous les pokemons évolués une fois");
+                System.out.println("3. Afficher tous les pokemons évolués deux fois");
+                System.out.println("4. Quitter");
 
-            // random sur Pokemon_non_evoluer pour pouvoir attraper
-            // pour futur fonction lootbox
+                choix = scanner.nextLine();
 
-        } catch (
+                switch (choix) {
+                    case "1":
+                        System.out.println(Creation_Pokemon.getNonEvo());
+                        break;
+                    case "2":
+                        System.out.println(Creation_Pokemon.getEvo1());
+                        break;
+                    case "3":
+                        System.out.println(Creation_Pokemon.getEvo2());
+                        break;
+                    case "4":
+                        System.out.println("Au revoir !");
+                        break;
+                    default:
+                        System.out.println("Choix invalide. Veuillez réessayer.");
+                        break;
+                }
+            } while (!choix.equals("4"));
 
-        Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
