@@ -5,21 +5,39 @@ import java.util.Scanner;
 public class MainPokemon {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
+            // recupère le nom inscrit dans la console
             System.out.println("Veuillez entrer votre nom :");
             String nomDresseur = scanner.nextLine();
 
+            // Crée une référence à un fichier avec le nom du dresseur dans le dossier
+            // "saves"
             File file = new File("saves/" + nomDresseur + ".txt");
+
+            // Déclare une variable pour le dresseur
             Dresseur dresseur;
+
+            // Crée une instance de la classe Open_Save pour ouvrir 
             Open_Save openSave = new Open_Save();
 
+            // Vérifie si le fichier du dresseur existe
             if (file.exists()) {
+                // Si le fichier existe, affiche un message de bienvenue
                 System.out.println("Bienvenue, " + nomDresseur + " !");
+
+                // Ouvre la sauvegarde du dresseur
                 dresseur = openSave.ouvrirSave("saves/" + nomDresseur + ".txt");
-                // clear la console
+
+                // Efface la console
                 System.out.print("\033\143");
             } else {
+                // Si le fichier n'existe pas, affiche un message indiquant qu'un nouveau
+                // dresseur est créé
                 System.out.println("Création d'un nouveau dresseur...");
+
+                // Efface la console
                 System.out.print("\033\143");
+
+                // Crée un nouveau dresseur avec le nom rentrer dans la console (à la 10lignes)
                 dresseur = new Dresseur(nomDresseur, null, null, null);
             }
 
