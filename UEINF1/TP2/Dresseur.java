@@ -2,12 +2,17 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Dresseur implements Serializable {
     private String nom;
     private List<Object> pokemonAttrape = new ArrayList<>();
     private List<Object> equipe = new ArrayList<>();
     private List<Object> bonbons = new ArrayList<>();
+
+    public Dresseur(String nom) {
+        this.nom = nom;
+    }
 
     public Dresseur(String nom, List<Object> pokemonAttrape, List<Object> equipe, List<Object> bonbons) {
         this.nom = nom;
@@ -33,10 +38,10 @@ public class Dresseur implements Serializable {
     }
 
     // public void setNom(String nom) {
-    //     this.nom = nom;
+    // this.nom = nom;
     // }
 
-    public void setPokemonAttrape(Object pokemonAttrape) {
+    public void setPokemonAttrape(Pokemon pokemonAttrape) {
         this.pokemonAttrape.add(pokemonAttrape);
     }
 
@@ -48,11 +53,31 @@ public class Dresseur implements Serializable {
         this.bonbons = bonbons;
     }
 
-    public void chassePokemon(List<Object> lootbox) {
+    public void chassePokemon(List<Pokemon> lootbox, Scanner lire) {
         Random random = new Random();
         int index = random.nextInt(lootbox.size());
-        Object pokemon = lootbox.get(index);
-        setPokemonAttrape(pokemon);
+        Pokemon pokemon = lootbox.get(index);
+    
+        System.out.println("Voullez vous attraper le pokémon " + pokemon.getNom() + " ?");
+        System.out.println("1. Oui");
+        System.out.println("2. Non");
+        String choix = lire.nextLine();
+        switch (choix) {
+            case "1":
+                System.out.println("Vous avez attrapé le pokémon " + pokemon.getNom() + " !");
+                pokemonAttrape.add(pokemon);
+                int nombreAleatoire = random.nextInt(11) + 10;
+                pokemon.setPC(nombreAleatoire);
+                nombreAleatoire = random.nextInt(21) + 10;
+                pokemon.setPV(nombreAleatoire);
+                break;
+            case "2":
+                System.out.println("Vous n'avez pas attrapé le pokémon " + pokemon.getNom() + " !");
+                break;
+            default:
+                System.out.println("Veuillez choisir une option valide.");
+                break;
+        }
     }
 
     public void ajouterEquipe(Object pokemon) {
@@ -115,21 +140,4 @@ public class Dresseur implements Serializable {
         }
     }
 
-    
-
-    
-
 }
-
-    
-
-    
-
-    
-
-
-
-
-
-
-    
