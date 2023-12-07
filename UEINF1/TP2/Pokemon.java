@@ -46,7 +46,12 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return nom + " [type = " + type +", "+ type2 + ", pv = " + pv + ", pc= " + pc + "] \n";
+        if (type2 != null) {
+             return nom + " [type = " + type +", "+ type2 + ", pv = " + pv + ", pc= " + pc + "] \n";
+        }
+       else{
+            return nom + " [type = " + type + ", pv = " + pv + ", pc= " + pc + "] \n";
+       }
     }
  
     
