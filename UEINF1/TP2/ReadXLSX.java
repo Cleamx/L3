@@ -36,9 +36,10 @@ public class ReadXLSX {
                 row.add(cellValue);
             }
             data.add(row);
-        }
 
-        // Si un Pokémon a moins de trois évolutions, insère un espace avant le premier type
+        }
+        // Si un Pokémon a moins de trois évolutions, insère un espace avant le premier
+        // type
         for (List<String> colonne : data) {
             if (colonne.size() < 4) {
                 colonne.add(colonne.size() - 1, " ");
