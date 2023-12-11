@@ -16,6 +16,16 @@ public class Bonbons {
         System.out.println("Vous avez " + Bonbon.get(type) + " bonbons " + type);
     }
 
+    public static void supprimerBonbons(String type, int nbrbonbons) {
+        if (Bonbon.containsKey(type)) {
+            // Si le type est déjà présent, obtenez le nombre actuel de bonbons
+            int currentBonbons = Bonbon.get(type);
+            // Ajoutez le nouveau nombre de bonbons à ce nombre
+            Bonbon.put(type, currentBonbons - nbrbonbons);
+        } 
+        System.out.println("Vous avez " + Bonbon.get(type) + " bonbons " + type);
+    }
+
     public static HashMap<String, Integer> getDictionnaireBonbons() {
         return Bonbon;
     }

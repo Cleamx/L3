@@ -1,6 +1,7 @@
 import java.io.Serializable;
+import java.util.List;
 
-public class Pokemon implements Serializable{
+public class Pokemon implements Serializable {
     protected String nom;
     protected String type;
     protected String type2;
@@ -53,12 +54,17 @@ public class Pokemon implements Serializable{
     @Override
     public String toString() {
         if (type2 != null) {
-             return nom + " [type = " + type +", "+ type2 + ", pv = " + pv + ", pc= " + pc + "] \n";
-        }
-       else{
+            return nom + " [type = " + type + ", " + type2 + ", pv = " + pv + ", pc= " + pc + "] \n";
+        } else {
             return nom + " [type = " + type + ", pv = " + pv + ", pc= " + pc + "] \n";
-       }
+        }
     }
- 
-    
+
+    public static Pokemon_evolution1 evoluer1(int choixPokemon,List<Pokemon> nonEvoPokemons, List<Pokemon_evolution1> pokemonEvolution1) {
+        
+        pokemonEvolution1.get(choixPokemon).setPC(nonEvoPokemons.get(choixPokemon).getPc() + 50);
+        pokemonEvolution1.get(choixPokemon).setPV(nonEvoPokemons.get(choixPokemon).getPv() + 50);
+        return pokemonEvolution1.get(choixPokemon);
+    }
+
 }

@@ -83,12 +83,12 @@ public class Dresseur implements Serializable {
 
                 // Ajoute des bonbons au dictionnaire de bonbons en fonction du type du Pokémon
                 // attrapé
-                Bonbons.ajouterBonbons(pokemon.getType(), 2);
+                Bonbons.ajouterBonbons(pokemon.getType(), 5);
 
                 // Vérifie si le Pokémon a un deuxième type
                 if (pokemon.getType2() != null) {
                     // Si oui, ajoute des bonbons pour le deuxième type
-                    Bonbons.ajouterBonbons(pokemon.getType2(), 2);
+                    Bonbons.ajouterBonbons(pokemon.getType2(), 5);
                 }
                 break;
             case "2":
@@ -133,10 +133,17 @@ public class Dresseur implements Serializable {
     }
 
     public void afficherbonbons() {
+        // Vérifie si la taille du dictionnaire de bonbons est égale à 0, c'est-à-dire
+        // s'il n'y a pas de bonbons
         if (dictionnaireBonbon.size() == 0) {
+            // Si c'est le cas, affiche un message indiquant qu'il n'y a pas encore de
+            // bonbons
             System.out.println("Vous n'avez pas encore de bonbons.");
         } else {
+            // Sinon, pour chaque entrée dans le dictionnaire de bonbons
             for (Map.Entry<String, Integer> entry : dictionnaireBonbon.entrySet()) {
+                // Affiche le type de bonbon (la clé de l'entrée) et le nombre de bonbons de ce
+                // type (la valeur de l'entrée)
                 System.out.println("Type: " + entry.getKey() + ", Nombre: " + entry.getValue() + "\n");
             }
         }
@@ -157,29 +164,25 @@ public class Dresseur implements Serializable {
                 // Affiche le Pokémon
                 System.out.println(i + ". " + pokemon);
 
-                // Vérifie si le dictionnaire de bonbons contient le type du Pokémon
                 if (dictionnaireBonbon.containsKey(pokemon.getType())) {
                     // Si oui, récupère le nombre de bonbons de ce type
-                    System.out.println("Nombre de bonbons de type " + pokemon.getType() + " : "
-                            + dictionnaireBonbon.get(pokemon.getType()));
-                    if (pokemon.getType2() != null) {
+                    int nombreBonbonsType1 = dictionnaireBonbon.get(pokemon.getType());
+                    System.out.println("Nombre de bonbons de type " + pokemon.getType() + " : " + nombreBonbonsType1);
+                    if (pokemon.getType2() != null && dictionnaireBonbon.containsKey(pokemon.getType2())) {
                         // Si le Pokémon a un deuxième type, récupère le nombre de bonbons de ce type
-                       System.out.println("Nombre de bonbons de type " + pokemon.getType2() + " : "
-                                + dictionnaireBonbon.get(pokemon.getType2())+ "\n");
+                        int nombreBonbonsType2 = dictionnaireBonbon.get(pokemon.getType2());
+                        System.out.println(
+                                "Nombre de bonbons de type " + pokemon.getType2() + " : " + nombreBonbonsType2 + "\n");
+                        if (nombreBonbonsType2 >= 5 && nombreBonbonsType1 >= 5) {
+                            System.out.println(pokemon.getNom() + " peut évoluer !");
+                        }
+                    } else if (nombreBonbonsType1 >= 5) {
+                        System.out.println(pokemon.getNom() + " peut évoluer !");
                     }
                 }
-                System.out.println("-----------------------------------");
-            }
-        }
-    }
 
-    public void utiliserBonbon(Object bonbon, Object pokemon) {
-        if (dictionnaireBonbon.containsKey(bonbon)) {
-            dictionnaireBonbon.remove(bonbon);
-            pokemonAttrape.remove(pokemon);
-            pokemonAttrape.add(pokemon);
-        } else {
-            System.out.println("Vous ne possédez pas ce bonbon.");
+                System.out.println("------------------------------------------------------------");
+            }
         }
     }
 
@@ -189,6 +192,33 @@ public class Dresseur implements Serializable {
         } else {
             System.out.println("Vous ne possédez pas ce pokémon.");
         }
+    }
+
+    public void evoluerPokemon(int choixPokemon, List<Pokemon> nonEvoPokemons, List<Pokemon_evolution1> evo1Pokemons,
+            List<Pokemon_evolution2> evo2Pokemons) {
+
+        // Récupère l'index du Pokémon choisi dans la liste des Pokémon non évolués
+        int indexOfpokemon = nonEvoPokemons.indexOf(pokemonAttrape.get(choixPokemon));
+
+        // Vérifie si le nombre de bonbons du type du Pokémon choisi est supérieur ou
+        // égal à 5
+        if (Bonbons.getDictionnaireBonbons().get(nonEvoPokemons.get(indexOfpokemon).getType()) >= 5) {
+
+            // Fait évoluer le Pokémon choisi à sa première évolution
+            Pokemon_evolution1 evolution1 = Pokemon.evoluer1(indexOfpokemon,nonEvoPokemons, evo1Pokemons);
+
+            // Remplace le Pokémon choisi par sa version évoluée dans la liste des Pokémon
+            // attrapés
+            pokemonAttrape.set(choixPokemon, evolution1);
+
+            // Supprime 5 bonbons du type du Pokémon choisi pour l'évolution
+            Bonbons.supprimerBonbons(nonEvoPokemons.get(indexOfpokemon).getType(), 5);
+        } else {
+            // Affiche un message indiquant que le joueur n'a pas assez de bonbons pour
+            // faire évoluer le Pokémon
+            System.out.println("Vous n'avez pas assez de bonbons pour faire évoluer ce pokémon");
+        }
+
     }
 
 }

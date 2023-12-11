@@ -38,6 +38,9 @@ public class MainPokemon {
             List<List<String>> Pokemon_liste = reader.readXLSX();
             Creation_Pokemon.Initialisation_pokemon(Pokemon_liste);
             List<Pokemon> nonEvoPokemons = Creation_Pokemon.getNonEvo();
+            List<Pokemon_evolution1> evo1Pokemons = Creation_Pokemon.getEvo1();
+            List<Pokemon_evolution2> evo2Pokemons = Creation_Pokemon.getEvo2();
+            
 
             String choix;
             do {
@@ -48,32 +51,44 @@ public class MainPokemon {
                 System.out.println("4. Quitter");
 
                 choix = scanner.nextLine();
-                System.out.print("\033\143");
+                // System.out.print("\033\143");
 
                 switch (choix) {
                     // Si le choix est 1, affiche les pokemons attrapés
                     case "1":
                         dresseur.afficherPokemonAttrape();
+                        System.out.println("Voulez vous faire évoluer un Pokémon? (O/N)");
+                        String r1 = scanner.nextLine();
+                        if (r1.equals("O")) {
+                           System.out.println("\nQuel pokémon voulez vous faire évoluer ? (1,2,3,...)");
+                            int choixPokemon = scanner.nextInt();
+                            dresseur.evoluerPokemon(choixPokemon, nonEvoPokemons ,evo1Pokemons, evo2Pokemons);
+                            break;
+                        }
+                        break;
+                        //  System.out.print("\033\143");
+                        //  break;
+                        // Si le choix est 2, affiche les bonbons
+                    case "2":
+                        dresseur.afficherbonbons();
                         System.out.println("Voulez vous retourner au menu principal ? (O/N)");
-                        String r = scanner.nextLine();
-                        if (r.equals("O")) {
+                        String r2 = scanner.nextLine();
+                        if (r2.equals("O")) {
                             System.out.print("\033\143");
                             break;
                         }
-                    // Si le choix est 2, affiche les bonbons
-                    case "2":
-                        dresseur.afficherbonbons();
                         break;
                     // Si le choix est 3, lance la méthode chassePokemon
                     case "3":
+                    
                         dresseur.chassePokemon(nonEvoPokemons, scanner);
                         System.out.println("Voulez vous retourner au menu principal ? (O/N)");
-                        String r1 = scanner.nextLine();
-                        if (r1.equals("O")) {
+                        String r3 = scanner.nextLine();
+                        if (r3.equals("O")) {
                             System.out.print("\033\143");
                             break;
                         }
-                    // Si le choix est 4, quitte le programme et enregistre la sauvegarde
+                        // Si le choix est 4, quitte le programme et enregistre la sauvegarde
                     case "4":
                         System.out.println("Au revoir !");
                         Save_dresseur save = new Save_dresseur();
