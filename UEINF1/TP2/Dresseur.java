@@ -83,12 +83,12 @@ public class Dresseur implements Serializable {
 
                 // Ajoute des bonbons au dictionnaire de bonbons en fonction du type du Pokémon
                 // attrapé
-                Bonbons.ajouterBonbons(pokemon.getType(), 5);
+                Bonbons.ajouterBonbons(pokemon.getType(), 2);
 
                 // Vérifie si le Pokémon a un deuxième type
                 if (pokemon.getType2() != null) {
                     // Si oui, ajoute des bonbons pour le deuxième type
-                    Bonbons.ajouterBonbons(pokemon.getType2(), 5);
+                    Bonbons.ajouterBonbons(pokemon.getType2(), 2);
                 }
                 break;
             case "2":
@@ -165,14 +165,17 @@ public class Dresseur implements Serializable {
                 System.out.println(i + ". " + pokemon);
 
                 if (dictionnaireBonbon.containsKey(pokemon.getType())) {
+
                     // Si oui, récupère le nombre de bonbons de ce type
                     int nombreBonbonsType1 = dictionnaireBonbon.get(pokemon.getType());
                     System.out.println("Nombre de bonbons de type " + pokemon.getType() + " : " + nombreBonbonsType1);
+
                     if (pokemon.getType2() != null && dictionnaireBonbon.containsKey(pokemon.getType2())) {
                         // Si le Pokémon a un deuxième type, récupère le nombre de bonbons de ce type
                         int nombreBonbonsType2 = dictionnaireBonbon.get(pokemon.getType2());
                         System.out.println(
                                 "Nombre de bonbons de type " + pokemon.getType2() + " : " + nombreBonbonsType2 + "\n");
+
                         if (nombreBonbonsType2 >= 5 && nombreBonbonsType1 >= 5) {
                             System.out.println(pokemon.getNom() + " peut évoluer !");
                         }
@@ -186,39 +189,84 @@ public class Dresseur implements Serializable {
         }
     }
 
-    public void transfererPokemon(Object pokemon) {
-        if (pokemonAttrape.contains(pokemon)) {
-            pokemonAttrape.remove(pokemon);
-        } else {
-            System.out.println("Vous ne possédez pas ce pokémon.");
-        }
+    public void transfererPokemon(int choixPokemon) {
+        pokemonAttrape.remove(pokemonAttrape.get(choixPokemon));
     }
 
     public void evoluerPokemon(int choixPokemon, List<Pokemon> nonEvoPokemons, List<Pokemon_evolution1> evo1Pokemons,
             List<Pokemon_evolution2> evo2Pokemons) {
 
-        // Récupère l'index du Pokémon choisi dans la liste des Pokémon non évolués
+        // Obtient l'index du Pokémon choisi dans la liste des Pokémons non évolués
+        // par exemple ratata est à l'index 0 dans la liste des pokemonAttrape je
+        // cherche
+        // l'index de ratata dans la liste des nonEvoPokemons (qui contient tous les
+        // pokemons non évolués)
+        // dans la liste evo1Pokemons le ratatac se trouve au même index que ratata dans
+        // nonEvoPokemons
         int indexOfpokemon = nonEvoPokemons.indexOf(pokemonAttrape.get(choixPokemon));
 
-        // Vérifie si le nombre de bonbons du type du Pokémon choisi est supérieur ou
-        // égal à 5
+        // Vérifie si le dresseur a suffisamment de bonbons pour faire évoluer le
+        // Pokémon
         if (Bonbons.getDictionnaireBonbons().get(nonEvoPokemons.get(indexOfpokemon).getType()) >= 5) {
+            // Si le Pokémon est de la première évolution
+            if (pokemonAttrape.get(choixPokemon) instanceof Pokemon) {
+                // Fait évoluer le Pokémon à la deuxième évolution
+                Pokemon_evolution1 evolution1 = Pokemon.evoluer1(indexOfpokemon, nonEvoPokemons, evo1Pokemons);
+                // Remplace le Pokémon dans la liste des Pokémons attrapés par sa deuxième
+                // évolution
+                pokemonAttrape.set(choixPokemon, evolution1);
+                // Affiche un message indiquant que le Pokémon a évolué
+                System.out.println("\nLe Pokémon a évolué en " + evolution1.getNom() + " !");
+                System.out.println("------------------------------------------------------------");
+                // Si le Pokémon est de la deuxième évolution
+            } else if (pokemonAttrape.get(choixPokemon) instanceof Pokemon_evolution1) {
+                // Tente de faire évoluer le Pokémon à la troisième évolution
+                Pokemon_evolution2 evolution2 = Pokemon_evolution1.evoluer2(indexOfpokemon, evo1Pokemons, evo2Pokemons);
+                // Si le Pokémon peut évoluer à la troisième évolution
+                if (evolution2 != null) {
+                    // Remplace le Pokémon dans la liste des Pokémons attrapés par sa troisième
+                    // évolution
+                    pokemonAttrape.set(choixPokemon, evolution2);
+                    // Affiche un message indiquant que le Pokémon a évolué
+                    System.out.println("\nLe Pokémon a évolué en " + evolution2.getNom() + " !");
+                    System.out.println("------------------------------------------------------------");
+                } else {
+                    // Si le Pokémon ne peut pas évoluer à la troisième évolution, augmente ses
+                    // statistiques
+                    int Pc = ((Pokemon) pokemonAttrape.get(choixPokemon)).getPc();
+                    int Pv = ((Pokemon) pokemonAttrape.get(choixPokemon)).getPv();
+                    ((Pokemon) pokemonAttrape.get(choixPokemon)).setPC(Pc + 50);
+                    ((Pokemon) pokemonAttrape.get(choixPokemon)).setPV(Pv + 50);
+                    // Affiche un message indiquant que les statistiques du Pokémon ont augmenté
+                    System.out.println("\nLe Pokémon a augmenté ses statistiques !");
+                    System.out.println("------------------------------------------------------------");
+                }
+            }
 
-            // Fait évoluer le Pokémon choisi à sa première évolution
-            Pokemon_evolution1 evolution1 = Pokemon.evoluer1(indexOfpokemon,nonEvoPokemons, evo1Pokemons);
-
-            // Remplace le Pokémon choisi par sa version évoluée dans la liste des Pokémon
-            // attrapés
-            pokemonAttrape.set(choixPokemon, evolution1);
-
-            // Supprime 5 bonbons du type du Pokémon choisi pour l'évolution
+            // Supprime 5 bonbons du type du Pokémon de la réserve de bonbons
             Bonbons.supprimerBonbons(nonEvoPokemons.get(indexOfpokemon).getType(), 5);
-        } else {
-            // Affiche un message indiquant que le joueur n'a pas assez de bonbons pour
-            // faire évoluer le Pokémon
-            System.out.println("Vous n'avez pas assez de bonbons pour faire évoluer ce pokémon");
-        }
+            // Affiche un message indiquant que 5 bonbons du type du Pokémon ont été
+            // utilisés
+            System.out.println(
+                    "5 bonbons de type " + nonEvoPokemons.get(indexOfpokemon).getType() + " ont été utilisés.");
 
+            // Vérifie si le Pokémon a un deuxième type
+            if (nonEvoPokemons.get(indexOfpokemon).getType2() != null) {
+                // Si oui, supprime 5 bonbons du deuxième type du Pokémon de la réserve de
+                // bonbons
+                Bonbons.supprimerBonbons(nonEvoPokemons.get(indexOfpokemon).getType2(), 5);
+                // Affiche un message indiquant que 5 bonbons du deuxième type du Pokémon ont
+                // été utilisés
+                System.out.println(
+                        "5 bonbons de type " + nonEvoPokemons.get(indexOfpokemon).getType2() + " ont été utilisés.");
+            }
+            // Si le dresseur n'a pas suffisamment de bonbons pour faire évoluer le Pokémon
+            else {
+                // Affiche un message indiquant que le dresseur n'a pas assez de bonbons pour
+                // faire évoluer le Pokémon
+                System.out.println("Vous n'avez pas assez de bonbons pour faire évoluer ce pokémon");
+            }
+        }
     }
 
 }

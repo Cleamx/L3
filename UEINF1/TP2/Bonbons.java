@@ -23,7 +23,7 @@ public class Bonbons {
             // Ajoutez le nouveau nombre de bonbons à ce nombre
             Bonbon.put(type, currentBonbons - nbrbonbons);
         } 
-        System.out.println("Vous avez " + Bonbon.get(type) + " bonbons " + type);
+        System.out.println("\nIl vous reste " + Bonbon.get(type) + " bonbons " + type);
     }
 
     public static HashMap<String, Integer> getDictionnaireBonbons() {

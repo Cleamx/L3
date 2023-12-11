@@ -60,10 +60,17 @@ public class Pokemon implements Serializable {
         }
     }
 
-    public static Pokemon_evolution1 evoluer1(int choixPokemon,List<Pokemon> nonEvoPokemons, List<Pokemon_evolution1> pokemonEvolution1) {
-        
+    // Méthode pour faire évoluer un Pokémon de la première à la deuxième évolution
+    public static Pokemon_evolution1 evoluer1(int choixPokemon, List<Pokemon> nonEvoPokemons,
+            List<Pokemon_evolution1> pokemonEvolution1) {
+        // Augmente les points de combat (PC) du Pokémon évolué en ajoutant 50 aux PC à
+        // ceux deja existant du pokemon non évolué
+        // Pokémon non évolué
         pokemonEvolution1.get(choixPokemon).setPC(nonEvoPokemons.get(choixPokemon).getPc() + 50);
+        // Augmente les points de vie (PV) du Pokémon évolué en ajoutant 50 aux PV à
+        // ceux deja existant du pokemon non évolué
         pokemonEvolution1.get(choixPokemon).setPV(nonEvoPokemons.get(choixPokemon).getPv() + 50);
+        // Retourne le Pokémon évolué
         return pokemonEvolution1.get(choixPokemon);
     }
 
