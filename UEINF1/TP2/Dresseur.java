@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Cette classe représente un dresseur de Pokémon.
+ * Un dresseur possède un nom, une liste de Pokémon attrapés, une équipe de Pokémon et un dictionnaire de bonbons.
+ * Le dresseur peut attraper des Pokémon, les ajouter à son équipe, les modifier, les supprimer, les transférer, les faire évoluer, etc.
+ */
 public class Dresseur implements Serializable {
     private String nom;
     private List<Object> pokemonAttrape = new ArrayList<>();
@@ -24,30 +29,53 @@ public class Dresseur implements Serializable {
     // this.bonbons = bonbons;
     // }
 
+    /**
+     * Renvoie le nom du dresseur
+     *
+     * @return le nom du dresseur
+     */
     public String getNom() {
         return nom;
     }
 
+    /**
+     * Renvoie la liste des Pokémon attrapés par le dresseur.
+     *
+     * @return la liste des Pokémon attrapés
+     */
     public List<Object> getPokemonAttrape() {
         return pokemonAttrape;
     }
 
+    /**
+     * Renvoie la liste des Pokémon de l'équipe du dresseur.
+     *
+     * @return la liste des Pokémon de l'équipe
+     */
     public List<Object> getEquipe() {
         return equipe;
     }
 
-    // public void setNom(String nom) {
-    // this.nom = nom;
-    // }
-
+    /**
+     * Ajoute un Pokémon attrapé à la liste des Pokémon du dresseur.
+     * 
+     * @param pokemonAttrape le Pokémon à ajouter
+     */
     public void setPokemonAttrape(Pokemon pokemonAttrape) {
         this.pokemonAttrape.add(pokemonAttrape);
     }
+
 
     public void setEquipe(List<Object> equipe) {
         this.equipe = equipe;
     }
 
+    /**
+     * Méthode permettant de chasser un Pokémon en faisant un random dans une liste de Pokémons.
+     * 
+     * @param lootbox la liste de Pokémons dans laquelle chasser
+     * @param lire le scanner pour lire la réponse de l'utilisateur
+     */
     public void chassePokemon(List<Pokemon> lootbox, Scanner lire) {
         // Crée un nouvel objet Random
         Random random = new Random();
@@ -132,6 +160,11 @@ public class Dresseur implements Serializable {
         }
     }
 
+    /**
+     * La fonction "afficherbonbons" vérifie si le dictionnaire des bonbons est vide et imprime un
+     * message si c'est le cas, sinon elle imprime le type et la quantité de chaque bonbon dans le
+     * dictionnaire.
+     */
     public void afficherbonbons() {
         // Vérifie si la taille du dictionnaire de bonbons est égale à 0, c'est-à-dire
         // s'il n'y a pas de bonbons
@@ -149,6 +182,12 @@ public class Dresseur implements Serializable {
         }
     }
 
+    /**
+     * Affiche les Pokémons attrapés par le dresseur.
+     * Si aucun Pokémon n'a été attrapé, affiche un message approprié.
+     * Parcourt la liste des Pokémons attrapés et affiche leurs informations.
+     * Vérifie si chaque Pokémon peut évoluer en fonction du nombre de bonbons disponibles.
+     */
     public void afficherPokemonAttrape() {
         // Vérifie si le dresseur a attrapé des Pokémons
         if (pokemonAttrape.size() == 0) {
@@ -189,10 +228,24 @@ public class Dresseur implements Serializable {
         }
     }
 
+    /**
+     * La fonction "transfererPokemon" supprime un Pokémon spécifique d'une liste de Pokémon capturés.
+     * 
+     * @param choixPokemon Le paramètre "choixPokemon" représente l'index des Pokémon à transférer
+     * depuis la liste "pokemonAttrape".
+     */
     public void transfererPokemon(int choixPokemon) {
         pokemonAttrape.remove(pokemonAttrape.get(choixPokemon));
     }
 
+    /**
+     * Fait évoluer un Pokémon en fonction des conditions spécifiées.
+     * 
+     * @param choixPokemon    L'indice du Pokémon choisi dans la liste des Pokémons attrapés.
+     * @param nonEvoPokemons  La liste des Pokémons non évolués.
+     * @param evo1Pokemons    La liste des Pokémons de première évolution.
+     * @param evo2Pokemons    La liste des Pokémons de deuxième évolution.
+     */
     public void evoluerPokemon(int choixPokemon, List<Pokemon> nonEvoPokemons, List<Pokemon_evolution1> evo1Pokemons,
             List<Pokemon_evolution2> evo2Pokemons) {
 

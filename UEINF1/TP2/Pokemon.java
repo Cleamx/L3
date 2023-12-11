@@ -1,6 +1,9 @@
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Cette classe représente un Pokémon.
+ */
 public class Pokemon implements Serializable {
     protected String nom;
     protected String type;
@@ -8,6 +11,14 @@ public class Pokemon implements Serializable {
     protected int pv;
     protected int pc;
 
+    /**
+     * Constructeur de la classe Pokemon.
+     * 
+     * @param nom  le nom du Pokémon
+     * @param type le type du Pokémon
+     * @param pv   les points de vie du Pokémon
+     * @param pc   les points de combat du Pokémon
+     */
     public Pokemon(String nom, String type, int pv, int pc) {
         this.nom = nom;
         this.type = type;
@@ -15,6 +26,15 @@ public class Pokemon implements Serializable {
         this.pc = pc;
     }
 
+    /**
+     * Constructeur de la classe Pokemon.
+     * 
+     * @param nom   le nom du Pokémon
+     * @param type  le type du Pokémon
+     * @param type2 le deuxième type du Pokémon
+     * @param pv    les points de vie du Pokémon
+     * @param pc    les points de combat du Pokémon
+     */
     public Pokemon(String nom, String type, String type2, int pv, int pc) {
         this.nom = nom;
         this.type = type;
@@ -23,34 +43,74 @@ public class Pokemon implements Serializable {
         this.pc = pc;
     }
 
+    /**
+     * Retourne le nom du Pokémon.
+     * 
+     * @return le nom du Pokémon
+     */
     public String getNom() {
         return this.nom;
     }
 
+    /**
+     * Retourne le type du Pokémon.
+     * 
+     * @return le type du Pokémon
+     */
     public String getType() {
         return this.type;
     }
 
+    /**
+     * Retourne le deuxième type du Pokémon.
+     * 
+     * @return le deuxième type du Pokémon
+     */
     public String getType2() {
         return this.type2;
     }
 
+    /**
+     * Retourne les points de vie du Pokémon.
+     * 
+     * @return les points de vie du Pokémon
+     */
     public int getPv() {
         return this.pv;
     }
 
+    /**
+     * Retourne les points de combat du Pokémon.
+     * 
+     * @return les points de combat du Pokémon
+     */
     public int getPc() {
         return this.pc;
     }
 
+    /**
+     * Modifie les points de combat du Pokémon.
+     * 
+     * @param pc les nouveaux points de combat du Pokémon
+     */
     public void setPC(int pc) {
         this.pc = pc;
     }
 
+    /**
+     * Modifie les points de vie du Pokémon.
+     * 
+     * @param pv les nouveaux points de vie du Pokémon
+     */
     public void setPV(int pv) {
         this.pv = pv;
     }
 
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères du Pokémon.
+     * 
+     * @return la représentation du Pokémon
+     */
     @Override
     public String toString() {
         if (type2 != null) {
@@ -60,7 +120,14 @@ public class Pokemon implements Serializable {
         }
     }
 
-    // Méthode pour faire évoluer un Pokémon de la première à la deuxième évolution
+    /**
+     * Méthode pour faire évoluer un Pokémon de la première à la deuxième évolution.
+     * 
+     * @param choixPokemon      l'indice du Pokémon à faire évoluer
+     * @param nonEvoPokemons    la liste des Pokémon non évolués
+     * @param pokemonEvolution1 la liste des Pokémon de première évolution
+     * @return le Pokémon évolué
+     */
     public static Pokemon_evolution1 evoluer1(int choixPokemon, List<Pokemon> nonEvoPokemons,
             List<Pokemon_evolution1> pokemonEvolution1) {
         // Augmente les points de combat (PC) du Pokémon évolué en ajoutant 50 aux PC à
@@ -73,5 +140,4 @@ public class Pokemon implements Serializable {
         // Retourne le Pokémon évolué
         return pokemonEvolution1.get(choixPokemon);
     }
-
 }

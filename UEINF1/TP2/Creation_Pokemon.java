@@ -1,3 +1,8 @@
+/**
+ * Cette classe représente la création des Pokémon à partir d'un fichier XLSX.
+ * Elle contient des méthodes pour initialiser les Pokémon, récupérer les listes de Pokémon non évolués,
+ * de Pokémon avec une première évolution et de Pokémon avec une deuxième évolution.
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +12,11 @@ public class Creation_Pokemon {
     private static List<Pokemon_evolution1> PokemonEvo1;
     private static List<Pokemon_evolution2> PokemonEvo2;
 
-    // Cette méthode initialise les pokémons à partir d'un fichier XLSX
+    /**
+     * Cette méthode initialise les pokémons à partir d'un fichier XLSX.
+     * @param Pokemon_liste La liste des Pokémon à initialiser.
+     * @throws Exception Si une erreur se produit lors de l'initialisation des Pokémon.
+     */
     public static void Initialisation_pokemon(List<List<String>> Pokemon_liste) throws Exception {
         // Création d'une nouvelle instance de la classe ReadXLSX
 
@@ -89,14 +98,26 @@ public class Creation_Pokemon {
 
     }
 
+    /**
+     * Récupère la liste des Pokémon non évolués.
+     * @return La liste des Pokémon non évolués.
+     */
     public static List<Pokemon> getNonEvo() {
         return PokemonNonEvo;
     }
 
+    /**
+     * Récupère la liste des Pokémon avec une première évolution.
+     * @return La liste des Pokémon avec une première évolution.
+     */
     public static List<Pokemon_evolution1> getEvo1() {
         return PokemonEvo1;
     }
 
+    /**
+     * Récupère la liste des Pokémon avec une deuxième évolution.
+     * @return La liste des Pokémon avec une deuxième évolution.
+     */
     public static List<Pokemon_evolution2> getEvo2() {
         return PokemonEvo2;
     }

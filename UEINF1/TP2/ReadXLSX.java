@@ -3,8 +3,16 @@ import java.util.zip.*;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 
+/**
+ * Cette classe permet de lire un fichier Excel (xlsx) et d'extraire les données de la feuille de calcul.
+ */
 public class ReadXLSX {
-    // Méthode pour lire un fichier Excel (xlsx)
+    /**
+     * Méthode pour lire un fichier Excel (xlsx) et retourner les données de la feuille de calcul.
+     * 
+     * @return Une liste de listes de chaînes de caractères représentant les données de la feuille de calcul.
+     * @throws Exception si une erreur se produit lors de la lecture du fichier Excel.
+     */
     public List<List<String>> readXLSX() throws Exception {
         // Ouvre le fichier Excel comme un fichier Zip
         ZipFile zipFile = new ZipFile("Liste_Pokemon.xlsx");
@@ -36,10 +44,9 @@ public class ReadXLSX {
                 row.add(cellValue);
             }
             data.add(row);
-
         }
-        // Si un Pokémon a moins de trois évolutions, insère un espace avant le premier
-        // type
+
+        // Si un Pokémon a moins de trois évolutions, insère un espace avant le premier type
         for (List<String> colonne : data) {
             if (colonne.size() < 4) {
                 colonne.add(colonne.size() - 1, " ");
@@ -52,7 +59,13 @@ public class ReadXLSX {
         return data;
     }
 
-    // Méthode pour obtenir la valeur d'une cellule
+    /**
+     * Méthode pour obtenir la valeur d'une cellule.
+     * 
+     * @param cellElement   L'élément XML représentant la cellule.
+     * @param sharedStrings La liste des chaînes partagées.
+     * @return La valeur de la cellule.
+     */
     private static String getCellValue(Element cellElement, List<String> sharedStrings) {
         String cellValue = "";
         NodeList vNodes = cellElement.getElementsByTagName("v");
