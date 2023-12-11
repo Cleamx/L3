@@ -56,7 +56,7 @@ public class MainPokemon {
                 // Affiche le menu
                 System.out.println("Veuillez choisir une option :");
                 System.out.println("1. Consulter les Pokemons attrapés ");
-                System.out.println("2. // FAIRE EQUIPE");
+                System.out.println("2. Consulter l'équipe");
                 System.out.println("3. Attraper les Pokemons");
                 System.out.println("4. Quitter");
 
@@ -103,17 +103,26 @@ public class MainPokemon {
                             break;
                         }
 
-                        // Si le choix est 2, affiche les bonbons
-                        // case "2":
-                        // System.out.println("\n1. Voulez vous faire évoluer un Pokémon? (O/N)");
-                        // String r2 = scanner.nextLine();
-                        // if (r2.equals("O")) {
-                        // System.out.println("\nQuel pokémon voulez vous faire évoluer ? (1,2,3,...)");
-                        // int choixPokemon = scanner.nextInt();
-                        // dresseur.evoluerPokemon(choixPokemon, nonEvoPokemons ,evo1Pokemons,
-                        // evo2Pokemons);
-                        // break;
-                        // }
+                    case "2":
+
+                        System.out.println("\nVoici votre équipe actuelle de Pokémon :");
+                        dresseur.afficherEquipe(); // Suppose que vous avez une méthode pour afficher l'équipe
+
+                        System.out.println("\nVoulez-vous ajouter un Pokémon à votre équipe ? (O/N)");
+                        dresseur.afficherPokemonAttrape();
+                        String ajout = scanner.nextLine();
+                        if (ajout.equals("O")) {
+                            System.out.println("\nQuel Pokémon voulez-vous ajouter ? (1,2,3,...)");
+                            int choixPokemon = scanner.nextInt();
+                            dresseur.ajouterEquipe(choixPokemon); 
+                        }
+                        System.out.println("\nVoulez-vous retirer un Pokémon de votre équipe ? (O/N)");
+                        String retrait = scanner.nextLine();
+                        if (retrait.equals("O")) {
+                            System.out.println("\nQuel Pokémon voulez-vous retirer ? (1,2,3,...)");
+                            int choixPokemon = scanner.nextInt();
+                            dresseur.supprimerEquipe(choixPokemon); 
+                        }
 
                         // Si le choix est 3, lance la méthode chassePokemon
                     case "3":
@@ -141,7 +150,7 @@ public class MainPokemon {
                 }
             } while (!choix.equals("4"));
 
-        } 
+        }
         // Attrape toute exception qui pourrait être levée dans le bloc try
         catch (Exception e) {
             // Affiche la trace de pile de l'exception

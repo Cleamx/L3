@@ -111,12 +111,12 @@ public class Dresseur implements Serializable {
 
                 // Ajoute des bonbons au dictionnaire de bonbons en fonction du type du Pokémon
                 // attrapé
-                Bonbons.ajouterBonbons(pokemon.getType(), 2);
+                Bonbons.ajouterBonbons(pokemon.getType(), 5);
 
                 // Vérifie si le Pokémon a un deuxième type
                 if (pokemon.getType2() != null) {
                     // Si oui, ajoute des bonbons pour le deuxième type
-                    Bonbons.ajouterBonbons(pokemon.getType2(), 2);
+                    Bonbons.ajouterBonbons(pokemon.getType2(), 5);
                 }
                 break;
             case "2":
@@ -130,25 +130,17 @@ public class Dresseur implements Serializable {
         }
     }
 
-    public void ajouterEquipe(Object pokemon) {
+    public void ajouterEquipe(int pokemonChoix) {
         if (equipe.size() < 6) {
-            equipe.add(pokemon);
+            equipe.add(pokemonAttrape.get(pokemonChoix));
         } else {
             System.out.println("Vous avez déjà 6 pokémons dans votre équipe.");
         }
     }
 
-    public void modifierEquipe(Object pokemon, int index) {
-        if (index < 6) {
-            equipe.set(index, pokemon);
-        } else {
-            System.out.println("Vous ne pouvez pas ajouter plus de 6 pokémons dans votre équipe.");
-        }
-    }
-
-    public void supprimerEquipe(int index) {
-        if (index < 6) {
-            equipe.remove(index);
+    public void supprimerEquipe(int pokemonChoix) {
+        if (equipe.size() < 6) {
+            equipe.remove(pokemonChoix);
         } else {
             System.out.println("Vous ne pouvez pas supprimer plus de 6 pokémons dans votre équipe.");
         }
@@ -236,6 +228,7 @@ public class Dresseur implements Serializable {
      */
     public void transfererPokemon(int choixPokemon) {
         pokemonAttrape.remove(pokemonAttrape.get(choixPokemon));
+        System.out.println(((Pokemon) pokemonAttrape.get(choixPokemon)).getNom()+" a été transféré avec succès.");
     }
 
     /**
