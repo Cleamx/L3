@@ -30,6 +30,10 @@ public class Pokemon implements Serializable{
         return this.type;
     }
 
+    public String getType2() {
+        return this.type2;
+    }
+
     public int getPv() {
         return this.pv;
     }

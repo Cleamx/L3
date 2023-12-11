@@ -51,6 +51,7 @@ public class MainPokemon {
                 System.out.print("\033\143");
 
                 switch (choix) {
+                    // Si le choix est 1, affiche les pokemons attrapés
                     case "1":
                         dresseur.afficherPokemonAttrape();
                         System.out.println("Voulez vous retourner au menu principal ? (O/N)");
@@ -59,10 +60,11 @@ public class MainPokemon {
                             System.out.print("\033\143");
                             break;
                         }
+                    // Si le choix est 2, affiche les bonbons
                     case "2":
                         dresseur.afficherbonbons();
                         break;
-
+                    // Si le choix est 3, lance la méthode chassePokemon
                     case "3":
                         dresseur.chassePokemon(nonEvoPokemons, scanner);
                         System.out.println("Voulez vous retourner au menu principal ? (O/N)");
@@ -71,6 +73,7 @@ public class MainPokemon {
                             System.out.print("\033\143");
                             break;
                         }
+                    // Si le choix est 4, quitte le programme et enregistre la sauvegarde
                     case "4":
                         System.out.println("Au revoir !");
                         Save_dresseur save = new Save_dresseur();
