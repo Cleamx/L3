@@ -3,6 +3,11 @@
  * Elle hérite de la classe Pokemon.
  */
 public class Pokemon_evolution2 extends Pokemon {
+    protected String nom;
+    protected String type;
+    protected String type2;
+    protected int pv;
+    protected int pc;
     /**
      * Constructeur pour un Pokémon avec une seule évolution.
      * @param nom le nom du Pokémon

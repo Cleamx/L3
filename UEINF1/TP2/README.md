@@ -1,18 +1,16 @@
-## Getting Started
+# Projet Pokémon
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Ce projet est une simulation de jeu Pokémon en Java. Il permet aux utilisateurs de capturer, d'évoluer et de gérer une équipe de Pokémon.
 
-## Folder Structure
+## Gestion des dépendances
 
-The workspace contains two folders by default, where:
+La vue `JAVA PROJECTS` vous permet de gérer vos dépendances.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Comment jouer
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+1. Exécutez le programme.
+2. Suivez les instructions à l'écran pour capturer des Pokémon, les faire évoluer et gérer votre équipe.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Contribution
 
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Les contributions sont les bienvenues. Veuillez ouvrir une issue ou une pull request pour les suggestions, les corrections de bugs ou les nouvelles fonctionnalités.

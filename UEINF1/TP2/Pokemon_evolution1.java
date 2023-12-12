@@ -6,6 +6,12 @@ import java.util.List;
  */
 public class Pokemon_evolution1 extends Pokemon {
 
+    protected String nom;
+    protected String type;
+    protected String type2;
+    protected int pv;
+    protected int pc;
+    
     /**
      * Constructeur pour créer un Pokémon de première évolution avec un seul type.
      * @param nom le nom du Pokémon

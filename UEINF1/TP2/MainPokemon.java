@@ -1,12 +1,22 @@
 import java.io.File;
+import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
 
 public class MainPokemon {
+    private static Socket connectToServer() { // Ajout d'une méthode pour se connecter au serveur
+        Socket socket = null;
+        try {
+            socket = new Socket("localhost", AreneServeur.PORT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return socket;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         try {
-
             // Demande à l'utilisateur d'entrer son nom
             System.out.println("Veuillez entrer votre nom :");
             // Lit le nom de l'utilisateur depuis la console
@@ -58,7 +68,8 @@ public class MainPokemon {
                 System.out.println("1. Consulter les Pokemons attrapés ");
                 System.out.println("2. Consulter l'équipe");
                 System.out.println("3. Attraper les Pokemons");
-                System.out.println("4. Quitter");
+                System.out.println("4. Combat MultiJoueur");
+                System.out.println("5. Quitter");
 
                 // Lit le choix de l'utilisateur
                 choix = scanner.nextLine();
@@ -114,14 +125,14 @@ public class MainPokemon {
                         if (ajout.equals("O")) {
                             System.out.println("\nQuel Pokémon voulez-vous ajouter ? (1,2,3,...)");
                             int choixPokemon = scanner.nextInt();
-                            dresseur.ajouterEquipe(choixPokemon); 
+                            dresseur.ajouterEquipe(choixPokemon);
                         }
                         System.out.println("\nVoulez-vous retirer un Pokémon de votre équipe ? (O/N)");
                         String retrait = scanner.nextLine();
                         if (retrait.equals("O")) {
                             System.out.println("\nQuel Pokémon voulez-vous retirer ? (1,2,3,...)");
                             int choixPokemon = scanner.nextInt();
-                            dresseur.supprimerEquipe(choixPokemon); 
+                            dresseur.supprimerEquipe(choixPokemon);
                         }
 
                         // Si le choix est 3, lance la méthode chassePokemon
@@ -138,9 +149,18 @@ public class MainPokemon {
                             System.out.print("\033\143");
                             break;
                         }
-
-                        // Si le choix est 4, quitte le programme et enregistre la sauvegarde
+                    
                     case "4":
+                        // if (AreneServeur.compteDresseurs == 0 && !AreneServeur.isRunning) {
+                        //     AreneServeur.demarrerServeur();
+                        // }
+                        // Crée un objet Socket pour se connecter au serveur
+                        connectToServer();
+                        break;
+
+
+                        // Si le choix est 5, quitte le programme et enregistre la sauvegarde
+                    case "5":
                         System.out.println("Au revoir !");
                         // Crée un nouvel objet Save_dresseur
                         Save_dresseur save = new Save_dresseur();
