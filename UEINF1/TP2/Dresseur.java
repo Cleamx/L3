@@ -315,4 +315,10 @@ public class Dresseur implements Serializable {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Dresseur [nom=" + nom + ", pokemonAttrape=" + pokemonAttrape + ", equipe=" + equipe
+                + ", dictionnaireBonbon=" + dictionnaireBonbon + "]";
+    }
+
 }

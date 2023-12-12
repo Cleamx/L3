@@ -1,13 +1,17 @@
 import java.io.File;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
 
 public class MainPokemon {
-    private static Socket connectToServer() { // Ajout d'une méthode pour se connecter au serveur
+    private static Socket connectToServer(Dresseur dresseur) { 
         Socket socket = null;
         try {
             socket = new Socket("localhost", AreneServeur.PORT);
+            // Envoie l'objet dresseur au serveur
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectOutputStream.writeObject(dresseur);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,17 +153,16 @@ public class MainPokemon {
                             System.out.print("\033\143");
                             break;
                         }
-                    
+
                     case "4":
-                        // if (AreneServeur.compteDresseurs == 0 && !AreneServeur.isRunning) {
-                        //     AreneServeur.demarrerServeur();
-                        // }
-                        // Crée un objet Socket pour se connecter au serveur
-                        connectToServer();
+                        // System.out.println(dresseur.getNom());
+                        
+                        connectToServer(dresseur);
+                        // AcceptDresseur.getDresseur(dresseur);
+
                         break;
 
-
-                        // Si le choix est 5, quitte le programme et enregistre la sauvegarde
+                    // Si le choix est 5, quitte le programme et enregistre la sauvegarde
                     case "5":
                         System.out.println("Au revoir !");
                         // Crée un nouvel objet Save_dresseur
