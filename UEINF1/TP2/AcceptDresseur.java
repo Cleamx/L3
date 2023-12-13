@@ -23,28 +23,18 @@ public class AcceptDresseur extends Thread {
                 ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
                 Dresseur d = (Dresseur) objectInputStream.readObject();
                 dresseurs_Connected.add(d);
-                // System.out.println(dresseurs_Connected);
                 dresseurs_Sockets.add(socket);
 
                 System.out.println("Nombre de dresseurs connectés : " + dresseurs_Connected.size());
 
-                System.out.println("Un client s'est connecté !");
-
                 BroadcastMessage broadcastMessage = new BroadcastMessage(dresseurs_Sockets,
                         "Un nouveau client s'est connecté !");
                 broadcastMessage.send();
-                if(dresseurs_Connected.size() == 2){
-                    CombatDresseur.AddDresseur(dresseurs_Connected.get(0));
-                    CombatDresseur.AddDresseur(dresseurs_Connected.get(1));
-                }
-                else{
-                    System.out.println("Il ne peut y avoir que deux dresseurs connectés !");
-                }
 
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Une erreur est survenue : " + e.getMessage());
                 e.printStackTrace();
             }
         }
-    }
+    }    
 }

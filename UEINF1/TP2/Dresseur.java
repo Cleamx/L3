@@ -1,3 +1,4 @@
+//import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
@@ -10,8 +11,10 @@ import java.util.Scanner;
 
 /**
  * Cette classe représente un dresseur de Pokémon.
- * Un dresseur possède un nom, une liste de Pokémon attrapés, une équipe de Pokémon et un dictionnaire de bonbons.
- * Le dresseur peut attraper des Pokémon, les ajouter à son équipe, les modifier, les supprimer, les transférer, les faire évoluer, etc.
+ * Un dresseur possède un nom, une liste de Pokémon attrapés, une équipe de
+ * Pokémon et un dictionnaire de bonbons.
+ * Le dresseur peut attraper des Pokémon, les ajouter à son équipe, les
+ * modifier, les supprimer, les transférer, les faire évoluer, etc.
  */
 public class Dresseur implements Serializable {
     private String nom;
@@ -23,18 +26,39 @@ public class Dresseur implements Serializable {
         this.nom = nom;
     }
 
-    static Socket connectToServer(Dresseur dresseur) { 
-        Socket socket = null;
-        try {
-            socket = new Socket("localhost", AreneServeur.PORT);
-            // Envoie l'objet dresseur au serveur
+    static void connectToServer(Dresseur dresseur) {
+        try (Socket socket = new Socket("localhost", AreneServeur.PORT)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            //ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+    
+            // Recevoir l'objet dresseur du client
             objectOutputStream.writeObject(dresseur);
+    
+            // Envoyer le message de début de combat
+            objectOutputStream.writeObject("Le combat commence !");
+    
+            // Simulation d'un combat tour par tour
+            for (int i = 0; i < 5; i++) {
+                // Envoyer le message de début de tour
+                objectOutputStream.writeObject("Tour " + (i + 1));
+    
+                if (AcceptDresseur.dresseurs_Connected.size() == 2) {
+                    CombatDresseur.startCombat();
+                    // Réinitialiser la liste des dresseurs pour un nouveau combat
+                } else {
+                    System.out.println("Il ne peut y avoir que deux dresseurs connectés !");
+                }
+            }
+    
+            // Envoyer le message de fin de combat
+            objectOutputStream.writeObject("Le combat est terminé !");
+    
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return socket;
     }
+    
+    
 
     /**
      * Renvoie le nom du dresseur
@@ -72,16 +96,16 @@ public class Dresseur implements Serializable {
         this.pokemonAttrape.add(pokemonAttrape);
     }
 
-
     public void setEquipe(List<Object> equipe) {
         this.equipe = equipe;
     }
 
     /**
-     * Méthode permettant de chasser un Pokémon en faisant un random dans une liste de Pokémons.
+     * Méthode permettant de chasser un Pokémon en faisant un random dans une liste
+     * de Pokémons.
      * 
      * @param lootbox la liste de Pokémons dans laquelle chasser
-     * @param lire le scanner pour lire la réponse de l'utilisateur
+     * @param lire    le scanner pour lire la réponse de l'utilisateur
      */
     public void chassePokemon(List<Pokemon> lootbox, Scanner lire) {
         // Crée un nouvel objet Random
@@ -161,8 +185,10 @@ public class Dresseur implements Serializable {
     }
 
     /**
-     * La fonction "afficherbonbons" vérifie si le dictionnaire des bonbons est vide et imprime un
-     * message si c'est le cas, sinon elle imprime le type et la quantité de chaque bonbon dans le
+     * La fonction "afficherbonbons" vérifie si le dictionnaire des bonbons est vide
+     * et imprime un
+     * message si c'est le cas, sinon elle imprime le type et la quantité de chaque
+     * bonbon dans le
      * dictionnaire.
      */
     public void afficherbonbons() {
@@ -186,7 +212,8 @@ public class Dresseur implements Serializable {
      * Affiche les Pokémons attrapés par le dresseur.
      * Si aucun Pokémon n'a été attrapé, affiche un message approprié.
      * Parcourt la liste des Pokémons attrapés et affiche leurs informations.
-     * Vérifie si chaque Pokémon peut évoluer en fonction du nombre de bonbons disponibles.
+     * Vérifie si chaque Pokémon peut évoluer en fonction du nombre de bonbons
+     * disponibles.
      */
     public void afficherPokemonAttrape() {
         // Vérifie si le dresseur a attrapé des Pokémons
@@ -229,23 +256,26 @@ public class Dresseur implements Serializable {
     }
 
     /**
-     * La fonction "transfererPokemon" supprime un Pokémon spécifique d'une liste de Pokémon capturés.
+     * La fonction "transfererPokemon" supprime un Pokémon spécifique d'une liste de
+     * Pokémon capturés.
      * 
-     * @param choixPokemon Le paramètre "choixPokemon" représente l'index des Pokémon à transférer
-     * depuis la liste "pokemonAttrape".
+     * @param choixPokemon Le paramètre "choixPokemon" représente l'index des
+     *                     Pokémon à transférer
+     *                     depuis la liste "pokemonAttrape".
      */
     public void transfererPokemon(int choixPokemon) {
         pokemonAttrape.remove(pokemonAttrape.get(choixPokemon));
-        System.out.println(((Pokemon) pokemonAttrape.get(choixPokemon)).getNom()+" a été transféré avec succès.");
+        System.out.println(((Pokemon) pokemonAttrape.get(choixPokemon)).getNom() + " a été transféré avec succès.");
     }
 
     /**
      * Fait évoluer un Pokémon en fonction des conditions spécifiées.
      * 
-     * @param choixPokemon    L'indice du Pokémon choisi dans la liste des Pokémons attrapés.
-     * @param nonEvoPokemons  La liste des Pokémons non évolués.
-     * @param evo1Pokemons    La liste des Pokémons de première évolution.
-     * @param evo2Pokemons    La liste des Pokémons de deuxième évolution.
+     * @param choixPokemon   L'indice du Pokémon choisi dans la liste des Pokémons
+     *                       attrapés.
+     * @param nonEvoPokemons La liste des Pokémons non évolués.
+     * @param evo1Pokemons   La liste des Pokémons de première évolution.
+     * @param evo2Pokemons   La liste des Pokémons de deuxième évolution.
      */
     public void evoluerPokemon(int choixPokemon, List<Pokemon> nonEvoPokemons, List<Pokemon_evolution1> evo1Pokemons,
             List<Pokemon_evolution2> evo2Pokemons) {

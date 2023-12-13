@@ -125,12 +125,11 @@ public class MainPokemon {
                             int choixPokemon = scanner.nextInt();
                             dresseur.supprimerEquipe(choixPokemon);
                         }
-                        System.out.println("\nVoulez vous retourner au menu principal ? (O/N)");
-                        String r2 = scanner.nextLine();
-                        if (r2.equals("O")) {
-                            System.out.print("\033\143");
+                        else{
+                            System.out.println("\n Retour au menu principal");
                             break;
                         }
+                        
                         // Si le choix est 3, lance la méthode chassePokemon
                     case "3":
                         // Appelle la méthode chassePokemon de l'objet dresseur

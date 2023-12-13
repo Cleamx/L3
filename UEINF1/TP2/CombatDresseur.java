@@ -5,67 +5,78 @@ public class CombatDresseur {
     protected static Dresseur dresseur2;
 
     public static void AddDresseur(Dresseur dresseur) {
-        if(dresseur1 == null){
-             dresseur1 = dresseur;
-        }
-        else{
+        if (dresseur1 == null) {
+            dresseur1 = dresseur;
+        } else {
             dresseur2 = dresseur;
         }
         System.out.println(dresseur1);
         System.out.println(dresseur2);
     }
-    //combat de dresseurs lorsque deux dresseurs sont connecter au serveur
-    public static void Combat(){
-        Scanner scan  = new Scanner(System.in);
-        if(dresseur1 != null && dresseur2 != null){
-            System.out.println("Combat entre " + dresseur1.getNom() + " et " + dresseur2.getNom());
 
-            while(dresseur1.getEquipe().size() > 0 && dresseur2.getEquipe().size() > 0){
-                dresseur1.afficherEquipe();
-                
-                
-                System.out.println("Choisissez un pokemon pour " + dresseur1.getNom());
-                int choixPokemon1 = scan.nextInt();
+    // Démarre un combat entre deux dresseurs
+    static void startCombat() {
 
-                dresseur2.afficherEquipe();
-                System.out.println("Choisissez un pokemon pour " + dresseur2.getNom());
-                int choixPokemon2 = scan.nextInt();
+        // Affiche le nom des deux dresseurs qui vont combattre
+        System.out.println("Combat entre " + dresseur1.getNom() + " et " + dresseur2.getNom());
 
-                Pokemon pokemon1 = (Pokemon) dresseur1.getEquipe().get(choixPokemon1);
-                Pokemon pokemon2 = (Pokemon) dresseur2.getEquipe().get(choixPokemon2);
+        // Continue le combat tant que les deux dresseurs ont encore des Pokémon dans
+        // leur équipe
+        while (dresseur1.getEquipe().size() > 0 && dresseur2.getEquipe().size() > 0) {
 
-                while(pokemon1.getPv() > 0 && pokemon2.getPv() > 0){
+            // Affiche les informations sur l'équipe de chaque dresseur
+            dresseur1.afficherEquipe();
+            dresseur2.afficherEquipe();
 
-                    System.out.println(pokemon1.getNom() + " attaque " + pokemon2.getNom());
-                    pokemon1.attaque(pokemon2);
-                    System.out.println(pokemon2.getNom() + " a " + pokemon2.getPv() + " PV");
+            // Effectue un tour de combat pour chaque dresseur
+            // Le dresseur1 attaque en premier, puis le dresseur2
+            executeCombatTurn(dresseur1, dresseur2);
+            executeCombatTurn(dresseur2, dresseur1);
+        }
 
-                    System.out.println(pokemon2.getNom() + " attaque " + pokemon1.getNom());
-                    pokemon2.attaque(pokemon1);
-                    System.out.println(pokemon1.getNom() + " a " + pokemon1.getPv() + " PV");
+        // Une fois que l'un des dresseurs n'a plus de Pokémon dans son équipe, le
+        // combat se termine
+        // Affiche le nom du dresseur qui a encore des Pokémon dans son équipe,
+        // c'est-à-dire le gagnant
+        if (dresseur1.getEquipe().size() == 0) {
+            System.out.println(dresseur2.getNom() + " a gagné !");
+        } else {
+            System.out.println(dresseur1.getNom() + " a gagné !");
+        }
+    }
 
-                }
+    // Cette méthode simule un tour de combat entre deux dresseurs
+    private static void executeCombatTurn(Dresseur attaquant, Dresseur adversaire) {
+        // Crée un scanner pour lire l'entrée de l'utilisateur
+        Scanner scanner = new Scanner(System.in);
 
-                if(pokemon1.getPv() <= 0){
-                    System.out.println(pokemon1.getNom() + " est KO !");
-                    dresseur1.getEquipe().remove(pokemon1);
-                }
-                else{
-                    System.out.println(pokemon2.getNom() + " est KO !");
-                    dresseur2.getEquipe().remove(pokemon2);
-                }
-            }
-            if(dresseur1.getEquipe().size() == 0){
-                System.out.println(dresseur2.getNom() + " a gagné !");
-            }
-            else{
-                System.out.println(dresseur1.getNom() + " a gagné !");
+        // Demande à l'attaquant de choisir un Pokémon pour attaquer
+        System.out.println(attaquant.getNom() + ", choisissez un Pokémon pour attaquer :");
+        attaquant.afficherEquipe();
+        int choixPokemon = scanner.nextInt();
+        Pokemon pokemonAttaquant = (Pokemon) attaquant.getEquipe().get(choixPokemon);
+
+        // Demande à l'adversaire de choisir un Pokémon pour défendre
+        System.out.println(adversaire.getNom() + ", choisissez un Pokémon pour défendre :");
+        adversaire.afficherEquipe();
+        int choixPokemonAdversaire = scanner.nextInt();
+        Pokemon pokemonAdversaire = (Pokemon) adversaire.getEquipe().get(choixPokemonAdversaire);
+
+        // Effectue l'attaque
+        System.out.println(pokemonAttaquant.getNom() + " attaque " + pokemonAdversaire.getNom());
+        while (pokemonAttaquant.getPv() > 0 && pokemonAdversaire.getPv() > 0) {
+            if (Math.random() < 0.1) {
+                // Il y a 10% de chance que l'attaque échoue
+                System.out.println("L'attaque a échoué !");
+            } else {
+                // Si l'attaque réussit, le Pokémon attaquant attaque le Pokémon adversaire
+                pokemonAttaquant.attaque(pokemonAdversaire);
+                // Affiche les points de vie restants du Pokémon adversaire
+                System.out.println(pokemonAdversaire.getNom() + " a " + pokemonAdversaire.getPv() + " PV");
             }
         }
-        else{
-            System.out.println("Il n'y a pas assez de dresseurs connectés !");
-        }
-        scan.close();
+        // Ferme le scanner
+        scanner.close();
     }
 
 }
