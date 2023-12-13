@@ -1,9 +1,12 @@
-//import java.io.ObjectInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -26,39 +29,47 @@ public class Dresseur implements Serializable {
         this.nom = nom;
     }
 
-    static void connectToServer(Dresseur dresseur) {
-        try (Socket socket = new Socket("localhost", AreneServeur.PORT)) {
+    public void connectToServer(String host, int port) {
+        try {
+            Socket socket = new Socket(host, port);
+
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            //ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-    
-            // Recevoir l'objet dresseur du client
-            objectOutputStream.writeObject(dresseur);
-    
-            // Envoyer le message de début de combat
-            objectOutputStream.writeObject("Le combat commence !");
-    
-            // Simulation d'un combat tour par tour
-            for (int i = 0; i < 5; i++) {
-                // Envoyer le message de début de tour
-                objectOutputStream.writeObject("Tour " + (i + 1));
-    
-                if (AcceptDresseur.dresseurs_Connected.size() == 2) {
-                    CombatDresseur.startCombat();
-                    // Réinitialiser la liste des dresseurs pour un nouveau combat
-                } else {
-                    System.out.println("Il ne peut y avoir que deux dresseurs connectés !");
-                }
+
+            objectOutputStream.writeObject(this);
+            objectOutputStream.flush();
+            System.out.println("Après avoir envoyé l'objet Dresseur au serveur");
+
+            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
+
+            // Lire la confirmation de connexion du serveur
+            try {
+                String confirmation = (String) objectInputStream.readObject();
+                System.out.println("Confirmation du serveur : " + confirmation);
+            } catch (ClassNotFoundException e) {
+                System.err.println("Erreur lors de la lecture de la confirmation du serveur");
+                e.printStackTrace();
             }
-    
-            // Envoyer le message de fin de combat
-            objectOutputStream.writeObject("Le combat est terminé !");
-    
-        } catch (Exception e) {
+
+            CombatClientHandler handler = new CombatClientHandler(socket, objectOutputStream, objectInputStream, this);
+            new Thread(handler).start();
+
+        } catch (UnknownHostException e) {
+            System.err.println("Hôte inconnu : " + host);
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Erreur lors de la connexion au serveur : " + host + ":" + port);
             e.printStackTrace();
         }
     }
-    
-    
+
+    public int choisirPokemon() {
+        System.out.println("Veuillez choisir un Pokémon pour le combat (entrez l'index) :");
+        afficherEquipe();
+        Scanner scan = new Scanner(System.in);
+        int index = scan.nextInt();
+        scan.close();
+        return index;
+    }
 
     /**
      * Renvoie le nom du dresseur
@@ -359,4 +370,16 @@ public class Dresseur implements Serializable {
                 + ", dictionnaireBonbon=" + dictionnaireBonbon + "]";
     }
 
+    // equals
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Dresseur)) {
+            return false;
+        }
+        Dresseur dresseur = (Dresseur) o;
+        return Objects.equals(nom, dresseur.nom) && Objects.equals(pokemonAttrape, dresseur.pokemonAttrape)
+                && Objects.equals(equipe, dresseur.equipe)
+                && Objects.equals(dictionnaireBonbon, dresseur.dictionnaireBonbon);
+    }
 }

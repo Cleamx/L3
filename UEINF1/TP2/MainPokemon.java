@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainPokemon {
-    
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -124,12 +123,11 @@ public class MainPokemon {
                             System.out.println("\nQuel Pokémon voulez-vous retirer ? (1,2,3,...)");
                             int choixPokemon = scanner.nextInt();
                             dresseur.supprimerEquipe(choixPokemon);
-                        }
-                        else{
+                        } else {
                             System.out.println("\n Retour au menu principal");
                             break;
                         }
-                        
+
                         // Si le choix est 3, lance la méthode chassePokemon
                     case "3":
                         // Appelle la méthode chassePokemon de l'objet dresseur
@@ -146,8 +144,14 @@ public class MainPokemon {
                         }
 
                     case "4":
-
-                        Dresseur.connectToServer(dresseur);
+                        System.out.println("Avant la connexion au serveur");
+                        try {
+                            // Connectez le client au serveur
+                            dresseur.connectToServer("localhost", 8000);
+                            System.out.println("Après la connexion au serveur");
+                        } catch (Exception e) {
+                            System.out.println("Une exception a été levée lors de la connexion au serveur : " + e);
+                        }
 
                         break;
 
