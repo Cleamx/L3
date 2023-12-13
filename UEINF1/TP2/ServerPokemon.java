@@ -8,79 +8,69 @@ import java.util.List;
 
 public class ServerPokemon {
     private ServerSocket serverSocket;
-    private List<CombatClientHandler> dresseurs = new ArrayList<>();
+    private List<CombatClientHandler> handlers = new ArrayList<>();
     private int port;
-    private List<Dresseur> clientsConnectes = new ArrayList<>();
 
-    public void ajouterClient(Dresseur client) {
-        clientsConnectes.add(client);
-    }
-
-    public Dresseur obtenirAdversaire(Dresseur client) {
-        for (Dresseur adversaire : clientsConnectes) {
-            if (!adversaire.equals(client)) {
-                return adversaire;
-            }
-        }
-        return null; // Retourne null si aucun adversaire n'est trouvé (ce qui ne devrait pas arriver si la liste contient au moins deux clients)
-    }
     public ServerPokemon(int port) {
         this.port = port;
     }
 
-    public void startServer() throws ClassNotFoundException {
+    public void startServer() {
         try {
             serverSocket = new ServerSocket(port);
             while (true) {
-                while (dresseurs.size() < 2) {
-                    System.out.println("Avant l'acceptation d'une connexion");
+                // Attendre que deux dresseurs se connectent
+                while (handlers.size() < 2) { // Change this line
                     Socket clientSocket = serverSocket.accept();
-                    System.out.println("Après l'acceptation d'une connexion");
 
                     ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
                     ObjectInputStream objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
 
                     // Lire l'objet Dresseur du flux d'entrée
-                    Dresseur dresseur = null;
-                    try {
-                        dresseur = (Dresseur) objectInputStream.readObject();
-                    } catch (ClassNotFoundException e) {
-                        System.err.println("Erreur lors de la lecture de l'objet Dresseur");
-                        e.printStackTrace();
-                    }
+                    Dresseur dresseur = (Dresseur) objectInputStream.readObject();
 
-                    if (dresseurs.size() == 0) {
-                        CombatClientHandler handler = new CombatClientHandler(clientSocket, objectOutputStream,
-                                objectInputStream, dresseur);
-                        dresseurs.add(handler);
-                        new Thread(handler).start();
-                    } else {
-                        CombatClientHandler handler1 = dresseurs.get(0);
-                        CombatClientHandler handler2 = new CombatClientHandler(clientSocket, objectOutputStream,
-                                objectInputStream, dresseur);
-                        handler1.setAutreHandler(handler2);
-                        dresseurs.add(handler2);
-                        new Thread(handler2).start();
-                    }
+                    // Créer un nouveau CombatClientHandler pour gérer la communication avec ce
+                    // dresseur
+                    CombatClientHandler handler = new CombatClientHandler(clientSocket, objectOutputStream,
+                            objectInputStream, dresseur);
+                    handlers.add(handler);
+                    System.out.println("Added handler: " + handler);
+                    System.out.println("Current handlers: " + handlers);
+                    System.out.println("Current handlers size: " + handlers.size());
 
-                    System.out.println(
-                            "Un dresseur s'est connecté. Nombre total de dresseurs connectés : " + dresseurs.size());
                 }
+                if (handlers.size() == 2) {
+                    CombatClientHandler handler1 = handlers.get(0);
+                    CombatClientHandler handler2 = handlers.get(1);
 
-                System.out.println("Deux dresseurs sont connectés. Le combat va commencer.");
+                    handler1.setOtherHandler(handler2);
+                    handler2.setOtherHandler(handler1);
 
-                CombatClientHandler handler1 = dresseurs.get(0);
-                CombatClientHandler handler2 = dresseurs.get(1);
+                    System.out.println("Handler1 Dresseur: " + handler1.getDresseur());
+                    System.out.println("Handler2 Dresseur: " + handler2.getDresseur());
 
-                // Envoyer le message "START_COMBAT" à chaque client
-                handler1.getObjectOutputStream().writeObject("START_COMBAT");
-                handler1.getObjectOutputStream().flush();
-                handler2.getObjectOutputStream().writeObject("START_COMBAT");
-                handler2.getObjectOutputStream().flush();
+                    new Thread(handler1).start();
+                    new Thread(handler2).start();
 
-                dresseurs.clear();
+                    System.out.println("Sending Dresseur to Handler1...");
+                    handler1.getObjectOutputStream().writeObject(handler2.getDresseur());
+                    handler1.getObjectOutputStream().flush();
+                    System.out.println("Dresseur sent to Handler1.");
+
+                    System.out.println("Sending Dresseur to Handler2...");
+                    handler2.getObjectOutputStream().writeObject(handler1.getDresseur());
+                    handler2.getObjectOutputStream().flush();
+                    System.out.println("Dresseur sent to Handler2.");
+                
+                    // Envoyer le message "START_COMBAT" à chaque dresseur pour commencer le combat
+                    handler1.getObjectOutputStream().writeObject("START_COMBAT");
+                    handler1.getObjectOutputStream().flush();
+                    handler2.getObjectOutputStream().writeObject("START_COMBAT");
+                    handler2.getObjectOutputStream().flush();
+                    
+                }
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

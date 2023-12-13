@@ -54,7 +54,7 @@ public class MainPokemon {
             // Boucle jusqu'à ce que l'utilisateur choisisse de quitter
             do {
                 // Affiche le menu
-                System.out.println("Veuillez choisir une option :");
+                System.out.println("Veuillez choisir une option :" + dresseur.getNom());
                 System.out.println("1. Consulter les Pokemons attrapés ");
                 System.out.println("2. Consulter l'équipe");
                 System.out.println("3. Attraper les Pokemons");
