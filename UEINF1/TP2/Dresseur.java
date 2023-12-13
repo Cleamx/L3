@@ -1,4 +1,6 @@
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -21,13 +23,18 @@ public class Dresseur implements Serializable {
         this.nom = nom;
     }
 
-    // public Dresseur(String nom, List<Object> pokemonAttrape, List<Object> equipe,
-    // List<Object> bonbons) {
-    // this.nom = nom;
-    // this.pokemonAttrape = pokemonAttrape;
-    // this.equipe = equipe;
-    // this.bonbons = bonbons;
-    // }
+    static Socket connectToServer(Dresseur dresseur) { 
+        Socket socket = null;
+        try {
+            socket = new Socket("localhost", AreneServeur.PORT);
+            // Envoie l'objet dresseur au serveur
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            objectOutputStream.writeObject(dresseur);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return socket;
+    }
 
     /**
      * Renvoie le nom du dresseur
@@ -108,6 +115,7 @@ public class Dresseur implements Serializable {
                 // Définit les points de vie (PV) du Pokémon de manière aléatoire
                 nombreAleatoire = random.nextInt(21) + 10;
                 pokemon.setPV(nombreAleatoire);
+                pokemon.setPvSave(nombreAleatoire);
 
                 // Ajoute des bonbons au dictionnaire de bonbons en fonction du type du Pokémon
                 // attrapé

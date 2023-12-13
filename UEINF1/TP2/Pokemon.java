@@ -9,6 +9,7 @@ public class Pokemon implements Serializable {
     protected String type;
     protected String type2;
     protected int pv;
+    protected int pvSave;
     protected int pc;
 
     /**
@@ -106,6 +107,10 @@ public class Pokemon implements Serializable {
         this.pv = pv;
     }
 
+    public void setPvSave(int pvSave) {
+        this.pvSave = pvSave;
+    }
+
     /**
      * Retourne une représentation sous forme de chaîne de caractères du Pokémon.
      * 
@@ -139,5 +144,10 @@ public class Pokemon implements Serializable {
         pokemonEvolution1.get(choixPokemon).setPV(nonEvoPokemons.get(choixPokemon).getPv() + 50);
         // Retourne le Pokémon évolué
         return pokemonEvolution1.get(choixPokemon);
+    }
+
+    public int attaque(Pokemon pokemon) {
+        pokemon.setPV(pokemon.getPv() - this.getPc());
+        return 0;
     }
 }

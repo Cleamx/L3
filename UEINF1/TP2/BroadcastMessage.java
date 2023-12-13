@@ -7,12 +7,11 @@ import java.util.List;
 public class BroadcastMessage {
     private List<Socket> dresseurs_Sockets;
     private String message;
-    private List<Dresseur> dresseurs_Connected;
 
-    public BroadcastMessage(List<Socket> dresseurs, String message, List<Dresseur> dresseurs_Connected) {
+
+    public BroadcastMessage(List<Socket> dresseurs, String message) {
         this.dresseurs_Sockets = dresseurs;
         this.message = message;
-        this.dresseurs_Connected = dresseurs_Connected;
     }
 
     public void send() {
@@ -20,12 +19,7 @@ public class BroadcastMessage {
             try {
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
-                synchronized (dresseurs_Connected) {
-                    if (!dresseurs_Connected.isEmpty()) {
-                        writer.println(message);
-                        writer.println(dresseurs_Connected.get(0));
-                    }
-                }
+                writer.println(message);
             } catch (IOException e) {
                 e.printStackTrace();
             }

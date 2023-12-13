@@ -1,22 +1,9 @@
 import java.io.File;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.List;
 import java.util.Scanner;
 
 public class MainPokemon {
-    private static Socket connectToServer(Dresseur dresseur) { 
-        Socket socket = null;
-        try {
-            socket = new Socket("localhost", AreneServeur.PORT);
-            // Envoie l'objet dresseur au serveur
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectOutputStream.writeObject(dresseur);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return socket;
-    }
+    
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -138,7 +125,12 @@ public class MainPokemon {
                             int choixPokemon = scanner.nextInt();
                             dresseur.supprimerEquipe(choixPokemon);
                         }
-
+                        System.out.println("\nVoulez vous retourner au menu principal ? (O/N)");
+                        String r2 = scanner.nextLine();
+                        if (r2.equals("O")) {
+                            System.out.print("\033\143");
+                            break;
+                        }
                         // Si le choix est 3, lance la méthode chassePokemon
                     case "3":
                         // Appelle la méthode chassePokemon de l'objet dresseur
@@ -155,10 +147,8 @@ public class MainPokemon {
                         }
 
                     case "4":
-                        // System.out.println(dresseur.getNom());
-                        
-                        connectToServer(dresseur);
-                        // AcceptDresseur.getDresseur(dresseur);
+
+                        Dresseur.connectToServer(dresseur);
 
                         break;
 
@@ -171,7 +161,7 @@ public class MainPokemon {
                         save.enregistrerDresseur(dresseur, "saves/" + nomDresseur + ".txt");
                         break;
                 }
-            } while (!choix.equals("4"));
+            } while (!choix.equals("5"));
 
         }
         // Attrape toute exception qui pourrait être levée dans le bloc try
