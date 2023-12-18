@@ -7,7 +7,7 @@ public class ReadXLSX {
     // Méthode pour lire un fichier Excel (xlsx)
     public List<List<String>> readXLSX() throws Exception {
         // Ouvre le fichier Excel comme un fichier Zip
-        ZipFile zipFile = new ZipFile("cdpoo/TP2_Pokemon/Liste_Pokemon.xlsx");
+        ZipFile zipFile = new ZipFile("Liste_Pokemon.xlsx");
 
         // Lit les chaînes partagées (sharedStrings.xml)
         ZipEntry sharedStringXML = zipFile.getEntry("xl/sharedStrings.xml");
