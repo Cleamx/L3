@@ -27,7 +27,7 @@ public class MainPokemon {
                 // Si le fichier existe, affiche un message de bienvenue
                 System.out.println("Bienvenue, " + nomDresseur + " !");
                 // Ouvre la sauvegarde du dresseur
-                dresseur = openSave.ouvrirSave("/saves/" + nomDresseur + ".txt");
+                dresseur = openSave.ouvrirSave("saves/" + nomDresseur + ".txt");
             } else {
                 // Si le fichier n'existe pas, affiche un message indiquant qu'un nouveau
                 // dresseur est créé
@@ -86,7 +86,7 @@ public class MainPokemon {
                             // Fait évoluer le pokemon choisi
                             dresseur.evoluerPokemon(choixPokemon, nonEvoPokemons, evo1Pokemons, evo2Pokemons);
                             // Attend 4 secondes
-                            Thread.sleep(10000);
+                            Thread.sleep(4000);
                             System.out.print("\033\143");
                             break;
                             // Si l'utilisateur veut transférer un pokemon
@@ -148,8 +148,6 @@ public class MainPokemon {
                         } while (!r3.equals("O"));
                         break;
                         
-
-
                     case "4":
 
                         Dresseur.connectToServer(dresseur);
@@ -162,7 +160,7 @@ public class MainPokemon {
                         // Crée un nouvel objet Save_dresseur
                         Save_dresseur save = new Save_dresseur();
                         // Enregistre l'objet dresseur dans un fichier
-                        save.enregistrerDresseur(dresseur, "/saves/" + nomDresseur + ".txt");
+                        save.enregistrerDresseur(dresseur, "saves/" + nomDresseur + ".txt");
                         break;
                 }
             } while (!choix.equals("5"));

@@ -3,9 +3,10 @@ import numpy as np
 import math 
 
 
-
+"""
 Prix = [0,4,4,3,3,5,5,3,3,5,6,5,5]
 poids = [0,5,7,2,2,6,8,3,4,9,11,8,7]
+
 PoidsMax = 15
 sac = []; PoidsSac=0; PrixSac=0
 bestSac=[]; bestPrix=0; bestPoids=0
@@ -34,3 +35,16 @@ def remplir(e):
             remplir(ei)
 
 remplir(0)
+"""
+
+Prix = [0,4,4,3,3,5,5,3,3,5,6,5,5]
+poids = [0,5,7,2,2,6,8,3,4,9,11,8,7]
+MaxP = 15
+Cout = np.zero(15, len(Prix))
+
+for i in range(1, len(Prix)):
+    for w in range(1, MaxP):
+        if w > poids[i]:
+            Cout[i,w] = max(Cout[i-1,w], Cout[i-1, w-poids[i]] + Prix[i])
+        else:
+            Cout[i,w] = Cout[i-1, w]

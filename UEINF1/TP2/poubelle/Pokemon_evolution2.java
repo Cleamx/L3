@@ -1,4 +1,3 @@
-
 /**
  * Cette classe représente une évolution d'un Pokémon.
  * Elle hérite de la classe Pokemon.
