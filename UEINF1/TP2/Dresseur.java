@@ -89,9 +89,10 @@ public class Dresseur implements Serializable {
                     opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon, opponentHp,
                             outStream);
 
-                    if (opponentHp <= 0)
+                    if (opponentHp <= 0) {
+                        System.out.println("Le Pokémon adverse est KO!");
                         break;
-
+                    }
                     selfHp = getAttacked(selfHp, inStream);
 
                     if (selfHp <= 0) {
@@ -108,17 +109,9 @@ public class Dresseur implements Serializable {
                     }
                 }
 
-                printBattleEndInfo(opponentHp, selfHp);
-
                 if (selfHp <= 0) {
                     break;
                 }
-
-                if (index >= dresseur.getEquipe().size()) {
-                    outStream.writeUTF("Vous avez gagné!");
-                    socket.close();
-                }
-                
             }
         }
     }
@@ -168,15 +161,8 @@ public class Dresseur implements Serializable {
                     }
                 }
 
-                printBattleEndInfo(opponentHp, selfHp);
-
                 if (selfHp <= 0) {
                     break;
-                }
-
-                if (index >= dresseur.getEquipe().size()) {
-                    outStream.writeUTF("Vous avez gagné!");
-                    socket.close();
                 }
             }
         }
@@ -223,16 +209,6 @@ public class Dresseur implements Serializable {
         System.out.println("\nLe Pokémon adverse a attaqué, votre Pokémon a subi " + result + " dégâts");
         System.out.println("PV restant de votre Pokémon: " + selfHp);
         return selfHp;
-    }
-
-    private static void printBattleEndInfo(int opponentHp, int selfHp) {
-        if (opponentHp <= 0) {
-            System.out.println("Félicitation, vous avez gagné!");
-        } else if (selfHp <= 0) {
-            System.out.println("Votre Pokémon est KO!");
-        } else {
-            System.out.println("Erreur !!");
-        }
     }
 
     /**
