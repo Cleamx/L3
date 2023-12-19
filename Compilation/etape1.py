@@ -123,6 +123,6 @@ def interpreteur(PCODE):
 #        ("PRN",False),("HLT",False)]
 # PCODE = [('INT', 4), ('LDA', 2), ('LDI', '0'), ('STO', None), ('LDA', 3), ('LDI', '0'), ('STO', None), ('LDI', 1), ('LDA', 2), ('LDV', None), ('LDA', 2), ('LDV', None), ('LDI', '0'), ('LDA', 2), ('INN', None), ('LDA', 3), ('LDI', 1), ('LDA', 2), ('LDV', None), ('LDA', 2), ('LDV', None), ('LDI', 1), ('LDA', 3), ('LDV', None), ('LDA', 3), ('LDV', None), ('ADD', None), ('STO', None), ('LDI', 1), ('LDA', 3), ('LDV', None), ('LDA', 3), ('LDV', None), ('PRN', None), ('HLT', None), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-# [("LDI",3),("LDI",2),("ADD",False),("PRN",False),("HLT",False)]
+# # [("LDI",3),("LDI",2),("ADD",False),("PRN",False),("HLT",False)]
 
 # interpreteur(PCODE)

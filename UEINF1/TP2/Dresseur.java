@@ -49,10 +49,10 @@ public class Dresseur implements Serializable {
             // face
 
             if (serverMessage.equals("premier")) {
-                System.out.println(serverMessage);
+                System.out.println("Vous êtes le premier à jouer");
                 combat1(dresseur, socket);
             } else {
-                System.out.println(serverMessage);
+                System.out.println("Vous êtes le deuxième à jouer");
                 combat2(dresseur, socket);
             }
 
@@ -68,6 +68,7 @@ public class Dresseur implements Serializable {
     public static void combat1(Dresseur dresseur, Socket socket) throws NumberFormatException, IOException {
         DataInputStream inStream = new DataInputStream(socket.getInputStream());
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
+        System.out.println("\nAdversaire trouvé: le combat va bientôt commencer");
 
         int index = 0;
         while (index < dresseur.getEquipe().size()) {
@@ -76,42 +77,56 @@ public class Dresseur implements Serializable {
 
             sendPokemonInfo(selfPokemon, selfHp, outStream);
 
-            int opponentHp = Integer.parseInt(inStream.readUTF());
-            String opponentType1 = inStream.readUTF();
-            String opponentType2 = inStream.readUTF();
-            String opponentPokemon = inStream.readUTF();
+            while (true) {
+                int opponentHp = Integer.parseInt(inStream.readUTF());
+                String opponentType1 = inStream.readUTF();
+                String opponentType2 = inStream.readUTF();
+                String opponentPokemon = inStream.readUTF();
 
-            printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
+                printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
 
-            while (selfHp > 0 && opponentHp > 0) {
-                opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon, opponentHp,
-                        outStream);
-                if (opponentHp <= 0)
-                    break;
+                while (selfHp > 0 && opponentHp > 0) {
+                    opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon, opponentHp,
+                            outStream);
 
-                selfHp = getAttacked(selfHp, inStream);
+                    if (opponentHp <= 0)
+                        break;
 
-                if (selfHp <= 0) {
-                    System.out.println("Votre Pokémon est KO!");
-                    index++;
-                    if (index < dresseur.getEquipe().size()) {
+                    selfHp = getAttacked(selfHp, inStream);
+
+                    if (selfHp <= 0) {
+                        System.out.println("Votre Pokémon est KO!");
+                        index++;
+                        if (index >= dresseur.getEquipe().size()) {
+                            System.out.println("Tous vos Pokémon sont KO! Le combat est terminé.");
+                            return;
+                        }
                         selfPokemon = (Pokemon) dresseur.getEquipe().get(index);
                         selfHp = selfPokemon.getPv();
                         System.out.println("Envoi du prochain Pokémon : " + selfPokemon.getNom());
                         sendPokemonInfo(selfPokemon, selfHp, outStream);
                     }
                 }
-            }
 
-            printBattleEndInfo(opponentHp, selfHp);
-               index++;
+                printBattleEndInfo(opponentHp, selfHp);
+
+                if (selfHp <= 0) {
+                    break;
+                }
+
+                if (index >= dresseur.getEquipe().size()) {
+                    outStream.writeUTF("Vous avez gagné!");
+                    socket.close();
+                }
+                
+            }
         }
     }
 
-     public static void combat2(Dresseur dresseur, Socket socket) throws NumberFormatException, IOException {
-
+    public static void combat2(Dresseur dresseur, Socket socket) throws NumberFormatException, IOException {
         DataInputStream inStream = new DataInputStream(socket.getInputStream());
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
+        System.out.println("\nAdversaire trouvé: le combat va bientôt commencer");
 
         int index = 0;
         while (index < dresseur.getEquipe().size()) {
@@ -120,33 +135,49 @@ public class Dresseur implements Serializable {
 
             sendPokemonInfo(selfPokemon, selfHp, outStream);
 
-            int opponentHp = Integer.parseInt(inStream.readUTF());
-            String opponentType1 = inStream.readUTF();
-            String opponentType2 = inStream.readUTF();
-            String opponentPokemon = inStream.readUTF();
+            while (true) {
+                int opponentHp = Integer.parseInt(inStream.readUTF());
+                String opponentType1 = inStream.readUTF();
+                String opponentType2 = inStream.readUTF();
+                String opponentPokemon = inStream.readUTF();
 
-            printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
+                printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
 
-            while (selfHp > 0 && opponentHp > 0) {
-                selfHp = getAttacked(selfHp, inStream);
-                if (selfHp <= 0)
-                    break;
+                while (selfHp > 0 && opponentHp > 0) {
+                    selfHp = getAttacked(selfHp, inStream);
 
-                opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon, opponentHp,
-                        outStream);
+                    if (selfHp <= 0) {
+                        System.out.println("Votre Pokémon est KO!");
+                        index++;
+                        if (index >= dresseur.getEquipe().size()) {
+                            System.out.println("Tous vos Pokémon sont KO! Le combat est terminé.");
+                            return;
+                        }
+                        selfPokemon = (Pokemon) dresseur.getEquipe().get(index);
+                        selfHp = selfPokemon.getPv();
+                        System.out.println("Envoi du prochain Pokémon : " + selfPokemon.getNom());
+                        sendPokemonInfo(selfPokemon, selfHp, outStream);
+                    }
 
-                if (opponentHp <= 0) {
-                    System.out.println("Félicitation, vous avez gagné!");
+                    opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon, opponentHp,
+                            outStream);
+
+                    if (opponentHp <= 0) {
+                        System.out.println("Le Pokémon adverse est KO!");
+                        break;
+                    }
+                }
+
+                printBattleEndInfo(opponentHp, selfHp);
+
+                if (selfHp <= 0) {
                     break;
                 }
-            }
 
-            printBattleEndInfo(opponentHp, selfHp);
-
-            index++;
-            if (index >= dresseur.getEquipe().size()) {
-                System.out.println("Vous n'avez plus de Pokémon!");
-                break;
+                if (index >= dresseur.getEquipe().size()) {
+                    outStream.writeUTF("Vous avez gagné!");
+                    socket.close();
+                }
             }
         }
     }
@@ -168,11 +199,10 @@ public class Dresseur implements Serializable {
     }
 
     private static void printBattleStartInfo(Pokemon selfPokemon, int selfHp, int opponentHp, String opponentPokemon) {
-        System.out.println("\nAdversaire trouvé: le combat va bientôt commencer");
-        System.out.println("Vous êtes le 1er joueur");
-        System.out.println("Vous envoyez " + selfPokemon.getNom() + " au combat");
+
+        System.out.println("\nVous envoyez " + selfPokemon.getNom() + " au combat");
         System.out.println("L'adversaire envoie un " + opponentPokemon + " au combat");
-        System.out.println("PV de votre Pokémon: " + selfHp + "; PV du Pokémon adverse: " + opponentHp);
+        System.out.println("PV de votre Pokémon: " + selfHp + "; \nPV du Pokémon adverse: " + opponentHp);
     }
 
     private static int attackOpponent(Pokemon selfPokemon, String opponentType1, String opponentType2,
@@ -204,8 +234,6 @@ public class Dresseur implements Serializable {
             System.out.println("Erreur !!");
         }
     }
-
-   
 
     /**
      * Renvoie le nom du dresseur
