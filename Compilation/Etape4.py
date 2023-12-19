@@ -186,8 +186,21 @@ def expr():
 def cond():
     expr()
     if token in ["==", "<>", "<", ">", "<=", ">="]:
+        op = token
         next_token()
         expr()
+        if op == "==":
+            generer1('EQU')
+        elif op == "<>":
+            generer1('NEQ')
+        elif op == "<":
+            generer1('INF')
+        elif op == ">":
+            generer1('SUP')
+        elif op == "<=":
+            generer1('INFE')
+        elif op == ">=":
+            generer1('SUPE')
 
 
 def affec():
@@ -210,10 +223,16 @@ def si():
 
 
 def tantQue():
+    global PC
+    adresse_debut_boucle = PC  # Sauvegarder l'index du début de la boucle
     teste("while")
     cond()
+    generer2('BZE', None)  # Laisser l'index de fin de boucle vide pour l'instant
+    adresse_fin_boucle = PC - 1  # Sauvegarder l'index de l'instruction BZE
     teste("do")
     inst()
+    generer2('BRN', adresse_debut_boucle)  # Sauter au début de la boucle
+    PCODE[adresse_fin_boucle] = ('BZE', PC)  # Mettre à jour l'index de fin de boucle dans l'instruction BZE
 
 
 def ecrire():
