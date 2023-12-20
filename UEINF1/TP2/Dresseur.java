@@ -3,6 +3,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Dresseur implements Serializable {
             outStream.writeUTF(clientMessage);
             outStream.flush();
             serverMessage = inStream.readUTF();
-            System.out.println("vous venez d'entrer dans l'arène. Le combat commencera dès qu'un adversaire rejoindra");
+            System.out.println("Vous venez d'entrer dans l'arène. Le combat commencera dès qu'un adversaire rejoindra");
             // le server désigne qui jouera en premier et qui jouera en second à pile ou
             // face
 
@@ -65,7 +66,8 @@ public class Dresseur implements Serializable {
 
     }
 
-    public static void combat1(Dresseur dresseur, Socket socket) throws NumberFormatException, IOException {
+    public static void combat1(Dresseur dresseur, Socket socket)
+            throws NumberFormatException, IOException, InterruptedException {
         DataInputStream inStream = new DataInputStream(socket.getInputStream());
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         System.out.println("\nAdversaire trouvé: le combat va bientôt commencer");
@@ -78,45 +80,56 @@ public class Dresseur implements Serializable {
             sendPokemonInfo(selfPokemon, selfHp, outStream);
 
             while (true) {
-                int opponentHp = Integer.parseInt(inStream.readUTF());
-                String opponentType1 = inStream.readUTF();
-                String opponentType2 = inStream.readUTF();
-                String opponentPokemon = inStream.readUTF();
+                try {
+                    socket.setSoTimeout(1000);
+                    int opponentHp = Integer.parseInt(inStream.readUTF());
+                    String opponentType1 = inStream.readUTF();
+                    String opponentType2 = inStream.readUTF();
+                    String opponentPokemon = inStream.readUTF();
 
-                printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
+                    printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
 
-                while (selfHp > 0 && opponentHp > 0) {
-                    opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon, opponentHp,
-                            outStream);
+                    while (selfHp > 0 && opponentHp > 0) {
+                        opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon,
+                                opponentHp,
+                                outStream);
 
-                    if (opponentHp <= 0) {
-                        System.out.println("Le Pokémon adverse est KO!");
-                        break;
-                    }
-                    selfHp = getAttacked(selfHp, inStream);
-
-                    if (selfHp <= 0) {
-                        System.out.println("Votre Pokémon est KO!");
-                        index++;
-                        if (index >= dresseur.getEquipe().size()) {
-                            System.out.println("Tous vos Pokémon sont KO! Le combat est terminé.");
-                            return;
+                        if (opponentHp <= 0) {
+                            System.out.println("Le Pokémon adverse est KO!");
+                            Thread.sleep(1000);
+                            break;
                         }
-                        selfPokemon = (Pokemon) dresseur.getEquipe().get(index);
-                        selfHp = selfPokemon.getPv();
-                        System.out.println("Envoi du prochain Pokémon : " + selfPokemon.getNom());
-                        sendPokemonInfo(selfPokemon, selfHp, outStream);
+                        selfHp = getAttacked(selfHp, inStream);
+
+                        if (selfHp <= 0) {
+                            System.out.println("Votre Pokémon est KO!");
+                            index++;
+                            if (index >= dresseur.getEquipe().size()) {
+                                System.out.println("Tous vos Pokémon sont KO! Le combat est terminé.");
+                                return;
+                            }
+                            selfPokemon = (Pokemon) dresseur.getEquipe().get(index);
+                            selfHp = selfPokemon.getPv();
+                            System.out.println("Envoi du prochain Pokémon : " + selfPokemon.getNom());
+                            sendPokemonInfo(selfPokemon, selfHp, outStream);
+                        }
                     }
+                } catch (SocketTimeoutException e) {
+                    // Si aucun message n'est reçu après 1 seconde, quitter le combat
+                    System.out.println("Vous avez gangé le combat! Fin du combat.");
+                    return;
+                } catch (IOException e) {
+                    // Gérer les autres exceptions d'entrée/sortie
+                    System.out.println("Une erreur est survenue lors de la lecture du message. Fin du combat.");
+                    return;
                 }
 
-                if (selfHp <= 0) {
-                    break;
-                }
             }
         }
     }
 
-    public static void combat2(Dresseur dresseur, Socket socket) throws NumberFormatException, IOException {
+    public static void combat2(Dresseur dresseur, Socket socket)
+            throws NumberFormatException, IOException, InterruptedException {
         DataInputStream inStream = new DataInputStream(socket.getInputStream());
         DataOutputStream outStream = new DataOutputStream(socket.getOutputStream());
         System.out.println("\nAdversaire trouvé: le combat va bientôt commencer");
@@ -129,59 +142,77 @@ public class Dresseur implements Serializable {
             sendPokemonInfo(selfPokemon, selfHp, outStream);
 
             while (true) {
-                int opponentHp = Integer.parseInt(inStream.readUTF());
-                String opponentType1 = inStream.readUTF();
-                String opponentType2 = inStream.readUTF();
-                String opponentPokemon = inStream.readUTF();
+                try {
+                    int opponentHp = (int) Integer.parseInt(inStream.readUTF());
+                    String opponentType1 = inStream.readUTF();
+                    String opponentType2 = inStream.readUTF();
+                    String opponentPokemon = inStream.readUTF();
 
-                printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
+                    printBattleStartInfo(selfPokemon, selfHp, opponentHp, opponentPokemon);
 
-                while (selfHp > 0 && opponentHp > 0) {
-                    selfHp = getAttacked(selfHp, inStream);
+                    while (selfHp > 0 && opponentHp > 0) {
+                        selfHp = getAttacked(selfHp, inStream);
 
-                    if (selfHp <= 0) {
-                        System.out.println("Votre Pokémon est KO!");
-                        index++;
-                        if (index >= dresseur.getEquipe().size()) {
-                            System.out.println("Tous vos Pokémon sont KO! Le combat est terminé.");
-                            return;
+                        if (selfHp <= 0) {
+                            System.out.println("Votre Pokémon est KO!");
+                            index++;
+                            if (index >= dresseur.getEquipe().size()) {
+                                System.out.println("Tous vos Pokémon sont KO! Le combat est terminé.");
+                                return;
+                            }
+                            selfPokemon = (Pokemon) dresseur.getEquipe().get(index);
+                            selfHp = selfPokemon.getPv();
+                            System.out.println("Envoi du prochain Pokémon : " + selfPokemon.getNom());
+                            sendPokemonInfo(selfPokemon, selfHp, outStream);
                         }
-                        selfPokemon = (Pokemon) dresseur.getEquipe().get(index);
-                        selfHp = selfPokemon.getPv();
-                        System.out.println("Envoi du prochain Pokémon : " + selfPokemon.getNom());
-                        sendPokemonInfo(selfPokemon, selfHp, outStream);
+
+                        opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon,
+                                opponentHp,
+                                outStream);
+
+                        if (opponentHp <= 0) {
+                            System.out.println("Le Pokémon adverse est KO!");
+                            Thread.sleep(1000);
+                            break;
+                        }
                     }
-
-                    opponentHp = attackOpponent(selfPokemon, opponentType1, opponentType2, opponentPokemon, opponentHp,
-                            outStream);
-
-                    if (opponentHp <= 0) {
-                        System.out.println("Le Pokémon adverse est KO!");
-                        break;
-                    }
-                }
-
-                if (selfHp <= 0) {
-                    break;
+                } catch (SocketTimeoutException e) {
+                    // Si aucun message n'est reçu après 1 seconde, quitter le combat
+                    System.out.println("Vous avez gangé le combat! Fin du combat.");
+                    return;
+                } catch (IOException e) {
+                    // Gérer les autres exceptions d'entrée/sortie
+                    System.out.println("Une erreur est survenue lors de la lecture du message. Fin du combat.");
+                    return;
                 }
             }
         }
     }
 
     private static void sendPokemonInfo(Pokemon pokemon, int hp, DataOutputStream outStream) throws IOException {
-        outStream.writeUTF(String.valueOf(hp));
-        outStream.flush();
+        try {
+            outStream.writeUTF(String.valueOf(hp));
+            outStream.flush();
 
-        String type = pokemon.getType();
-        String[] types = type.contains("/") ? type.split("/") : new String[] { type, "none" };
+            String type = pokemon.getType();
+            String[] types = type.contains("/") ? type.split("/") : new String[] { type, "none" };
 
-        outStream.writeUTF(types[0]);
-        outStream.flush();
-        outStream.writeUTF(types[1]);
-        outStream.flush();
+            outStream.writeUTF(types[0]);
+            outStream.flush();
+            outStream.writeUTF(types[1]);
+            outStream.flush();
 
-        outStream.writeUTF(pokemon.getNom());
-        outStream.flush();
+            outStream.writeUTF(pokemon.getNom());
+            outStream.flush();
+        } catch (SocketTimeoutException e) {
+            // Si aucun message n'est reçu après 1 seconde, quitter le combat
+            System.out.println("Vous avez gangé le combat! Fin du combat.");
+            return;
+        } catch (IOException e) {
+            // Gérer les autres exceptions d'entrée/sortie
+            System.out.println("Une erreur est survenue lors de la lecture du message. Fin du combat.");
+            return;
+        }
     }
 
     private static void printBattleStartInfo(Pokemon selfPokemon, int selfHp, int opponentHp, String opponentPokemon) {
