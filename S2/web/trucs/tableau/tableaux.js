@@ -51,13 +51,10 @@ function isPaire(nbr){
     return "impaire";
 }
 
-
-console.log(double(sequence));
+const Sdouble = sequence.map(e => e * 2);
+const Spaire = sequence.map(e => e % 2);
+const Ssomme = sequence.reduce((sum,e)=> sum + e);
+console.log(Ssomme);
 console.log("-----");
-console.log(paire(sequence));
-console.log("-----");
-console.log(impaire(sequence));
-console.log("-----");
-console.log(somme(sequence));
-console.log("-----");
-console.log(isPaire(2))
+console.log(Sdouble);
+//filter -> filtrer les tableaux
