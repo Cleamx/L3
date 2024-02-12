@@ -2,7 +2,7 @@ import re
 import etape1
 
 
-nom_fichier = 'monProgramme.txt'
+nom_fichier = 'S1/Compilation/monProgramme.txt'
 # Ouvrir le fichier en mode lecture
 with open(nom_fichier, 'r') as fichier:
     # Lire le contenu du fichier

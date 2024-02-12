@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ncurses.h>
 
 /*
  * Fonction : chiffrementCesar
@@ -28,18 +29,27 @@ int main(int argc, char const *argv[])
 {
     char mot[100];
     int cle = 2;
+    
+    initscr();              
+    printw("Entrez la clé de chiffrement : \n");
+    scanw("%d", &cle);
+    
 
-    printf("Entrez un mot à chiffrer : \n");
-    scanf("%s", mot);
+    refresh();             
+    getch();                
+    endwin();
 
-    printf("Entrez la clé de chiffrement : \n");
-    scanf("%d", &cle);
+    // printf("Entrez un mot à chiffrer : \n");
+    // scanf("%s", mot);
 
-    printf("\nVoici le mot chiffrer : ");
-    chiffrementCesar(mot, cle);
+    // printf("Entrez la clé de chiffrement : \n");
+    // scanf("%d", &cle);
 
-    printf("\nVoici le mot dechiffrer : ");
-    dechiffrer(mot, cle);
+    // printf("\nVoici le mot chiffrer : ");
+    // chiffrementCesar(mot, cle);
+
+    // printf("\nVoici le mot dechiffrer : ");
+    // dechiffrer(mot, cle);
 
     return 0;
 }
