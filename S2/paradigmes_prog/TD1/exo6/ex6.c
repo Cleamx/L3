@@ -29,27 +29,19 @@ int main(int argc, char const *argv[])
 {
     char mot[100];
     int cle = 2;
-    
-    initscr();              
-    printw("Entrez la clé de chiffrement : \n");
+
+    initscr();
+    printw("Entrez la clé de chiffrement : ");
     scanw("%d", &cle);
-    
-
-    refresh();             
-    getch();                
+    printw("Entrez un mot à chiffrer : ");
+    scanw("%s", mot);
+    chiffrementCesar(mot, cle);
+    printw("Le mot chiffré est : %s\n", mot);
+    dechiffrer(mot, cle);
+    printw("Le mot déchiffré est : %s", mot);
+    refresh();
+    getch();
     endwin();
-
-    // printf("Entrez un mot à chiffrer : \n");
-    // scanf("%s", mot);
-
-    // printf("Entrez la clé de chiffrement : \n");
-    // scanf("%d", &cle);
-
-    // printf("\nVoici le mot chiffrer : ");
-    // chiffrementCesar(mot, cle);
-
-    // printf("\nVoici le mot dechiffrer : ");
-    // dechiffrer(mot, cle);
 
     return 0;
 }
