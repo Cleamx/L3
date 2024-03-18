@@ -1,0 +1,2 @@
+Je pense utiliser une liste chainée car une liste chainée n'a pas de taille fixe contrairement à un tableau statique.
+Et elles ne nécessite pas de géstion complexe de la mémoire.
