@@ -28,4 +28,6 @@ ht_hash_table * hsht_new(const int size);
 /* suppression d'une table */
 void hsht_del(ht_hash_table * tab);
 
+double hsht_hash(char * value, double nbr_premier, int taille_tab);
+
 #endif

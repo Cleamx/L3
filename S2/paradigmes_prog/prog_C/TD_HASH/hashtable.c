@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 #include "hashtable.h"
 
 hsht_key_value_pair * hsht_new_key_value_pair(const char * key, const char * value){
@@ -46,4 +47,18 @@ void hsht_del(ht_hash_table * tab){
     printf("Suppression de la table de hachage\n");
     free(tab->kv_items);
     free(tab);
+}
+
+double hsht_hash(char * value, double nbr_premier, int taille_tab){
+    int ascii = 0;
+    double equ = 0;
+    int taille_value = strlen(value);
+    for(int i = 0; i < taille_value; i++){
+        printf("taille value = %d\n", taille_value);
+        ascii = value[i];
+        printf("ascii = %d\n", ascii);
+        equ = equ + pow(nbr_premier, i) * ascii;
+    }
+    equ = fmod(equ, taille_tab);
+    return equ;
 }

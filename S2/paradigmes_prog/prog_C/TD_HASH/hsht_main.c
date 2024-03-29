@@ -6,7 +6,7 @@ int main() {
     char value[256];
 
     // Crée une table de hachage
-    ht_hash_table * table = hsht_new(10);
+    ht_hash_table * table = hsht_new(3);
 
     // Demande à l'utilisateur d'entrer une clé et une valeur
     printf("Entrez une clé : ");
@@ -20,9 +20,9 @@ int main() {
     // Ajoute l'élément à la table
     table->kv_items[0] = element;
 
-    // Affiche la clé et la valeur de l'élément ajouté
-    printf("Clé ajoutée : %s\n", table->kv_items[0]->key);
-    printf("Valeur ajoutée : %s\n", table->kv_items[0]->value);
+    int size = table->size;
+    int res = hsht_hash(value, 227, 53);
+    printf("%d\n", res);
 
     // Détruit la table et les éléments
     hsht_del(table);

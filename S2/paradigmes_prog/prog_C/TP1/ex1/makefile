@@ -7,4 +7,4 @@ run: all
 	./mirandeexo1
 
 clean:
-	rm -f mirandeexo1 savelist.bin
+	rm -f mirandeexo1 

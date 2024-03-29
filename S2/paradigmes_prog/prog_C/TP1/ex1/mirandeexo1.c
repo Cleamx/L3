@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "mirandelisteint.h"
+
 int menu()
 {
     int choix = 0;
