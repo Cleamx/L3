@@ -30,4 +30,13 @@ void hsht_del(ht_hash_table * tab);
 
 double hsht_hash(char * value, double nbr_premier, int taille_tab);
 
+int hsht_give_hash(const char* S, const int M, const int attempt, 
+                       const int alpha_1, const int alpha_2);
+
+void hsht_insert(ht_hash_table * tab, char * key, char* value);
+
+char* hsht_search(ht_hash_table* tab, char* key);
+
+void hsht_delete(ht_hash_table *tab, char *key);
+
 #endif
