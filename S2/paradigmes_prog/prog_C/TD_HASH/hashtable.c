@@ -83,10 +83,24 @@ int hsht_give_hash(const char *S, const int M, const int attempt,
 
 void hsht_insert(ht_hash_table *tab, char *key, char *value)
 {
-    int position = hsht_give_hash(key, tab->size, 0, 397, 40);
-    printf("%d\n", position);
-    hsht_key_value_pair *kv_pairs = hsht_new_key_value_pair(key, value);
-    tab->kv_items[position] = kv_pairs;
+    int attempt;
+
+    for (int i = 0; i < tab->size; i++)
+    {   int position = hsht_give_hash(key, tab->size, attempt, 397, 40);
+        printf("%d\n", position);
+
+        if (tab->kv_items == HSHT_DELETED_PAIR || tab->kv_items[position] == NULL)
+        {
+            hsht_key_value_pair *kv_pairs = hsht_new_key_value_pair(key, value);
+            tab->kv_items[position] = kv_pairs;
+            return;
+        }
+        else
+        {
+            attempt++;
+
+        }
+    }
 }
 
 char *hsht_search(ht_hash_table *tab, char *key)
@@ -94,20 +108,21 @@ char *hsht_search(ht_hash_table *tab, char *key)
     int position = hsht_give_hash(key, tab->size, 0, 397, 40);
     hsht_key_value_pair *kv_pairs = tab->kv_items[position];
 
-    if (kv_pairs != NULL)
-    {
-        return kv_pairs->value;
-    }
-    else
-    {
-        return NULL;
-    }
+    // if ()
+    // {
+    //     return kv_pairs->value;
+    // }
+    // else
+    // {
+    //     return NULL;
+    // }
 }
 
 void hsht_delete(ht_hash_table *tab, char *key)
 {
     char *value = hsht_search(tab, key);
     int position = hsht_give_hash(key, tab->size, 0, 397, 40);
+
     if (value != NULL)
     {
         tab->kv_items[position] = HSHT_DELETED_PAIR;
